@@ -1,5 +1,6 @@
 package net.postcore.apilist.cli;
 
+import net.postcore.apilist.cli.service.ApiRetrievalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,5 +23,9 @@ public class ApiRetriever {
 
     private static void retrieveApis(String category) {
         LOG.info("Retrieving APIs for category \"{}\"", category);
+        ApiRetrievalService apiRetrievalService = new ApiRetrievalService();
+
+        String apisToStore = apiRetrievalService.getApisFor(category);
+        LOG.info("Retrieved the following APIs {}", apisToStore);
     }
 }
