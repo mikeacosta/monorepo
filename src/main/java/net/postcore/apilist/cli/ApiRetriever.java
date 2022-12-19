@@ -1,8 +1,11 @@
 package net.postcore.apilist.cli;
 
 import net.postcore.apilist.cli.service.ApiRetrievalService;
+import net.postcore.apilist.cli.service.PublicApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class ApiRetriever {
     private static final Logger LOG = LoggerFactory.getLogger(ApiRetriever.class);
@@ -25,7 +28,19 @@ public class ApiRetriever {
         LOG.info("Retrieving APIs for category \"{}\"", category);
         ApiRetrievalService apiRetrievalService = new ApiRetrievalService();
 
-        String apisToStore = apiRetrievalService.getApisFor(category);
-        LOG.info("Retrieved the following APIs {}", apisToStore);
+        List<PublicApi> apisToStore = apiRetrievalService.getApisFor(category);
+        LOG.info("Retrieved the following {} APIs {}", apisToStore.size(), formattedApis(apisToStore));
+    }
+
+    private static String formattedApis(List<PublicApi> apiList) {
+        StringBuilder sb = new StringBuilder();
+        String newline = System.getProperty("line.separator");
+
+        for (PublicApi api : apiList) {
+            sb.append(newline);
+            sb.append(api.toString());
+        }
+
+        return sb.toString();
     }
 }
