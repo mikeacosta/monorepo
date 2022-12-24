@@ -4,6 +4,7 @@ public record ApiRecord(String api, String description, String auth, Boolean htt
 
     public ApiRecord {
         checkValue(api);
+        checkValue(description);
         checkValue(link);
         checkValue(category);
     }
