@@ -1,13 +1,19 @@
 package net.postcore.apilist.server;
 
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import net.postcore.apilist.domain.ApiRecord;
 import net.postcore.apilist.repository.ApiRepository;
+import net.postcore.apilist.repository.RepositoryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.stream.Collectors;
+import java.util.List;
+
+import static java.util.Comparator.comparing;
 
 @Path("apis")
 public class ApiResource {
@@ -20,11 +26,18 @@ public class ApiResource {
     }
 
     @GET
-    public String getApis() {
-        return apiRepository
-                .getAllApis()
-                .stream()
-                .map(ApiRecord::toString)
-                .collect(Collectors.joining(", "));
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ApiRecord> getApis() {
+        try {
+            return apiRepository
+                    .getAllApis()
+                    .stream()
+                    .sorted(comparing(ApiRecord::api))
+                    .toList();
+        } catch (RepositoryException e) {
+            LOG.error("Could not retrieve APIs from the database", e);
+            throw new NotFoundException();
+        }
+
     }
 }
