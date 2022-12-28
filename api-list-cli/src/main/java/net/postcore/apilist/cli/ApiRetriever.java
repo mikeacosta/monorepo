@@ -1,7 +1,9 @@
 package net.postcore.apilist.cli;
 
 import net.postcore.apilist.cli.service.ApiRetrievalService;
+import net.postcore.apilist.cli.service.ApiStorageService;
 import net.postcore.apilist.cli.service.PublicApi;
+import net.postcore.apilist.repository.ApiRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +29,13 @@ public class ApiRetriever {
     private static void retrieveApis(String category) {
         LOG.info("Retrieving APIs for category \"{}\"", category);
         ApiRetrievalService apiRetrievalService = new ApiRetrievalService();
+        ApiRepository apiRepository = ApiRepository.openApiRepository("./apis.db");
+        ApiStorageService apiStorageService = new ApiStorageService(apiRepository);
 
         List<PublicApi> apisToStore = apiRetrievalService.getApisFor(category);
         LOG.info("Retrieved the following {} APIs {}", apisToStore.size(), formattedApis(apisToStore));
+        apiStorageService.storeApis(apisToStore);
+        LOG.info("APIs successfully saved");
     }
 
     private static String formattedApis(List<PublicApi> apiList) {

@@ -23,7 +23,7 @@ class ApiJdbcRepository implements ApiRepository {
 
     public ApiJdbcRepository(String databaseFile) {
         JdbcDataSource jdbcDataSource = new JdbcDataSource();
-        jdbcDataSource.setURL(H2_DATABASE_URL);
+        jdbcDataSource.setURL(H2_DATABASE_URL.formatted(databaseFile));
         this.dataSource = jdbcDataSource;
     }
 
