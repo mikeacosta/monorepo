@@ -8,9 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.Comparator.comparing;
 
 @Path("apis")
 public class ApiResource {
