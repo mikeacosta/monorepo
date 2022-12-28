@@ -10,6 +10,7 @@
     <modules>
         <module>api-list-repository</module>
         <module>api-list-cli</module>
+        <module>api-list-server</module>
     </modules>
 
     <properties>
