@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +31,8 @@ class ApiStorageServiceTest {
                 true,
                 "yes",
                 "https://my.api.com/path",
-                "test");
+                "test",
+                Optional.empty());
         assertEquals(List.of(expected), repository.getAllApis());
     }
 
@@ -46,6 +48,11 @@ class ApiStorageServiceTest {
         @Override
         public List<ApiRecord> getAllApis() {
             return apiRecords;
+        }
+
+        @Override
+        public void addNotes(String api, String notes) {
+            throw new UnsupportedOperationException();
         }
     }
 }

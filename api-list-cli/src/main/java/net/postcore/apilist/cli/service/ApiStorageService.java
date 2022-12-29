@@ -4,6 +4,7 @@ import net.postcore.apilist.domain.ApiRecord;
 import net.postcore.apilist.repository.ApiRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ApiStorageService {
 
@@ -21,7 +22,8 @@ public class ApiStorageService {
                     api.HTTPS(),
                     api.Cors(),
                     api.Link(),
-                    api.Category());
+                    api.Category(),
+                    Optional.empty());
             apiRepository.saveApi(apiRecord);
         }
     }

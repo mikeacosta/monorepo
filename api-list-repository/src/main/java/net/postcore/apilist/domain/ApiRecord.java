@@ -1,12 +1,16 @@
 package net.postcore.apilist.domain;
 
-public record ApiRecord(String api, String description, String auth, Boolean https, String cors, String link, String category) {
+import java.util.Optional;
+
+public record ApiRecord(String api, String description, String auth, Boolean https, String cors, String link, String category,
+                        Optional<String> notes) {
 
     public ApiRecord {
         checkValue(api);
         checkValue(description);
         checkValue(link);
         checkValue(category);
+        notes.ifPresent(ApiRecord::checkValue);
     }
 
     public static void checkValue(String value) {

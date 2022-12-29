@@ -10,6 +10,8 @@ public interface ApiRepository {
 
     List<ApiRecord> getAllApis();
 
+    void addNotes(String api, String notes);
+
     static ApiRepository openApiRepository(String databaseFile) {
         return new ApiJdbcRepository(databaseFile);
     }
