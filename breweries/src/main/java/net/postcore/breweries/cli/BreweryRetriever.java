@@ -1,23 +1,27 @@
 package net.postcore.breweries.cli;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BreweryRetriever {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BreweryRetriever.class);
+
     public static void main(String[] args) {
-        System.out.println("BreweryRetriever running...");
+        LOG.info("BreweryRetriever running...");
         if (args.length == 0) {
-            System.out.println("First argument should be a city.");
+            LOG.warn("First argument should be a city.");
             return;
         }
 
         try {
             retrieveBreweries(args[0]);
         } catch (Exception e) {
-            System.out.println("Unexpected error!");
-            e.printStackTrace();
+            LOG.error("Unexpected error!", e);
         }
     }
 
     private static void retrieveBreweries(String city) {
-        System.out.println("Retrieving breweries located in " + city);
+        LOG.info("Retrieving breweries located in {}", city);
     }
 }
