@@ -1,5 +1,6 @@
 package net.postcore.breweries.cli;
 
+import net.postcore.breweries.cli.service.BreweryRetrievalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,5 +24,9 @@ public class BreweryRetriever {
 
     private static void retrieveBreweries(String city) {
         LOG.info("Retrieving breweries located in {}", city);
+        BreweryRetrievalService breweryRetrievalService = new BreweryRetrievalService();
+
+        String breweriesToStore = breweryRetrievalService.getBreweriesFor(city);
+        LOG.info("Retrieved the following breweries: {}", breweriesToStore);
     }
 }
