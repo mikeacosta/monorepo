@@ -29,8 +29,10 @@ public class BreweryRetriever {
         LOG.info("Retrieving breweries located in {}", city);
         BreweryRetrievalService breweryRetrievalService = new BreweryRetrievalService();
 
-        List<OpenBrewery> breweriesToStore = breweryRetrievalService.getBreweriesFor(city);
-        // TODO: filter out closed breweries (brewery_type = 'closed')
+        List<OpenBrewery> breweriesToStore = breweryRetrievalService.getBreweriesFor(city)
+                .stream()
+                .filter(b -> !b.brewery_type().equals("closed"))
+                .toList();
         LOG.info("Retrieved the following {} breweries: {}", breweriesToStore.size(), breweriesToStore);
     }
 }
