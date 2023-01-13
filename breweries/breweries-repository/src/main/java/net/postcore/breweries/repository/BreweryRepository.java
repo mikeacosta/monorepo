@@ -1,4 +1,4 @@
-package net.postcore.breweries.domain.net.postcore.breweries.repository;
+package net.postcore.breweries.repository;
 
 import net.postcore.breweries.domain.Brewery;
 
