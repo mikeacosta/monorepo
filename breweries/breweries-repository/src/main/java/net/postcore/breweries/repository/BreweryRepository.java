@@ -9,4 +9,8 @@ public interface BreweryRepository {
     void saveBrewery(Brewery brewery);
 
     List<Brewery> getAllBreweries();
+
+    static BreweryRepository openBreweryRepository(String databaseFile) {
+        return new BreweryJdbcRepository(databaseFile);
+    }
 }

@@ -36,7 +36,7 @@ class BreweryJdbcRepository implements BreweryRepository {
             statement.setString(3, brewery.brewery_type());
             statement.setString(4, brewery.street());
             statement.setString(5, brewery.city());
-            statement.setString(6, brewery.street());
+            statement.setString(6, brewery.state());
             statement.setString(7, brewery.postal_code());
             statement.setString(8, brewery.phone());
             statement.setString(9, brewery.website_url());
