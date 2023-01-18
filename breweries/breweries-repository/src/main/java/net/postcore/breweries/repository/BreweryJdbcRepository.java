@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 class BreweryJdbcRepository implements BreweryRepository {
 
@@ -17,6 +18,11 @@ class BreweryJdbcRepository implements BreweryRepository {
     private static final String INSERT_BREWERY = """
             MERGE INTO Breweries (id, name, brewery_type, street, city, state, postal_code, phone, website_url)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """;
+
+    private static final String ADD_NOTES = """
+            UPDATE Breweries SET notes = ?
+            WHERE id = ?
             """;
 
     private final DataSource dataSource;
@@ -62,13 +68,26 @@ class BreweryJdbcRepository implements BreweryRepository {
                         resultSet.getString(6),
                         resultSet.getString(7),
                         resultSet.getString(8),
-                        resultSet.getString(9));
+                        resultSet.getString(9),
+                        Optional.ofNullable(resultSet.getString(10)));
                 breweries.add(brewery);
             }
 
             return Collections.unmodifiableList(breweries);
         }catch (SQLException e) {
             throw new RepositoryException("Failed to retrieve breweries", e);
+        }
+    }
+
+    @Override
+    public void addNotes(String id, String notes) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(ADD_NOTES);
+            stmt.setString(1, notes);
+            stmt.setString(2, id);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RepositoryException("Failed to add notes to " + id, e);
         }
     }
 }

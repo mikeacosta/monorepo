@@ -10,6 +10,8 @@ public interface BreweryRepository {
 
     List<Brewery> getAllBreweries();
 
+    void addNotes(String id, String notes);
+
     static BreweryRepository openBreweryRepository(String databaseFile) {
         return new BreweryJdbcRepository(databaseFile);
     }

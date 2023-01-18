@@ -4,6 +4,7 @@ import net.postcore.breweries.domain.Brewery;
 import net.postcore.breweries.repository.BreweryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BreweryStorageService {
 
@@ -23,7 +24,8 @@ public class BreweryStorageService {
                     openBrewery.state(),
                     openBrewery.postal_code(),
                     openBrewery.phone(),
-                    openBrewery.website_url());
+                    openBrewery.website_url(),
+                    Optional.empty());
             breweryRepository.saveBrewery(brewery);
         }
     }

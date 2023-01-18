@@ -1,5 +1,7 @@
 package net.postcore.breweries.domain;
 
+import java.util.Optional;
+
 public record Brewery(String id,
                       String name,
                       String brewery_type,
@@ -8,7 +10,8 @@ public record Brewery(String id,
                       String state,
                       String postal_code,
                       String phone,
-                      String website_url) {
+                      String website_url,
+                      Optional<String> notes) {
 
     public Brewery {
         checkValue(id);
@@ -16,6 +19,7 @@ public record Brewery(String id,
         checkValue(brewery_type);
         checkValue(city);
         checkValue(state);
+        notes.ifPresent(Brewery::checkValue);
     }
 
     public static void checkValue(String value) {
