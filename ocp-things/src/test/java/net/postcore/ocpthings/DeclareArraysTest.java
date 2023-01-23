@@ -2,6 +2,7 @@ package net.postcore.ocpthings;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeclareArraysTest {
@@ -14,7 +15,8 @@ class DeclareArraysTest {
 
     @Test
     void likeCLang() {
-        var arr = DeclareArrays.likeCLang();
-        assertEquals(2, arr.size());
+        var list = DeclareArrays.likeCLang();
+        assertEquals(2, list.size());
+        assertThat(list).hasOnlyElementsOfType(int[].class);
     }
 }
