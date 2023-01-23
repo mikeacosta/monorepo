@@ -45,11 +45,21 @@ public class CatalogController {
     public String getCatalogCourse() {
         RestTemplate restTemplate = new RestTemplate();
         Course course = restTemplate.getForObject(getCourseAppUrl() + "/courses/1", Course.class);
-        return "Our first course is: " + (course != null ? course.getCourseName() : " not found");
+
+        String studentList = restTemplate.getForObject(getUserAppUrl() + "/" + course.getCourseId(), String.class);
+
+        return "Our first course is: " + (course != null
+                ? course.getCourseName() + "***** and enrolled students are " + studentList
+                : " not found");
     }
 
     private String getCourseAppUrl() {
         InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("course-app", false);
+        return instanceInfo.getHomePageUrl();
+    }
+
+    private String getUserAppUrl() {
+        InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("user-app", false);
         return instanceInfo.getHomePageUrl();
     }
 }
