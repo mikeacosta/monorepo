@@ -1,5 +1,6 @@
-package net.postcore.ocpthings;
+package net.postcore.ocpthings.declarearrays;
 
+import net.postcore.ocpthings.declarearrays.DeclareArrays;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

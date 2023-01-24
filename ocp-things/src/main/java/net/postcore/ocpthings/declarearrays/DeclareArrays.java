@@ -1,4 +1,4 @@
-package net.postcore.ocpthings;
+package net.postcore.ocpthings.declarearrays;
 
 import java.util.List;
 
