@@ -1,12 +1,9 @@
 package net.postcore.crittercare.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 
 public class Pet {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private PetType petType;
     private Owner owner;
