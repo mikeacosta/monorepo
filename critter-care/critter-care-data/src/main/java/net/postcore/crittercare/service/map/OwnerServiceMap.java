@@ -1,15 +1,20 @@
 package net.postcore.crittercare.service.map;
 
 import net.postcore.crittercare.model.Owner;
-import net.postcore.crittercare.service.CrudService;
+import net.postcore.crittercare.service.OwnerService;
 
 import java.util.Set;
 
-public class OwnerServiceMap  extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap  extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 
     @Override

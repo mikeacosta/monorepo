@@ -1,11 +1,11 @@
 package net.postcore.crittercare.service.map;
 
 import net.postcore.crittercare.model.Vet;
-import net.postcore.crittercare.service.CrudService;
+import net.postcore.crittercare.service.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
     @Override
     public Set<Vet> findAll() {
