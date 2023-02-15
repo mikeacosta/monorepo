@@ -2,9 +2,11 @@ package net.postcore.crittercare.service.map;
 
 import net.postcore.crittercare.model.Owner;
 import net.postcore.crittercare.service.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMap  extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override

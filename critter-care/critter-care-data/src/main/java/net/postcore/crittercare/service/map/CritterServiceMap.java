@@ -2,9 +2,11 @@ package net.postcore.crittercare.service.map;
 
 import net.postcore.crittercare.model.Critter;
 import net.postcore.crittercare.service.CritterService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class CritterServiceMap extends AbstractMapService<Critter, Long> implements CritterService {
     
     @Override
