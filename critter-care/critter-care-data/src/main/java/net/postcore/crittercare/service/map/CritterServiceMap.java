@@ -21,7 +21,7 @@ public class CritterServiceMap extends AbstractMapService<Critter, Long> impleme
 
     @Override
     public Critter save(Critter object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override
