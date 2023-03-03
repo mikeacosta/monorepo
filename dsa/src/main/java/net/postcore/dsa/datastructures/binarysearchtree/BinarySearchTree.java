@@ -61,6 +61,16 @@ public class BinarySearchTree {
     public ArrayList<Integer> BFS() {
         ArrayList<Integer> results = new ArrayList<>();
 
+        // traverse with queue
+
+        return results;
+    }
+
+    public ArrayList<Integer> DFSPreOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        // traverse recursively
+
         return results;
     }
 
