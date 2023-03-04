@@ -29,7 +29,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void bfsTest() {
-        ArrayList<Integer> actual = bst.BFS();
+        ArrayList<Integer> actual = bst.bfs();
         List<Integer> expected = Arrays.asList(47, 21, 76, 18, 27, 52, 82);
 
         assertEquals(expected, actual);
@@ -37,8 +37,16 @@ public class BinarySearchTreeTest {
 
     @Test
     public void dfsPreOrderTest() {
-        ArrayList<Integer> actual = bst.DFSPreOrder();
+        ArrayList<Integer> actual = bst.dfsPreOrder();
         List<Integer> expected = Arrays.asList(47, 21, 18, 27, 76, 52, 82);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void dfsInOrderTest() {
+        ArrayList<Integer> actual = bst.dfsInOrder();
+        List<Integer> expected = Arrays.asList(18, 21, 27, 47, 52, 76, 82);
 
         assertEquals(expected, actual);
     }
