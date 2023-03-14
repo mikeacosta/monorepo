@@ -81,5 +81,13 @@ public class BinarySearchTree {
 
         return results;
     }
+
+    public ArrayList<Integer> dfsPostOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        // traverse recursively
+
+        return results;
+    }
 }
 

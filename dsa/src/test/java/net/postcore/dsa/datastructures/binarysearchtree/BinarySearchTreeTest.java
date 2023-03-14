@@ -50,4 +50,12 @@ public class BinarySearchTreeTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void dfsPostOrderTest() {
+        ArrayList<Integer> actual = bst.dfsPostOrder();
+        List<Integer> expected = Arrays.asList(18, 27, 21, 52, 82, 76, 47);
+
+        assertEquals(expected, actual);
+    }
 }
