@@ -44,4 +44,46 @@ app.MapGet("/post/{postId}", async (int postId) =>
     }
 });
 
+app.MapPost("/post", async (Post postToCreate) =>
+{
+    bool createSuccessful = await PostRepository.CreatePostAsync(postToCreate);
+
+    if (createSuccessful)
+    {
+        return Results.Ok("Create successful.");
+    }
+    else
+    {
+        return Results.BadRequest();
+    }
+});
+
+app.MapPut("/post", async (Post postToUpdate) =>
+{
+    bool updateSuccessful = await PostRepository.UpdatePostAsync(postToUpdate);
+
+    if (updateSuccessful)
+    {
+        return Results.Ok("Update successful.");
+    }
+    else
+    {
+        return Results.BadRequest();
+    }
+});
+
+app.MapDelete("/delete/{postId}", async (int postId) =>
+{
+    bool deleteSuccessful = await PostRepository.DeletePostAsync(postId);
+
+    if (deleteSuccessful)
+    {
+        return Results.Ok("Delete successful.");
+    }
+    else
+    {
+        return Results.BadRequest();
+    }
+});
+
 app.Run();
