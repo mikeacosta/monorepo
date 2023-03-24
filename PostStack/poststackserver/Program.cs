@@ -42,9 +42,9 @@ app.UseCors("CORSPolicy");
 //
 // app.MapControllers();
 
-app.MapGet("/posts", async () => await PostRepository.GetPostsAsync());
+app.MapGet("/get-all-posts", async () => await PostRepository.GetPostsAsync());
 
-app.MapGet("/post/{postId}", async (int postId) =>
+app.MapGet("/get-post-by-id/{postId}", async (int postId) =>
 {
     Post postToReturn = await PostRepository.GetPostByIdAsync(postId);
 
@@ -58,7 +58,7 @@ app.MapGet("/post/{postId}", async (int postId) =>
     }
 });
 
-app.MapPost("/post", async (Post postToCreate) =>
+app.MapPost("/create-post", async (Post postToCreate) =>
 {
     bool createSuccessful = await PostRepository.CreatePostAsync(postToCreate);
 
@@ -72,7 +72,7 @@ app.MapPost("/post", async (Post postToCreate) =>
     }
 });
 
-app.MapPut("/post", async (Post postToUpdate) =>
+app.MapPut("/update-post", async (Post postToUpdate) =>
 {
     bool updateSuccessful = await PostRepository.UpdatePostAsync(postToUpdate);
 
@@ -86,7 +86,7 @@ app.MapPut("/post", async (Post postToUpdate) =>
     }
 });
 
-app.MapDelete("/delete/{postId}", async (int postId) =>
+app.MapDelete("/delete-post/{postId}", async (int postId) =>
 {
     bool deleteSuccessful = await PostRepository.DeletePostAsync(postId);
 

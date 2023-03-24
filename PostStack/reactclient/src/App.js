@@ -1,11 +1,12 @@
 import { render } from "@testing-library/react";
 import React, { useState } from "react";
+import Constants from "./utils/Constants";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
   function getPosts() {
-    const url = 'https://localhost:7099/posts';
+    const url = Constants.API_URL_GET_ALL_POSTS;
 
     fetch(url, {
       method: 'GET'
@@ -37,34 +38,38 @@ function App() {
       </div>
     </div>
   );
-}
 
-function renderPostsTable() {
-  return (
-    <div className="table-responsive mt-5">
-      <table className="table table-bordered border-dark">
-        <thead>
-          <tr>
-            <th scope="col">PostId</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
-            <th scope="col">CRUD Operations</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row1">1</th>
-            <td>Post 1 title</td>
-            <td>Post 2 title</td>
-            <td>
-              <button className="btn btn-dark btn-lg mx-3 my-3">Update</button>
-              <button className="btn btn-secondary btn-lg">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
+  function renderPostsTable() {
+    return (
+      <div className="table-responsive mt-5">
+        <table className="table table-bordered border-dark">
+          <thead>
+            <tr>
+              <th scope="col">PostId</th>
+              <th scope="col">Title</th>
+              <th scope="col">Content</th>
+              <th scope="col">CRUD Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              <tr key={post.postId}>
+                <th scope="row">{post.postId}</th>
+                <td>{post.title}</td>
+                <td>{post.content}</td>
+                <td>
+                  <button className="btn btn-dark btn-lg mx-3 my-3">Update</button>
+                  <button className="btn btn-secondary btn-lg">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+  
+        <button onClick={() => setPosts([])} className="btn btn-dark btn-lg w-100">Empty React posts array</button>
+      </div>
+    );
+  }  
 }
 
 export default App;
