@@ -7,8 +7,8 @@ public class LocalMailService : IMailService
     
     public LocalMailService(IConfiguration configuration)
     {
-        _mailTo = configuration["mailSettings:mailToAddress"];
-        _mailFrom = configuration["mailSettings:mailFromAddress"];
+        _mailTo = configuration["mailSettings:mailToAddress"] ?? string.Empty;;
+        _mailFrom = configuration["mailSettings:mailFromAddress"] ?? string.Empty;
     }
     
     public void Send(string subject, string message)

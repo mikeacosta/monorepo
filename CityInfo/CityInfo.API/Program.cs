@@ -38,7 +38,7 @@ builder.Services.AddSingleton<CitiesDataStore>();
 
 builder.Services.AddDbContext<CityInfoDbContext>(
     dbContextOptions => dbContextOptions.UseMySQL(
-        builder.Configuration["ConnectionStrings:Default"]));
+        builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
 var app = builder.Build();
 
