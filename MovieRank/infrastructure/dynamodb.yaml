@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Provision DynamoDB table
+
+Resources:
+  MovieRankTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: MovieRank
+      AttributeDefinitions:
+      - AttributeName: UserId
+        AttributeType: N
+      - AttributeName: MovieName
+        AttributeType: S
+      KeySchema:
+      - AttributeName: UserId
+        KeyType: HASH
+      - AttributeName: MovieName
+        KeyType: RANGE        
+      ProvisionedThroughput: 
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+      GlobalSecondaryIndexes:
+      - IndexName: MovieName-index
+        KeySchema:
+        - AttributeName: MovieName
+          KeyType: HASH
+        Projection:
+          NonKeyAttributes:
+          - UserId
+          ProjectionType: INCLUDE
+        ProvisionedThroughput: 
+          ReadCapacityUnits: '5'
+          WriteCapacityUnits: '5'
+          
+
+
