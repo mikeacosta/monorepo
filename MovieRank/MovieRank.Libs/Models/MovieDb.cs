@@ -1,7 +1,11 @@
+using Amazon.DynamoDBv2.DataModel;
+
 namespace MovieRank.Libs.Models;
 
+[DynamoDBTable("MovieRank")]
 public class MovieDb
 {
+    [DynamoDBHashKey]
     public int UserId { get; set; }
 
     public string MovieName { get; set; }

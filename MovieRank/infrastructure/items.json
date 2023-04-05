@@ -1,0 +1,40 @@
+{
+    "MovieRank": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "UserId": {"N": "1"},
+                    "MovieName": {"S": "The Departed"},
+                    "Description": {"S": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston."},
+                    "Actors": {"SS": ["Leonardo DiCaprio", "Matt Damon"]},
+                    "Ranking": {"N": "9"},
+                    "RankedDateTime": {"S": "2023-04-05T00:00:00"}
+                }
+            }           
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "UserId": {"N": "2"},
+                    "MovieName": {"S": "Inglourious Basterds"},
+                    "Description": {"S": "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same."},
+                    "Actors": {"SS": ["Brad Pitt", "Christoph Waltz"]},
+                    "Ranking": {"N": "8"},
+                    "RankedDateTime": {"S": "2023-04-04T00:00:00"}                    
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "UserId": {"N": "3"},
+                    "MovieName": {"S": "Gone Girl"},
+                    "Description": {"S": "With his wife's disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it's suspected that he may not be innocent."},
+                    "Actors": {"SS": ["Ben Affleck", "Rosamund Pike"]},
+                    "Ranking": {"N": "8"},
+                    "RankedDateTime": {"S": "2023-04-03T00:00:00"}
+                }
+            }
+        }
+    ]
+}

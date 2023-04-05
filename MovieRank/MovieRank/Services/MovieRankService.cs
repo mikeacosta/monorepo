@@ -1,4 +1,5 @@
 using MovieRank.Contracts;
+using MovieRank.Libs.Mappers;
 using MovieRank.Libs.Repositories;
 
 namespace MovieRank.Services;
@@ -6,21 +7,18 @@ namespace MovieRank.Services;
 public class MovieRankService : IMovieRankService
 {
     private readonly IMovieRankRepository _movieRankRepository;
+    private readonly IMapper _mapper;
 
-    public MovieRankService(IMovieRankRepository movieRankRepository)
+    public MovieRankService(IMovieRankRepository movieRankRepository,
+        IMapper mapper)
     {
         _movieRankRepository = movieRankRepository ?? throw new ArgumentNullException(nameof(movieRankRepository));
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<MovieResponse>> GetAllItemsAsync()
     {
         var response = await _movieRankRepository.GetAllItemsAsync();
-        var movieContract = response.Select(m => new MovieResponse()
-        {
-            MovieName = m.MovieName,
-            Description = m.Description
-        });
-
-        return movieContract;
+        return _mapper.ToMovieContract(response);
     }
 }

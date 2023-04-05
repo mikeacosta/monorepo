@@ -25,9 +25,7 @@ Resources:
         - AttributeName: MovieName
           KeyType: HASH
         Projection:
-          NonKeyAttributes:
-          - UserId
-          ProjectionType: INCLUDE
+          ProjectionType: ALL
         ProvisionedThroughput: 
           ReadCapacityUnits: '5'
           WriteCapacityUnits: '5'
