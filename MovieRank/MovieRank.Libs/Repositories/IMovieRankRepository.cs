@@ -4,5 +4,6 @@ namespace MovieRank.Libs.Repositories;
 
 public interface IMovieRankRepository
 {
-    public Task<IEnumerable<MovieDb>> GetAllItemsAsync();
+    Task<IEnumerable<MovieDb>> GetAllItemsAsync();
+    Task<MovieDb> GetMovieAsync(int userId, string movieName);
 }

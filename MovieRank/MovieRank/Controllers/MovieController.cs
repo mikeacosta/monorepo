@@ -20,4 +20,12 @@ public class MovieController : Controller
         var results = await _movieRankService.GetAllItemsAsync();
         return results;
     }
+    
+    [HttpGet]
+    [Route("{userId}/{movieName}")]
+    public async Task<MovieResponse> GetMovie(int userId, string movieName)
+    {
+        var result = await _movieRankService.GetMovieAsync(userId, movieName);
+        return result;
+    }
 }

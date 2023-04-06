@@ -17,4 +17,9 @@ public class MovieRankRepository : IMovieRankRepository
     {
         return await _context.ScanAsync<MovieDb>(new List<ScanCondition>()).GetRemainingAsync();
     }
+
+    public async Task<MovieDb> GetMovieAsync(int userId, string movieName)
+    {
+        return await _context.LoadAsync<MovieDb>(userId, movieName);
+    }
 }

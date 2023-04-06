@@ -4,5 +4,6 @@ namespace MovieRank.Services;
 
 public interface IMovieRankService
 {
-    public Task<IEnumerable<MovieResponse>> GetAllItemsAsync();
+    Task<IEnumerable<MovieResponse>> GetAllItemsAsync();
+    Task<MovieResponse> GetMovieAsync(int userId, string movieName);
 }
