@@ -28,4 +28,12 @@ public class MovieController : Controller
         var result = await _movieRankService.GetMovieAsync(userId, movieName);
         return result;
     }
+    
+    [HttpGet]
+    [Route("user/{userId}/rankedMovies/{movieName}")]
+    public async Task<IEnumerable<MovieResponse>> GetUserRankedMoviesByTitle(int userId, string movieName)
+    {
+        var result = await _movieRankService.GetUserRankedMoviesByTitleAsync(userId, movieName);
+        return result;
+    }
 }
