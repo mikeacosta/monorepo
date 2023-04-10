@@ -33,4 +33,10 @@ public class MovieRankService : IMovieRankService
         var response = await _movieRankRepository.GetUserRankedMoviesByTitleAsync(userId, movieName);
         return _mapper.ToMovieContract(response);
     }
+
+    public async Task AddMovieAsync(int userId, MovieRankRequest movieRankRequest)
+    {
+        var movieDb = _mapper.ToMovieDbModel(userId, movieRankRequest);
+        await _movieRankRepository.AddMovieAsync(movieDb);
+    }
 }

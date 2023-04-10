@@ -36,4 +36,12 @@ public class MovieController : Controller
         var result = await _movieRankService.GetUserRankedMoviesByTitleAsync(userId, movieName);
         return result;
     }
+
+    [HttpPost]
+    [Route("{userId}")]
+    public async Task<IActionResult> AddMovie(int userId, [FromBody] MovieRankRequest movieRankRequest)
+    {
+        await _movieRankService.AddMovieAsync(userId, movieRankRequest);
+        return Created($"movies/{userId}/{movieRankRequest.MovieName}", movieRankRequest);
+    }
 }

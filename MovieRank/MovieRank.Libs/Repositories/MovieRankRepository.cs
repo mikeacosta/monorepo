@@ -36,4 +36,9 @@ public class MovieRankRepository : IMovieRankRepository
 
         return await _context.QueryAsync<MovieDb>(userId, config).GetRemainingAsync();
     }
+
+    public async Task AddMovieAsync(MovieDb movieDb)
+    {
+        await _context.SaveAsync(movieDb);
+    }
 }
