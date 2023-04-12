@@ -8,4 +8,6 @@ public interface IMovieRankRepository
     Task<MovieDb> GetMovieAsync(int userId, string movieName);
     Task<IEnumerable<MovieDb>> GetUserRankedMoviesByTitleAsync(int userId, string movieName);
     Task AddMovieAsync(MovieDb movieDb);
+    Task UpdateMovieAsync(MovieDb movieDb);
+    Task<IEnumerable<MovieDb>> GetMovieRankAsync(string movieName);
 }

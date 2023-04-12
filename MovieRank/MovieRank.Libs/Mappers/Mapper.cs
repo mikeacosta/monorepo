@@ -36,4 +36,17 @@ public class Mapper : IMapper
             RankedDateTime = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
         };
     }
+
+    public MovieDb ToMovieDbModel(int userId, MovieDb movieDbRequest, MovieUpdateRequest movieUpdateRequest)
+    {
+        return new MovieDb()
+        {
+            UserId = movieDbRequest.UserId,
+            MovieName = movieDbRequest.MovieName,
+            Description = movieDbRequest.Description,
+            Actors = movieDbRequest.Actors,
+            Ranking = movieUpdateRequest.Ranking,
+            RankedDateTime = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
+        };
+    }
 }

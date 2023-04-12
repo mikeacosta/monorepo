@@ -44,4 +44,20 @@ public class MovieController : Controller
         await _movieRankService.AddMovieAsync(userId, movieRankRequest);
         return Created($"movies/{userId}/{movieRankRequest.MovieName}", movieRankRequest);
     }
+
+    [HttpPatch]
+    [Route("{userId}")]
+    public async Task<IActionResult> UpdateMovie(int userId, [FromBody] MovieUpdateRequest movieUpdateRequest)
+    {
+        await _movieRankService.UpdateMovieAsync(userId, movieUpdateRequest);
+        return Ok();
+    }
+
+    [HttpGet]
+    [Route("{movieName}/ranking")]
+    public async Task<MovieRankResponse> GetMoviesRanking(string movieName)
+    {
+        var result = await _movieRankService.GetMovieRankAsync(movieName);
+        return result;
+    }
 }

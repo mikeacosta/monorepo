@@ -39,4 +39,23 @@ public class MovieRankService : IMovieRankService
         var movieDb = _mapper.ToMovieDbModel(userId, movieRankRequest);
         await _movieRankRepository.AddMovieAsync(movieDb);
     }
+
+    public async Task UpdateMovieAsync(int userId, MovieUpdateRequest movieUpdateRequest)
+    {
+        var response = await _movieRankRepository.GetMovieAsync(userId, movieUpdateRequest.MovieName);
+        var movieDb = _mapper.ToMovieDbModel(userId, response, movieUpdateRequest);
+        await _movieRankRepository.UpdateMovieAsync(movieDb);
+    }
+
+    public async Task<MovieRankResponse> GetMovieRankAsync(string movieName)
+    {
+        var response = await _movieRankRepository.GetMovieRankAsync(movieName);
+        var avgMovieRanking = Math.Round(response.Select(x => x.Ranking).Average());
+
+        return new MovieRankResponse()
+        {
+            MovieName = movieName,
+            AverageRanking = avgMovieRanking
+        };
+    }
 }

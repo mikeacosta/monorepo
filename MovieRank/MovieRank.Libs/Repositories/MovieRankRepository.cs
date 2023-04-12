@@ -41,4 +41,19 @@ public class MovieRankRepository : IMovieRankRepository
     {
         await _context.SaveAsync(movieDb);
     }
+
+    public async Task UpdateMovieAsync(MovieDb movieDb)
+    {
+        await _context.SaveAsync(movieDb);
+    }
+
+    public async Task<IEnumerable<MovieDb>> GetMovieRankAsync(string movieName)
+    {
+        var config = new DynamoDBOperationConfig()
+        {
+            IndexName = "MovieName-index"
+        };
+
+        return await _context.QueryAsync<MovieDb>(movieName, config).GetRemainingAsync();
+    }
 }
