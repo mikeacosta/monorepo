@@ -24,4 +24,9 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MovieRank.Libs\MovieRank.Libs.csproj" />
+      <ProjectReference Include="..\MovieRank\MovieRank.csproj" />
+    </ItemGroup>
+
 </Project>
