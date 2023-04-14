@@ -19,6 +19,7 @@ public class TestContext : IAsyncLifetime
     {
         await PullImage();
         await StartContainer();
+        await new TestDataSetup().CreateTable();
     }
 
     public async Task DisposeAsync()

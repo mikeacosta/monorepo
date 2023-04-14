@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.102.26" />
         <PackageReference Include="Docker.DotNet" Version="3.125.13" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.16" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
