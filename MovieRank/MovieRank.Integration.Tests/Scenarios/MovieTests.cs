@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text;
+using MovieRank.Contracts;
 using MovieRank.Integration.Tests.Setup;
 using MovieRank.Libs.Models;
 using Newtonsoft.Json;
@@ -20,10 +21,49 @@ public class MovieTests : IClassFixture<CustomWebAppFactory>
     public async Task AddMovieRankDataReturnsOk()
     {
         const int userId = 100;
+        var response = await AddMovieRankData(userId);
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+    
+    [Fact]
+    public async Task GetAllItemsFromDatabaseReturnsNotNullMovieResponse()
+    {
+        const int userId = 200;
+        await AddMovieRankData(userId);
+        var response = await _client.GetAsync("movies");
+
+        MovieResponse[] result;
+        using (var content = response.Content.ReadAsStringAsync())
+        {
+            result = JsonConvert.DeserializeObject<MovieResponse[]>(await content);
+        }
         
+        Assert.NotNull(result);
+    }
+
+    [Fact]
+    public async Task GetMovieReturnsExpectedName()
+    {
+        const int userId = 300;
+        const string movieName = "Test Movie";
+        
+        await AddMovieRankData(userId);
+        var response = await _client.GetAsync($"movies/{userId}/{movieName}");
+        
+        MovieResponse result;
+        using (var content = response.Content.ReadAsStringAsync())
+        {
+            result = JsonConvert.DeserializeObject<MovieResponse>(await content);
+        }
+
+        Assert.Equal(movieName, result.MovieName);
+    }
+
+    private async Task<HttpResponseMessage> AddMovieRankData(int testUserId, string? movieName = null)
+    {
         var data = new MovieDb()
         {
-            UserId = userId,
+            UserId = testUserId,
             MovieName = "Test Movie",
             Description = "Test Description",
             Actors = new List<string>()
@@ -36,8 +76,6 @@ public class MovieTests : IClassFixture<CustomWebAppFactory>
 
         var json = JsonConvert.SerializeObject(data);
         var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await _client.PostAsync($"movies/{userId}", stringContent);
-        
-        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        return await _client.PostAsync($"movies/{testUserId}", stringContent);
     }
 }
