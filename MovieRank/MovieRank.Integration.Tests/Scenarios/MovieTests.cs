@@ -59,12 +59,42 @@ public class MovieTests : IClassFixture<CustomWebAppFactory>
         Assert.Equal(movieName, result.MovieName);
     }
 
-    private async Task<HttpResponseMessage> AddMovieRankData(int testUserId, string? movieName = null)
+    [Fact]
+    public async Task UpdateMovieReturnMovieRankValue()
+    {
+        const int userId = 400;
+        const string movieName = "Updated Movie";
+        const int ranking = 10;
+        
+        await AddMovieRankData(userId, movieName);
+
+        var updateMovie = new MovieUpdateRequest()
+        {
+            MovieName = movieName,
+            Ranking = ranking
+        };
+
+        var json = JsonConvert.SerializeObject(updateMovie);
+        var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+        await _client.PatchAsync($"movies/{userId}", stringContent);
+
+        var response = await _client.GetAsync($"movies/{userId}/{movieName}");
+
+        MovieResponse result;
+        using (var content = response.Content.ReadAsStringAsync())
+        {
+            result = JsonConvert.DeserializeObject<MovieResponse>(await content);
+        }
+
+        Assert.Equal(ranking, result.Ranking);     
+    }
+
+    private async Task<HttpResponseMessage> AddMovieRankData(int testUserId, string movieName = "Test Movie")
     {
         var data = new MovieDb()
         {
             UserId = testUserId,
-            MovieName = "Test Movie",
+            MovieName = movieName,
             Description = "Test Description",
             Actors = new List<string>()
             {
