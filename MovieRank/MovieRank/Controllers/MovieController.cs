@@ -5,7 +5,7 @@ using MovieRank.Services;
 namespace MovieRank.Controllers;
 
 [Route("movies")]
-public class MovieController : Controller
+public class MovieController : ControllerBase
 {
     private readonly IMovieRankService _movieRankService;
 
@@ -15,26 +15,26 @@ public class MovieController : Controller
     }
 
     [HttpGet]
-    public async Task<IEnumerable<MovieResponse>> GetAllItems()
+    public async Task<ActionResult<IEnumerable<MovieResponse>>> GetAllItems()
     {
         var results = await _movieRankService.GetAllItemsAsync();
-        return results;
+        return Ok(results);
     }
     
     [HttpGet]
     [Route("{userId}/{movieName}")]
-    public async Task<MovieResponse> GetMovie(int userId, string movieName)
+    public async Task<ActionResult<MovieResponse>> GetMovie(int userId, string movieName)
     {
         var result = await _movieRankService.GetMovieAsync(userId, movieName);
-        return result;
+        return Ok(result);
     }
     
     [HttpGet]
     [Route("user/{userId}/rankedMovies/{movieName}")]
-    public async Task<IEnumerable<MovieResponse>> GetUserRankedMoviesByTitle(int userId, string movieName)
+    public async Task<ActionResult<IEnumerable<MovieResponse>>> GetUserRankedMoviesByTitle(int userId, string movieName)
     {
         var result = await _movieRankService.GetUserRankedMoviesByTitleAsync(userId, movieName);
-        return result;
+        return Ok(result);
     }
 
     [HttpPost]
@@ -55,9 +55,9 @@ public class MovieController : Controller
 
     [HttpGet]
     [Route("{movieName}/ranking")]
-    public async Task<MovieRankResponse> GetMoviesRanking(string movieName)
+    public async Task<ActionResult<MovieRankResponse>> GetMoviesRanking(string movieName)
     {
         var result = await _movieRankService.GetMovieRankAsync(movieName);
-        return result;
+        return Ok(result);
     }
 }
