@@ -1,1 +1,18 @@
-<p>cities works!</p>
+<table class="table container">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">City</th>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let city of cities">
+      <td>{{city.id}}</td>
+      <td>{{city.name}}</td>
+    </tr>
+  </tbody>
+</table>
