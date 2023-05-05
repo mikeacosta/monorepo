@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ICategoryRepository, MockCategoryRepository>();
-builder.Services.AddSingleton<IPieRepository, MockPieRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPieRepository, PieRepository>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options =>
@@ -23,5 +23,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapDefaultControllerRoute();
-
+DbInitializer.Seed(app);
 app.Run();

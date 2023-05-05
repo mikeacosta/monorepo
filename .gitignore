@@ -32,3 +32,6 @@ _UpgradeReport_Files/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# exclude jQuery and Bootstrap files for now
+/BethanysPieShop/BethanysPieShop/wwwroot/lib/
