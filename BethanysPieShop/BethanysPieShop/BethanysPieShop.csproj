@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Views\Category" />
-      <Folder Include="Views\ShoppingCart" />
       <Folder Include="wwwroot\lib" />
     </ItemGroup>
 
