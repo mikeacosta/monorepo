@@ -1,5 +1,9 @@
-﻿using DataLayer;
+﻿using System.Diagnostics;
+using System.Reflection;
+using DataLayer;
 using Microsoft.Extensions.Configuration;
+
+namespace Runner;
 
 class Program
 {
@@ -7,19 +11,39 @@ class Program
     
     static void Main(string[] args)
     {
-        Console.WriteLine("hey");
+        Initialize();
+        
+        GetAllContacts();
+    }
+    
+    static void GetAllContacts()
+    {
+        // arrange
+        var repository = CreateRepository();
+
+        // act
+        var contacts = repository.GetAll();
+
+        // assert
+        Console.WriteLine($"Count: {contacts.Count}");
+        Debug.Assert(contacts.Count == 6);
+        contacts.Output();
     }
     
     private static void Initialize()
     {
+        var workingDir = Environment.CurrentDirectory;  // /bin/Debug
+        var basePath = Directory.GetParent(workingDir).Parent.Parent.FullName;  // project dir
+        
         var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
+            .SetBasePath(basePath)
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         config = builder.Build();
     }
 
     private static IContactRepository CreateRepository()
     {
-        return new ContactRepository(config.GetConnectionString("DefaultConnection"));
+        var connStr = config.GetConnectionString("DefaultConnection");
+        return new ContactRepository(connStr);
     }
 }

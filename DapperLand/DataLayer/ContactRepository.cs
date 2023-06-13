@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.SqlClient;
+using Dapper;
 
 namespace DataLayer;
 
@@ -19,7 +20,7 @@ public class ContactRepository : IContactRepository
 
     public List<Contact> GetAll()
     {
-        throw new NotImplementedException();
+        return this.db.Query<Contact>("SELECT * FROM Contacts").ToList();
     }
 
     public Contact Add(Contact contact)
