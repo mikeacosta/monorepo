@@ -6,6 +6,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateIdentityValues.Common", "UpdateIdentityValues.Common\UpdateIdentityValues.Common.csproj", "{A592880D-A8D6-428F-8706-64E0FA40574E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateIdentityValues.DataAccess", "UpdateIdentityValues.DataAccess\UpdateIdentityValues.DataAccess.csproj", "{242FDFF9-B678-4563-9B6C-5CE3A1FE0636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLibrary.Data.Dapper", "..\CoreLibrary.Data.Dapper\CoreLibrary.Data.Dapper\CoreLibrary.Data.Dapper.csproj", "{4341820B-A6B2-4643-9FCA-7A22BD79AEC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateIdentityValues.Flow", "UpdateIdentityValues.Flow\UpdateIdentityValues.Flow.csproj", "{B0C785B1-4A6B-44EA-B5B1-5A5FDE061E70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateIdentityValues.Process", "UpdateIdentityValues.Process\UpdateIdentityValues.Process.csproj", "{7D190F15-B9A0-40CE-BD4F-7AA9CB9AF848}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,5 +28,24 @@ Global
 		{A592880D-A8D6-428F-8706-64E0FA40574E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A592880D-A8D6-428F-8706-64E0FA40574E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A592880D-A8D6-428F-8706-64E0FA40574E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242FDFF9-B678-4563-9B6C-5CE3A1FE0636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242FDFF9-B678-4563-9B6C-5CE3A1FE0636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242FDFF9-B678-4563-9B6C-5CE3A1FE0636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242FDFF9-B678-4563-9B6C-5CE3A1FE0636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4341820B-A6B2-4643-9FCA-7A22BD79AEC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4341820B-A6B2-4643-9FCA-7A22BD79AEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4341820B-A6B2-4643-9FCA-7A22BD79AEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4341820B-A6B2-4643-9FCA-7A22BD79AEC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C785B1-4A6B-44EA-B5B1-5A5FDE061E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C785B1-4A6B-44EA-B5B1-5A5FDE061E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C785B1-4A6B-44EA-B5B1-5A5FDE061E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C785B1-4A6B-44EA-B5B1-5A5FDE061E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D190F15-B9A0-40CE-BD4F-7AA9CB9AF848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D190F15-B9A0-40CE-BD4F-7AA9CB9AF848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D190F15-B9A0-40CE-BD4F-7AA9CB9AF848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D190F15-B9A0-40CE-BD4F-7AA9CB9AF848}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4341820B-A6B2-4643-9FCA-7A22BD79AEC1} = {A4768F70-0B6E-4514-B6E6-F263FCFCC35D}
 	EndGlobalSection
 EndGlobal
