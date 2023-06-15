@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using CoreLibrary.Data.Dapper.Query;
 using Dapper;
@@ -59,4 +60,35 @@ public class DataContext
             commandTimeout: commandTimeout);
         return result;
     }
+    
+    public int Execute(QueryPacket queryPacket, Func<DbConnection, DbTransaction, int, int> querySet, DbTransaction? transaction = null)
+    {
+        using var db = new SqlConnection(_connectionString);
+        db.Open();
+        transaction ??= db.BeginTransaction();
+
+        try
+        {
+            var resultId = db.Execute(queryPacket.SqlString, queryPacket.SqlParams, transaction);
+            querySet(db, transaction, resultId);
+            transaction.Commit();
+            return resultId;
+        }
+        catch (Exception)
+        {
+            transaction.Rollback();
+            throw;
+        }
+    }
+    
+    public async  Task<int> ExecuteAsync(QueryPacket queryPacket, CommandType commandType = CommandType.Text,
+        int? commandTimeout = default)
+    {
+        using var db = new SqlConnection(_connectionString);
+        var result = await db.ExecuteAsync(queryPacket.SqlString, queryPacket.SqlParams, commandType: commandType,
+            commandTimeout: commandTimeout);
+        return result;
+    }
+    
+    // ExecuteInTransaction
 }
