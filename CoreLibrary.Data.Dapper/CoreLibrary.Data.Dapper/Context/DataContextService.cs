@@ -1,6 +1,8 @@
+using CoreLibrary.Data.Dapper.Context.Interface;
+
 namespace CoreLibrary.Data.Dapper.Context;
 
-public class DataContextService
+public class DataContextService : IDataContextService
 {
     private readonly string _connectionString;
 
