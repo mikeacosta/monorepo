@@ -8,8 +8,27 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+      <None Remove="app.config" />
+      <Content Include="app.config">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.Dev.json" />
+      <Content Include="appsettings.Dev.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.QA.json" />
+      <Content Include="appsettings.QA.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.json" />
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\UpdateIdentityValues.Common\UpdateIdentityValues.Common.csproj" />
+      <ProjectReference Include="..\UpdateIdentityValues.Flow\UpdateIdentityValues.Flow.csproj" />
     </ItemGroup>
 
 </Project>
