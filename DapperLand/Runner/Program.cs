@@ -13,7 +13,31 @@ class Program
     {
         Initialize();
         
-        GetAllContacts();
+        // GetAllContacts();
+        InsertContact();
+    }
+
+    static int InsertContact()
+    {
+        // arrange
+        var repository = CreateRepository();
+        var contact = new Contact()
+        {
+            FirstName = "Joe",
+            LastName = "Blow",
+            Email = "joe.blow@gmail.com",
+            Company = "Microsoft",
+            Title = "Developer"
+        };
+
+        // act
+        repository.Add(contact);
+        
+        // assert
+        Debug.Assert(contact.Id != 0);
+        Console.WriteLine("*** Contact inserted ***");
+        Console.WriteLine($"New ID: {contact.Id}");
+        return contact.Id;
     }
     
     static void GetAllContacts()

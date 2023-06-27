@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices.ComTypes;
 using Dapper;
 
 namespace DataLayer;
@@ -25,7 +26,12 @@ public class ContactRepository : IContactRepository
 
     public Contact Add(Contact contact)
     {
-        throw new NotImplementedException();
+        var sql =
+            "INSERT INTO Contacts (FirstName, LastName, Email, Company, Title) VALUES(@FirstName, @LastName, @Email, @Company, @Title); " +
+            "SELECT CAST(SCOPE_IDENTITY() as int)";
+        var id = this.db.Query<int>(sql, contact).Single();
+        contact.Id = id;
+        return contact;
     }
 
     public Contact Update(Contact contact)
