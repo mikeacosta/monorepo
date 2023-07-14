@@ -23,7 +23,17 @@ public class TransactionController : Controller
     // GET: Transaction/AddOrEdit/5(Update)
     public async Task<IActionResult> AddOrEdit(int id = 0)
     {
-        return null;
+        if (id == 0)
+            return View(new TransactionModel());
+        else
+        {
+            var transactionModel = await _context.Transactions.FindAsync(id);
+            if (transactionModel == null)
+            {
+                return NotFound();
+            }
+            return View(transactionModel);
+        }
     }
     
 
