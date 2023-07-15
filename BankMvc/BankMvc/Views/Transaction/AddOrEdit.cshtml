@@ -1,6 +1,9 @@
 ﻿@model BankMvc.Models.TransactionModel
 
-@{ Layout = null; }
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
 
 <div class="row">
     <div class="col-md-12">
@@ -57,11 +60,10 @@
                     </div>
                 </div>
             </div>
+            
             <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
-                </div>
-            </div>
+                <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+            </div>            
         </form>
     </div>
 </div>

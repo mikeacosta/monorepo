@@ -35,11 +35,49 @@ public class TransactionController : Controller
             return View(transactionModel);
         }
     }
-    
+
+    // POST: Transaction/AddOrEdit/{id}
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddOrEdit(int id,
+        [Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,SWIFTCode,Amount,Date")]
+        TransactionModel transactionModel)
+    {
+        if (!ModelState.IsValid)
+            return Json(new { isValid = false, html = "" });
+
+        if (id == 0)
+        {
+            _context.Add(transactionModel);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            try
+            {
+                _context.Update(transactionModel);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (TransactionModelExists(transactionModel.TransactionId))
+                    throw;
+                
+                return NotFound();
+            }
+        }
+
+        return Json(new { isValid = true, html = "" });
+    }
 
     // GET: Transaction/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         return null;
+    }    
+    
+    private bool TransactionModelExists(int id)
+    {
+        return _context.Transactions.Any(e => e.TransactionId == id);
     }    
 }
