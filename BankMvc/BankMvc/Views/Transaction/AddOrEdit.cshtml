@@ -1,13 +1,10 @@
 ﻿@model BankMvc.Models.TransactionModel
 
-@{
-    ViewData["Title"] = "Edit";
-    Layout = null;
-}
+@{ Layout = null; }
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="AddOrEdit" asp-route-id="@Model.TransactionId" onsubmit="return jQueryAjaxPost(this);">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.TransactionId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TransactionId" />
             <input type="hidden" asp-for="Date" />
@@ -60,10 +57,11 @@
                     </div>
                 </div>
             </div>
-            
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
-            </div>            
+                <div class="text-center">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+            </div>
         </form>
     </div>
 </div>

@@ -49,6 +49,7 @@ public class TransactionController : Controller
 
         if (id == 0)
         {
+            transactionModel.Date = DateTime.Now;
             _context.Add(transactionModel);
             await _context.SaveChangesAsync();
         }
@@ -70,15 +71,20 @@ public class TransactionController : Controller
 
         return Json(new { isValid = true, html = RenderHelper.RenderRazorViewToString(this, "_ViewAll", _context.Transactions.ToList()) });
     }
-
-    // GET: Transaction/Delete/5
-    public async Task<IActionResult> Delete(int? id)
+    
+    // POST: Transaction/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        return null;
-    }    
+        var transactionModel = await _context.Transactions.FindAsync(id);
+        _context.Transactions.Remove(transactionModel);
+        await _context.SaveChangesAsync();
+        return Json(new { html = RenderHelper.RenderRazorViewToString(this, "_ViewAll", _context.Transactions.ToList()) });
+    }
     
     private bool TransactionModelExists(int id)
     {
         return _context.Transactions.Any(e => e.TransactionId == id);
-    }    
+    }
 }
