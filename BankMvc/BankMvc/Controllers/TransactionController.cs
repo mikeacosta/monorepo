@@ -1,3 +1,4 @@
+using BankMvc.Helpers;
 using BankMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,7 +45,7 @@ public class TransactionController : Controller
         TransactionModel transactionModel)
     {
         if (!ModelState.IsValid)
-            return Json(new { isValid = false, html = "" });
+            return Json(new { isValid = false, html = RenderHelper.RenderRazorViewToString(this, "AddOrEdit", transactionModel) });
 
         if (id == 0)
         {
@@ -67,7 +68,7 @@ public class TransactionController : Controller
             }
         }
 
-        return Json(new { isValid = true, html = "" });
+        return Json(new { isValid = true, html = RenderHelper.RenderRazorViewToString(this, "_ViewAll", _context.Transactions.ToList()) });
     }
 
     // GET: Transaction/Delete/5
