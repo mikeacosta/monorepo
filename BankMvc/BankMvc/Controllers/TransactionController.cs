@@ -1,3 +1,4 @@
+using BankMvc.Attributes;
 using BankMvc.Helpers;
 using BankMvc.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ public class TransactionController : Controller
     
     // GET: Transaction/AddOrEdit(Insert)
     // GET: Transaction/AddOrEdit/5(Update)
+    [NoDirectAccess]
     public async Task<IActionResult> AddOrEdit(int id = 0)
     {
         if (id == 0)
