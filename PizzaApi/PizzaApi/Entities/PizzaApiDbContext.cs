@@ -10,4 +10,12 @@ public class PizzaApiDbContext : DbContext
         : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Pizza>().HasData(
+            new Pizza("Cheese pizza", "very cheesy") {Id = 1},
+            new Pizza("Al Tono pizza", "lots of tuna") {Id = 2}
+        );
+    }
 }
