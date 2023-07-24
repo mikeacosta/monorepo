@@ -31,5 +31,23 @@ public class PizzaController : ControllerBase
         {
             return StatusCode(500, ex.Message);
         }
-    }    
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetPizzaById(int id)
+    {
+        try
+        {
+            var pizza = _repository.Pizza.GetPizzaById(id);
+            if (pizza == null)
+                return NotFound();
+
+            var pizzaDto = _mapper.Map<PizzaDto>(pizza);
+            return Ok(pizzaDto);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
 }

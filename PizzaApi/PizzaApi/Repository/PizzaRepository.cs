@@ -15,4 +15,10 @@ public class PizzaRepository : RepositoryBase<Pizza>, IPizzaRepository
             .OrderBy(p => p.Name)
             .ToList();
     }
+
+    public Pizza? GetPizzaById(int id)
+    {
+        return FindByCondition(p => p.Id == id)
+            .FirstOrDefault();
+    }
 }
