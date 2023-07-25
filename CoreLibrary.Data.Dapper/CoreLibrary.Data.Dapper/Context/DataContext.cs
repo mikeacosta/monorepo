@@ -89,6 +89,13 @@ public class DataContext
             commandTimeout: commandTimeout);
         return result;
     }
-    
-    // ExecuteInTransaction
+
+    public T ExecuteScalar<T>(QueryPacket queryPacket, CommandType commandType = CommandType.Text,
+        int? commandTimeout = default)
+    {
+        using var db = new SqlConnection(_connectionString);
+        var result = db.ExecuteScalar<T>(queryPacket.SqlString, queryPacket.SqlParams, commandType: commandType,
+            commandTimeout: commandTimeout);
+        return result;
+    }
 }
