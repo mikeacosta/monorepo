@@ -20,6 +20,11 @@ builder.Services.AddDbContext<PizzaApiDbContext>(
     dbContextOptions => dbContextOptions.UseMySQL(
         builder.Configuration["ConnectionStrings:PizzaApiDBConnectionString"]));
 
+builder.Services.AddCors(policyBuilder =>
+    policyBuilder.AddDefaultPolicy(policy =>
+        policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader())
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
