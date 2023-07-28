@@ -13,8 +13,15 @@ class Program
     {
         Initialize();
         
-        // GetAllContacts();
-        InsertContact();
+        //GetAllContacts();
+        //InsertContact();
+        var table1 = new Table1()
+        {
+            Name = "Fred Flintstone"
+        };
+        var repository = CreateRepository();
+        var id = repository.TestQuery(table1);
+        Console.WriteLine(id);
     }
 
     static int InsertContact()
@@ -50,7 +57,7 @@ class Program
 
         // assert
         Console.WriteLine($"Count: {contacts.Count}");
-        Debug.Assert(contacts.Count == 6);
+        Debug.Assert(contacts.Count == 8);
         contacts.Output();
     }
     

@@ -7,4 +7,6 @@ public interface IContactRepository
     Contact Add(Contact contact);
     Contact Update(Contact contact);
     void Remove(int id);
+    int TestQuery(Table1 model);
+    int AnotherTest(Table1 model);
 }
