@@ -21,4 +21,9 @@ public class PizzaRepository : RepositoryBase<Pizza>, IPizzaRepository
         return FindByCondition(p => p.Id == id)
             .FirstOrDefault();
     }
+
+    public void CreatePizza(Pizza pizza)
+    {
+        Create(pizza);
+    }
 }

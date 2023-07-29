@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PizzaApi.Contracts;
+using PizzaApi.Entities;
 using PizzaApi.Models;
 
 namespace PizzaApi.Controllers;
@@ -33,7 +34,7 @@ public class PizzaController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "PizzaById")]
     public IActionResult GetPizzaById(int id)
     {
         try
@@ -44,6 +45,31 @@ public class PizzaController : ControllerBase
 
             var pizzaDto = _mapper.Map<PizzaDto>(pizza);
             return Ok(pizzaDto);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CreatePizza([FromBody] PizzaForCreationDto dto)
+    {
+        try
+        {
+            if (dto is null)
+                return BadRequest("Pizza object sent from client is null");
+
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid model object");
+
+            var pizza = _mapper.Map<Pizza>(dto);
+            
+            _repository.Pizza.Create(pizza);
+            _repository.Save();
+
+            var createdDto = _mapper.Map<PizzaDto>(pizza);
+            return CreatedAtRoute("PizzaById", new { id = createdDto.Id }, createdDto);
         }
         catch (Exception ex)
         {
