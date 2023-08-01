@@ -1,17 +1,23 @@
 import { data } from "../SpeakerData";
 
-const IndexPage = () => {
-    const {
-        id,
-        bio,
-        first,
-        last,
-        favorite,
-        twitterHandle,
-        company,
-        sessions,
-    } = data[0];
+function Session({ title, room }) {
+    return (
+        <span className="session w-100">
+            {title}{" "}
+            <strong>Room: {room}</strong>
+        </span>
+    );
+}
 
+function Sessions({ sessions }) {
+    return (
+        <div className="sessionBox card h-250">
+            <Session title={sessions[0].title} room={sessions[0].room.name} />
+        </div>
+    )
+}
+
+const IndexPage = () => {
     return (
         <div className="container speakers-list">
             <div className="row">
@@ -28,7 +34,7 @@ const IndexPage = () => {
                     } = speaker;   
 
                     return (
-                        <div key={`${id}`} className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
+                        <div key={id} className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
                             <div className="card card-height p-4 mt-4">
                                 <div className="speaker-img d-flex flex-row justify-content-center align-items-center h-300">
                                     <img
@@ -51,12 +57,7 @@ const IndexPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="sessionBox card h-250">
-                                <span className="session w-100">
-                                    {sessions[0].title}{" "}
-                                    <strong>Room: {sessions[0].room.name}</strong>
-                                </span>
-                            </div>
+                            <Sessions sessions={sessions} />
                         </div>
                     );
                 })} 
