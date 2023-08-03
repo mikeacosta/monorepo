@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backgrounder.Controllers;
@@ -13,14 +14,19 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    private readonly IBackgroundJobClient _backgroundJobClient;
+
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IBackgroundJobClient backgroundJobClient)
     {
         _logger = logger;
+        _backgroundJobClient = backgroundJobClient;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        _backgroundJobClient.Enqueue(() => CalledFromBackground()); 
+        
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
@@ -28,5 +34,16 @@ public class WeatherForecastController : ControllerBase
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+    }
+
+    [ApiExplorerSettings(IgnoreApi=true)]
+    public void CalledFromBackground()
+    {
+        var number1 = 1;
+        var number2 = 2;
+
+        var sum = number1 + number2;
+        
+        Console.WriteLine($"The sum of two numbers is {sum}");
     }
 }
