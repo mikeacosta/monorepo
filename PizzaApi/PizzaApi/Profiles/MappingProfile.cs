@@ -10,5 +10,6 @@ public class MappingProfile : Profile
     {
         CreateMap<Pizza, PizzaDto>();
         CreateMap<PizzaForCreationDto, Pizza>();
+        CreateMap<PizzaForUpdateDto, Pizza>();
     }
 }

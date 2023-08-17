@@ -26,4 +26,9 @@ public class PizzaRepository : RepositoryBase<Pizza>, IPizzaRepository
     {
         Create(pizza);
     }
+
+    public void UpdatePizza(Pizza pizza)
+    {
+        Update(pizza);
+    }
 }

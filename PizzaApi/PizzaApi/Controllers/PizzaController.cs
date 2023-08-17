@@ -20,7 +20,7 @@ public class PizzaController : ControllerBase
     }
     
     [HttpGet]
-    public IActionResult GetAllOwners()
+    public IActionResult GetAllPizzas()
     {
         try
         {
@@ -70,6 +70,35 @@ public class PizzaController : ControllerBase
 
             var createdDto = _mapper.Map<PizzaDto>(pizza);
             return CreatedAtRoute("PizzaById", new { id = createdDto.Id }, createdDto);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdatePizza(int id, [FromBody] PizzaForUpdateDto pizza)
+    {
+        try
+        {
+            if (pizza is null)
+            {
+                return BadRequest("Pizza object is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model object");
+            }
+            var pizzaEntity = _repository.Pizza.GetPizzaById(id);
+            if (pizzaEntity is null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(pizza, pizzaEntity);
+            _repository.Pizza.UpdatePizza(pizzaEntity);
+            _repository.Save();
+            return NoContent();
         }
         catch (Exception ex)
         {
