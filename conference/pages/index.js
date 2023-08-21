@@ -1,15 +1,8 @@
-import { data } from "../SpeakerData";
-import Header from "../src/components/Header";
-import SpeakersToolbar from "../src/components/SpeakersToolbar";
-import SpeakersList from "../src/components/SpeakersList";
+import Speakers from "../src/components/Speakers";
 
 const IndexPage = () => {
   return (
-    <div className="container-fluid">
-      <Header />
-      <SpeakersToolbar />
-      <SpeakersList data={data} />
-    </div>
+    <Speakers />
   )
 };
 
