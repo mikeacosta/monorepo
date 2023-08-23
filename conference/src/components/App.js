@@ -4,7 +4,7 @@ import SpeakersToolbar from "./SpeakersToolbar";
 import SpeakersList from "./SpeakersList";
 import { useState } from 'react';
 
-function Speakers() {
+function App() {
   const [theme, setTheme] = useState("light");
 
   return (
@@ -20,4 +20,4 @@ function Speakers() {
   );
 }
 
-export default Speakers;
+export default App;
