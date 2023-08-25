@@ -8,7 +8,7 @@ public class PizzaRepository : RepositoryBase<Pizza>, IPizzaRepository
     public PizzaRepository(PizzaApiDbContext dbContext) : base(dbContext)
     {
     }
-
+    
     public IEnumerable<Pizza> GetAllPizzas()
     {
         return FindAll()
@@ -30,5 +30,10 @@ public class PizzaRepository : RepositoryBase<Pizza>, IPizzaRepository
     public void UpdatePizza(Pizza pizza)
     {
         Update(pizza);
+    }
+
+    public void DeletePizza(Pizza pizza)
+    {
+        Delete(pizza);
     }
 }

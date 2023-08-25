@@ -105,4 +105,23 @@ public class PizzaController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteOwner(int id)
+    {
+        try
+        {
+            var pizza = _repository.Pizza.GetPizzaById(id);
+            if (pizza is null)
+                return NotFound();
+            
+            _repository.Pizza.DeletePizza(pizza);
+            _repository.Save();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
 }
