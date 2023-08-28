@@ -12,7 +12,10 @@ function SpeakersList({showSessions}) {
           return <Speaker 
             key={speaker.id} 
             speaker={speaker}
-            showSessions={showSessions} />;
+            showSessions={showSessions}
+            onFavoriteToggle={() => {
+              console.log(speaker.id)
+            }} />;
         })}
       </div>
     </div>
