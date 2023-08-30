@@ -5,6 +5,20 @@ import { useState } from "react";
 function SpeakersList({showSessions}) {
   const  [speakersData, setSpeakersData] = useState(data);
 
+  function onFavoriteToggle(id) {
+    const speakersRecPrevious = speakersData.find(function (rec) {
+      return rec.id === id;
+    });
+    const speakerRecUpdated = {
+      ...speakersRecPrevious, favorite: !speakersRecPrevious.favorite,
+    };
+    const speakersDataNew = speakersData.map(function (rec) {
+      return rec.id === id ? speakerRecUpdated : rec;
+    });
+
+    setSpeakersData(speakersDataNew);
+  }
+
   return (
     <div className="container speakers-list">
       <div className="row">
@@ -14,7 +28,7 @@ function SpeakersList({showSessions}) {
             speaker={speaker}
             showSessions={showSessions}
             onFavoriteToggle={() => {
-              console.log(speaker.id)
+              onFavoriteToggle(speaker.id)
             }} />;
         })}
       </div>
