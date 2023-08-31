@@ -1,6 +1,7 @@
 import { data } from "../../SpeakerData";
 import Speaker from "./Speaker";
 import { useState, useEffect } from "react";
+import ReactPlaceHolder from "react-placeholder";
 
 function SpeakersList({showSessions}) {
   const  [speakersData, setSpeakersData] = useState([]);
@@ -14,7 +15,7 @@ function SpeakersList({showSessions}) {
     async function delayFunc() {
       try {
         await delay(2000);
-        throw "Had Error."
+        // throw "Had Error."
         setIsLoading(false);
         setSpeakersData(data);
       } catch (e) {
@@ -40,7 +41,7 @@ function SpeakersList({showSessions}) {
     setSpeakersData(speakersDataNew);
   }
 
-  if (isLoading === true) return <div>Loading...</div>
+  // if (isLoading === true) return <div>Loading...</div>
 
   if (hasErrored === true) {
     return (
@@ -52,17 +53,27 @@ function SpeakersList({showSessions}) {
 
   return (
     <div className="container speakers-list">
-      <div className="row">
-        {speakersData.map(function (speaker) {
-          return <Speaker 
-            key={speaker.id} 
-            speaker={speaker}
-            showSessions={showSessions}
-            onFavoriteToggle={() => {
-              onFavoriteToggle(speaker.id)
-            }} />;
-        })}
-      </div>
+      <ReactPlaceHolder
+        type="media"
+        rows={15}
+        className="speakerslist-placeholder"
+        ready={isLoading === false}
+      >
+        <div className="row">
+          {speakersData.map(function (speaker) {
+            return (
+              <Speaker
+                key={speaker.id}
+                speaker={speaker}
+                showSessions={showSessions}
+                onFavoriteToggle={() => {
+                  onFavoriteToggle(speaker.id);
+                }}
+              />
+            );
+          })}
+        </div>
+      </ReactPlaceHolder>
     </div>
   );
 }
