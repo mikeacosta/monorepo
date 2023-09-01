@@ -15,7 +15,6 @@ function SpeakersList({showSessions}) {
     async function delayFunc() {
       try {
         await delay(2000);
-        // throw "Had Error."
         setIsLoading(false);
         setSpeakersData(data);
       } catch (e) {
@@ -40,8 +39,6 @@ function SpeakersList({showSessions}) {
 
     setSpeakersData(speakersDataNew);
   }
-
-  // if (isLoading === true) return <div>Loading...</div>
 
   if (hasErrored === true) {
     return (

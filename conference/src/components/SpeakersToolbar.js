@@ -1,5 +1,3 @@
-
-
 function SpeakersToolbar({ 
   theme, setTheme, showSessions, setShowSessions 
 }) {
