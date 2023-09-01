@@ -12,11 +12,15 @@ public class PizzaController : ControllerBase
 {
     private readonly IRepositoryWrapper _repository;
     private readonly IMapper _mapper;
+    private readonly ILogger<PizzaController> _logger;
 
-    public PizzaController(IRepositoryWrapper repository, IMapper mapper)
+    public PizzaController(IRepositoryWrapper repository, 
+        IMapper mapper,
+        ILogger<PizzaController> logger)
     {
         _repository = repository;
         _mapper = mapper;
+        _logger = logger;
     }
     
     [HttpGet]
@@ -41,8 +45,11 @@ public class PizzaController : ControllerBase
         {
             var pizza = _repository.Pizza.GetPizzaById(id);
             if (pizza == null)
+            {
+                _logger.LogInformation($"Pizza with id {id} was not found.");
                 return NotFound();
-
+            }
+            
             var pizzaDto = _mapper.Map<PizzaDto>(pizza);
             return Ok(pizzaDto);
         }
