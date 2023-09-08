@@ -28,21 +28,7 @@ function useRequestDelay(delayTime = 1000, initialData = []) {
     delayFunc();
   }, []);
 
-  // function onFavoriteToggle(id) {
-  //   const speakersRecPrevious = speakersData.find(function (rec) {
-  //     return rec.id === id;
-  //   });
-  //   const speakerRecUpdated = {
-  //     ...speakersRecPrevious, favorite: !speakersRecPrevious.favorite,
-  //   };
-  //   const speakersDataNew = speakersData.map(function (rec) {
-  //     return rec.id === id ? speakerRecUpdated : rec;
-  //   });
-
-  //   setSpeakersData(speakersDataNew);
-  // }
-
-  function updateRecord(recordUpdated) {
+  function updateRecord(recordUpdated, doneCallback) {
     const newRecords = data.map(function (rec) {
       return rec.id === recordUpdated.id ? recordUpdated : rec;
     });
@@ -50,6 +36,9 @@ function useRequestDelay(delayTime = 1000, initialData = []) {
     async function delayFunction() {
       try {
         await delay(delayTime);
+        if (doneCallback) {
+          doneCallback();
+        }
         setData(newRecords);
       } catch (error) {
         console.log("error thrown inside delayFunction", error);
