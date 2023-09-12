@@ -34,7 +34,8 @@ public class PizzaController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message);
+            _logger.LogCritical($"Exception while getting all pizzas.",ex);
+            return StatusCode(500, "A problem occured while handling your request.");
         }
     }
 
@@ -55,7 +56,8 @@ public class PizzaController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message);
+            _logger.LogCritical($"Exception while getting pizza with id {id}.",ex);
+            return StatusCode(500, "A problem occured while handling your request.");
         }
     }
 
