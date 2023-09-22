@@ -2,8 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using PizzaApi.Contracts;
 using PizzaApi.Entities;
 using PizzaApi.Repository;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs/pizzaapi.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
