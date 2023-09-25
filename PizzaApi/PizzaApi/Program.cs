@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PizzaApi.Contracts;
 using PizzaApi.Entities;
 using PizzaApi.Repository;
+using PizzaApi.Services;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -33,6 +34,8 @@ builder.Services.AddCors(policyBuilder =>
     policyBuilder.AddDefaultPolicy(policy =>
         policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader())
 );
+
+builder.Services.AddTransient<LocalMailService>();
 
 var app = builder.Build();
 
