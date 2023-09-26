@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PizzaApi.Contracts;
 using PizzaApi.Entities;
 using PizzaApi.Models;
+using PizzaApi.Services;
 
 namespace PizzaApi.Controllers;
 
@@ -13,14 +14,17 @@ public class PizzaController : ControllerBase
     private readonly IRepositoryWrapper _repository;
     private readonly IMapper _mapper;
     private readonly ILogger<PizzaController> _logger;
+    private readonly LocalMailService _mailService;
 
     public PizzaController(IRepositoryWrapper repository, 
         IMapper mapper,
-        ILogger<PizzaController> logger)
+        ILogger<PizzaController> logger,
+        LocalMailService mailService)
     {
         _repository = repository;
         _mapper = mapper;
         _logger = logger;
+        _mailService = mailService;
     }
     
     [HttpGet]
@@ -126,6 +130,7 @@ public class PizzaController : ControllerBase
             
             _repository.Pizza.DeletePizza(pizza);
             _repository.Save();
+            _mailService.Send("Pizza deleted", $"Pizza {pizza.Name} with id {pizza.Id}");
             return NoContent();
         }
         catch (Exception ex)
