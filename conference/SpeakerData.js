@@ -1083,6 +1083,15 @@ export const data = [
           capacity: 130,
         },
       },
+      {
+        id: "8000",
+        title: 'Become a "Hello World" Rock Star',
+        eventYear: "2023",
+        room: {
+          name: "3rd Floor Restroom",
+          capacity: 4,
+        },       
+      },
     ],
   },
 ];
