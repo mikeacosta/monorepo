@@ -1,4 +1,6 @@
 import SpeakerDemographics from "./SpeakerDemographics";
+import { SpeakerFilterContext } from "../contexts/SpeakerFilterContext";
+import { useContext } from "react";
 
 function Session({ title, room }) {
   return (
@@ -30,8 +32,9 @@ function SpeakerImage({ id, first, last }) {
   );
 }
 
-function Speaker({ speaker, showSessions, onFavoriteToggle }) {
+function Speaker({ speaker, onFavoriteToggle }) {
   const { id, first, last, sessions } = speaker;
+  const { showSessions  } = useContext(SpeakerFilterContext);
 
   return (
     <div key={id} className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
