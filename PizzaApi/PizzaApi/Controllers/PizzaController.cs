@@ -14,12 +14,12 @@ public class PizzaController : ControllerBase
     private readonly IRepositoryWrapper _repository;
     private readonly IMapper _mapper;
     private readonly ILogger<PizzaController> _logger;
-    private readonly LocalMailService _mailService;
+    private readonly IMailService _mailService;
 
     public PizzaController(IRepositoryWrapper repository, 
         IMapper mapper,
         ILogger<PizzaController> logger,
-        LocalMailService mailService)
+        IMailService mailService)
     {
         _repository = repository;
         _mapper = mapper;

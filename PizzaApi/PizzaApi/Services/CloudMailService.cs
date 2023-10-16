@@ -1,6 +1,6 @@
 namespace PizzaApi.Services;
 
-public class LocalMailService : IMailService
+public class CloudMailService : IMailService
 {
     private string _mailTo = "admin@mycompany.com";
     private string _mailFrom = "noreply@mycompany.com";
@@ -8,7 +8,7 @@ public class LocalMailService : IMailService
     public void Send(string subject, string message)
     {
         Console.WriteLine($"Mail from {_mailFrom} to {_mailTo}, " +
-                          $"with {nameof(LocalMailService)}.");
+                          $"with {nameof(CloudMailService)}.");
         Console.WriteLine($"Subject: {subject}");
         Console.WriteLine($"Message: {message}");
     }
