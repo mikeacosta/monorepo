@@ -1,4 +1,5 @@
 using api.Data;
+using api.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<HouseDbContext>(
         .UseMySQL(builder.Configuration["ConnectionStrings:TerramanticsConnectionString"])
         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
     );
+builder.Services.AddScoped<IHouseRepository, HouseRepository>();
 
 var app = builder.Build();
 
@@ -25,11 +27,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/houses", (HouseDbContext dbContext) => dbContext.Houses);
+app.MapGet("/houses", (IHouseRepository repo) => repo.GetAll());
 
 app.Run();
-
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
