@@ -1,20 +1,12 @@
-import { useEffect, useState } from "react";
-import { House } from "../types/house";
-import config from "../config";
+import { House } from "./../types/house";
+import { useQuery } from "react-query";
+import Config from "../config";
+import axios, { AxiosError } from "axios";
 
-const useFetchHouses = (): House[] => {
-  const [houses, setHouses] = useState<House[]>([]);
-
-  useEffect(() => {
-    const fetchHouses = async () => {
-      const response = await fetch(`${config.baseApiUrl}/houses`);
-      const houses = await response.json();
-      setHouses(houses);
-    }
-    fetchHouses(); 
-  }, []);  
-
-  return houses;
-}
+const useFetchHouses = () => {
+  return useQuery<House[], AxiosError>("houses", () =>
+    axios.get(`${Config.baseApiUrl}/houses`).then((resp) => resp.data)
+  );
+};
 
 export default useFetchHouses;
