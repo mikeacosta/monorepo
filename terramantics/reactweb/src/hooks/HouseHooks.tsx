@@ -9,4 +9,13 @@ const useFetchHouses = () => {
   );
 };
 
-export default useFetchHouses;
+const useFetchHouse = (id: number) => {
+  return useQuery<House, AxiosError>(["houses", id], () =>
+    axios.get(`${Config.baseApiUrl}/houses/${id}`).then((resp) => resp.data)
+  );
+};
+
+export {
+  useFetchHouses,
+  useFetchHouse,
+};

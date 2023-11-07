@@ -1,5 +1,5 @@
 import { House } from "../types/house";
-import useFetchHouses from "../hooks/HouseHooks";
+import { useFetchHouses } from "../hooks/HouseHooks";
 import { currencyFormatter } from "../config";
 import ApiStatus from "../ApiStatus";
 
