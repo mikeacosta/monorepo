@@ -11,12 +11,11 @@ namespace PizzaApi.Migrations
             migrationBuilder.InsertData(
                 table: "pizza",
                 columns: new[] { "Id", "Description", "Name" },
-                values: new object[] { 1, "very cheesy", "Cheese pizza" });
-
-            migrationBuilder.InsertData(
-                table: "pizza",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[] { 2, "lots of tuna", "Al Tono pizza" });
+                values: new object[,]
+                {
+                    { 1, "very cheesy", "Cheese pizza" },
+                    { 2, "lots of tuna", "Al Tono pizza" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

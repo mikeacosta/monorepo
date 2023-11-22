@@ -27,7 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PizzaApiDbContext>(
-    dbContextOptions => dbContextOptions.UseMySQL(
+    dbContextOptions => dbContextOptions.UseNpgsql(
         builder.Configuration["ConnectionStrings:PizzaApiDBConnectionString"]));
 
 builder.Services.AddCors(policyBuilder =>
