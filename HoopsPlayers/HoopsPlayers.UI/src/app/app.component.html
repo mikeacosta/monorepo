@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Team</th>
+    <th>Country</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players">
+      <td>{{ player.firstName }}</td>
+      <td>{{ player.lastName }}</td>
+      <td>{{ player.team }}</td>
+      <td>{{ player.country }}</td>
+    </tr>
+  </tbody>
+</table>
