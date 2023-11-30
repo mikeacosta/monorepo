@@ -14,7 +14,8 @@ export class AppComponent {
   constructor(private hoopsPlayerService: HoopsPlayerService) {}
 
   ngOnInit() : void {
-    this.players = this.hoopsPlayerService.getHoopsPlayers();
-    console.log(this.players);
+    this.hoopsPlayerService
+      .getHoopsPlayers()
+      .subscribe((result: HoopsPlayer[]) => (this.players = result));
   }
 }
