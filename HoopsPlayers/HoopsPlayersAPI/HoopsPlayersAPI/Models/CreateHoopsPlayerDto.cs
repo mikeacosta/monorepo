@@ -1,8 +1,7 @@
 namespace HoopsPlayersAPI.Models;
 
-public class HoopsPlayer
+public class CreateHoopsPlayerDto
 {
-    public int Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Team { get; set; } = string.Empty;
