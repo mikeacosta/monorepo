@@ -10,5 +10,6 @@ public class MappingProfile : Profile
     {
         CreateMap<HoopsPlayer, HoopsPlayerDto>();
         CreateMap<CreateHoopsPlayerDto, HoopsPlayer>();
+        CreateMap<UpdateHoopsPlayerDto, HoopsPlayer>();
     }
 }
