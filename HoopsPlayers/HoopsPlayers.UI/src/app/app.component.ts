@@ -10,6 +10,7 @@ import { HoopsPlayerService } from './services/hoops-player.service';
 export class AppComponent {
   title = 'HoopsPlayers.UI';
   players: HoopsPlayer[] = [];
+  playerToEdit?: HoopsPlayer;
 
   constructor(private hoopsPlayerService: HoopsPlayerService) {}
 
@@ -17,5 +18,13 @@ export class AppComponent {
     this.hoopsPlayerService
       .getHoopsPlayers()
       .subscribe((result: HoopsPlayer[]) => (this.players = result));
+  }
+
+  initNewPlayer() {
+    this.playerToEdit = new HoopsPlayer();
+  }
+
+  editPlayer(player: HoopsPlayer) {
+    this.playerToEdit = player;
   }
 }

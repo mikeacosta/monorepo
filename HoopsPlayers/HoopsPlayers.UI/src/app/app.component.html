@@ -1,9 +1,12 @@
+<button (click)="initNewPlayer()">Create New Player</button>
+
 <table>
   <thead>
     <th>First Name</th>
     <th>Last Name</th>
     <th>Team</th>
     <th>Country</th>
+    <th></th>
   </thead>
   <tbody>
     <tr *ngFor="let player of players">
@@ -11,6 +14,9 @@
       <td>{{ player.lastName }}</td>
       <td>{{ player.team }}</td>
       <td>{{ player.country }}</td>
+      <td><button (click)="editPlayer(player)">Edit</button></td>
     </tr>
   </tbody>
 </table>
+
+<app-edit-player [player]="playerToEdit"></app-edit-player>

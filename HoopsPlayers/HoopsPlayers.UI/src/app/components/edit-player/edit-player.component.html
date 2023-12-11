@@ -1,0 +1,26 @@
+<div *ngIf="player">
+  <h2>{{ player.firstName}} {{player.lastName}}</h2>
+  <div>
+    First Name:
+    <input [(ngModel)]="player.firstName" placeholder="FirstName" />
+  </div>
+
+  <div>
+    Last Name:
+    <input [(ngModel)]="player.lastName" placeholder="LastName" />
+  </div>
+
+  <div>
+    Team:
+    <input [(ngModel)]="player.team" placeholder="Team" />
+  </div>
+
+  <div>
+    Country:
+    <input [(ngModel)]="player.country" placeholder="Country" />
+  </div>
+
+  <button (click)="updatePlayer(player)" *ngIf="player.id">Save</button>
+  <button (click)="deletePlayer(player)" *ngIf="player.id">Delete</button>
+  <button (click)="createPlayer(player)" *ngIf="!player.id">Create</button>
+</div>
