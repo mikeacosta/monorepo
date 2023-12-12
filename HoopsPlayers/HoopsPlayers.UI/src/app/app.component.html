@@ -19,4 +19,4 @@
   </tbody>
 </table>
 
-<app-edit-player [player]="playerToEdit"></app-edit-player>
+<app-edit-player [player]="playerToEdit" (playersUpdated)="updatePlayersList($event)"></app-edit-player>

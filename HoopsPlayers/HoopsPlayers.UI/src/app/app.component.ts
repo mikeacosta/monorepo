@@ -20,6 +20,10 @@ export class AppComponent {
       .subscribe((result: HoopsPlayer[]) => (this.players = result));
   }
 
+  updatePlayersList(players: HoopsPlayer[]) {
+    this.players = players;
+  }
+
   initNewPlayer() {
     this.playerToEdit = new HoopsPlayer();
   }

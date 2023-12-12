@@ -14,4 +14,19 @@ export class HoopsPlayerService {
   public getHoopsPlayers() : Observable<HoopsPlayer[]> {
     return this.http.get<HoopsPlayer[]>(`${environment.apiUrl}/${this.url}`)
   }
+
+  public updatePlayer(player: HoopsPlayer): Observable<HoopsPlayer[]> {
+    return this.http.put<HoopsPlayer[]>(
+      `${environment.apiUrl}/${this.url}/${player.id}`, 
+      player
+    );
+  }  
+
+  public createPlayer(player: HoopsPlayer): Observable<HoopsPlayer[]> {
+    return this.http.post<HoopsPlayer[]>(`${environment.apiUrl}/${this.url}`, player);
+  }
+
+  public deletePlayer(player: HoopsPlayer): Observable<HoopsPlayer[]> {
+    return this.http.delete<HoopsPlayer[]>(`${environment.apiUrl}/${this.url}/${player.id}`);
+  }  
 }
