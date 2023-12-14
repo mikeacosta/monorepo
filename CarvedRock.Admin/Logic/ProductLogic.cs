@@ -36,7 +36,7 @@ public class ProductLogic : IProductLogic
 
     public async Task AddNewProduct(ProductModel productToAdd)
     {
-        var productToSave = productToAdd.ToProduct();        
+        var productToSave = productToAdd.ToNewProduct();        
         await _repo.AddProductAsync(productToSave);
     }
 

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarvedRock.Admin.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20231213142125_InitialMigration")]
+    [Migration("20231214113159_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

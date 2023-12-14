@@ -14,7 +14,8 @@ public class CarvedRockRepository : ICarvedRockRepository
 
     public async Task<List<Product>> GetAllProductsAsync()
     {
-        return await _context.Products            
+        return await _context.Products
+            .OrderBy(p => p.Id)
             .ToListAsync();
     }
 
