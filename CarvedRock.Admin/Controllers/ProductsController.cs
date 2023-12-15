@@ -7,12 +7,14 @@ namespace CarvedRock.Admin.Controllers;
 public class ProductsController : Controller
 {
     private readonly IProductLogic _logic;
+    private readonly ILogger<ProductsController> _logger;
     
     public List<ProductModel> Products { get; set; }
     
-    public ProductsController(IProductLogic logic)
+    public ProductsController(IProductLogic logic, ILogger<ProductsController> logger)
     {
         _logic = logic;
+        _logger = logger;
     }
 
     public async Task<IActionResult> Index()
@@ -24,7 +26,11 @@ public class ProductsController : Controller
     public async Task<IActionResult> Details(int id)
     {
         var product = await _logic.GetProductById(id);
-        return product == null ? NotFound() : View(product);
+        if (product is not null)
+            return View(product);
+        
+        _logger.LogInformation($"Details not found for id {id}");
+        return View("NotFound");
     }   
     
     public IActionResult Create()
@@ -51,11 +57,17 @@ public class ProductsController : Controller
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
-            return NotFound();
+        {
+            _logger.LogInformation("No id passed for edit");
+            return View("NotFound");
+        }
 
         var productModel = await _logic.GetProductById(id.Value);
         if (productModel == null)
-            return NotFound();
+        {
+            _logger.LogInformation($"Edit details not found for id {id}");
+            return View("NotFound");
+        }
 
         return View(productModel);
     }

@@ -1,4 +1,4 @@
-@model CarvedRock.Admin.Models.ProductModel
+@model ProductModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -43,3 +43,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
