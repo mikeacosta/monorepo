@@ -56,6 +56,11 @@ public class ProductLogic : IProductLogic
     {
         return new ProductModel { AvailableCategories = await GetAvailableCategoriesFromDb() };
     }
+    
+    public async Task GetAvailableCategories(ProductModel productModel)
+    {
+        productModel.AvailableCategories = await GetAvailableCategoriesFromDb();
+    }
 
     private async Task<List<SelectListItem>> GetAvailableCategoriesFromDb()
     {
