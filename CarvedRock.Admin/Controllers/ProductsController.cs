@@ -33,9 +33,10 @@ public class ProductsController : Controller
         return View("NotFound");
     }   
     
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        return View();
+        var model = await _logic.InitializeProductModel();
+        return View(model);
     }
     
     // POST: ProductsData/Create
