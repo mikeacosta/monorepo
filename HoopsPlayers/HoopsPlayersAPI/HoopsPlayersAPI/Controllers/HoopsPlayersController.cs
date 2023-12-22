@@ -1,8 +1,6 @@
-using AutoMapper;
-using HoopsPlayersAPI.Entities;
+using HoopsPlayersAPI.Logic;
 using HoopsPlayersAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace HoopsPlayersAPI.Controllers;
 
@@ -10,33 +8,33 @@ namespace HoopsPlayersAPI.Controllers;
 [ApiController]
 public class HoopsPlayersController : ControllerBase
 {
-    private readonly DataContext _dataContext;
-    private readonly IMapper _mapper;
+    private readonly ILogger<PlayerLogic> _logger;
+    private readonly IPlayerLogic _logic;
     
-    public HoopsPlayersController(DataContext dataContext,
-        IMapper mapper)
+    public HoopsPlayersController(ILogger<PlayerLogic> logger, IPlayerLogic logic)
     {
-        _dataContext = dataContext;
-        _mapper = mapper;
+        _logger = logger;
+        _logic = logic;
     }
 
     [HttpGet]
     public async Task<ActionResult<List<HoopsPlayerDto>>> GetHoopsPlayers()
     {
-        var players = await _dataContext.HoopsPlayers.OrderBy(p => p.Id).ToListAsync();
-        var dtos = _mapper.Map<IEnumerable<HoopsPlayerDto>>(players);
-        return Ok(dtos);
+        var players = await _logic.GetAllPlayers();
+        return Ok(players);
     }
     
     [HttpGet("{id}", Name = "HoopsPlayerById")]
     public async Task<ActionResult<HoopsPlayerDto>> GetHoopsPlayerById(int id)
     {
-        var player = await _dataContext.HoopsPlayers.FindAsync(id);
-        if (player == null)
+        if (!await _logic.PlayerExists(id))
+        {
+            _logger.LogInformation($"Player with id {id} not found");
             return NotFound();
+        }
         
-        var dto = _mapper.Map<HoopsPlayerDto>(player);
-        return Ok(dto);
+        var player = await _logic.GetPlayerById(id);
+        return Ok(player);
     }
 
     [HttpPost]
@@ -44,13 +42,8 @@ public class HoopsPlayersController : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid model object");
-
-        var player = _mapper.Map<HoopsPlayer>(dto);
-
-        await _dataContext.AddAsync(player);
-        await _dataContext.SaveChangesAsync();
         
-        var result = _mapper.Map<HoopsPlayerDto>(player);
+        var result = await _logic.AddNewPlayer(dto);
         return CreatedAtRoute("HoopsPlayerById", new { id = result.Id }, result);
     }
 
@@ -59,25 +52,21 @@ public class HoopsPlayersController : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid model object");
-
-        var playerEntity = await _dataContext.HoopsPlayers.FindAsync(id);
-        if (playerEntity is null)
+        
+        if (!await _logic.PlayerExists(id))
             return NotFound();
-
-        _mapper.Map(dto, playerEntity);
-        await _dataContext.SaveChangesAsync();
+        
+        await _logic.UpdatePlayer(id, dto);
         return Ok();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteHoopsPlayer(int id)
     {
-        var playerEntity = await _dataContext.HoopsPlayers.FindAsync(id);
-        if (playerEntity is null)
+        if (!await _logic.PlayerExists(id))
             return NotFound();
 
-        _dataContext.HoopsPlayers.Remove(playerEntity);
-        await _dataContext.SaveChangesAsync();
+        await _logic.RemovePlayer(id);
         return NoContent();
     }
 }

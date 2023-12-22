@@ -1,6 +1,8 @@
 using HoopsPlayersAPI.Entities;
+using HoopsPlayersAPI.Logic;
 using Microsoft.EntityFrameworkCore;
 
+// http://bit.ly/aspnet-builder-defaults
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +22,8 @@ builder.Services.AddCors(options => options.AddPolicy(name: "HoopsPlayersOrigins
     {
         policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
     }));
+
+builder.Services.AddScoped<IPlayerLogic, PlayerLogic>();
 
 var app = builder.Build();
 
