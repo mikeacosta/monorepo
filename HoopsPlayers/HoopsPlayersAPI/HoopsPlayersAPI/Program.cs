@@ -1,5 +1,6 @@
 using HoopsPlayersAPI.Entities;
 using HoopsPlayersAPI.Logic;
+using HoopsPlayersAPI.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 // http://bit.ly/aspnet-builder-defaults
@@ -28,6 +29,8 @@ builder.Services.AddScoped<IPlayerLogic, PlayerLogic>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
