@@ -29,7 +29,7 @@ public class HoopsPlayersController : ControllerBase
     {
         if (!await _logic.PlayerExists(id))
         {
-            _logger.LogInformation($"Player with id {id} not found");
+            _logger.LogInformation("Player with id {id} not found", id);
             return NotFound();
         }
         
@@ -43,6 +43,7 @@ public class HoopsPlayersController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest("Invalid model object");
         
+        _logger.LogInformation("Adding a new player - {firstName} {lastName}", dto.FirstName, dto.LastName);
         var result = await _logic.AddNewPlayer(dto);
         return CreatedAtRoute("HoopsPlayerById", new { id = result.Id }, result);
     }

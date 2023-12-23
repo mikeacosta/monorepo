@@ -29,7 +29,7 @@ public class PlayerLogic : IPlayerLogic
 
     public async Task<HoopsPlayerDto?> GetPlayerById(int id)
     {
-        _logger.LogInformation($"Getting player for id {id}");
+        _logger.LogInformation("Getting player for id {id}", id);
         var entity = await _dataContext.HoopsPlayers.FirstOrDefaultAsync(p => p.Id == id);
         return _mapper.Map<HoopsPlayerDto>(entity);
     }
