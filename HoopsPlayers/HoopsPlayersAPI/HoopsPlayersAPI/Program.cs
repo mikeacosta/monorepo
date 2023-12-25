@@ -2,9 +2,23 @@ using HoopsPlayersAPI.Entities;
 using HoopsPlayersAPI.Logic;
 using HoopsPlayersAPI.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
+
+var name = typeof(Program).Assembly.GetName().Name;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
+    .Enrich.WithProperty("Assembly", name)
+    .WriteTo.Console()
+    .CreateLogger();
 
 // http://bit.ly/aspnet-builder-defaults
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
