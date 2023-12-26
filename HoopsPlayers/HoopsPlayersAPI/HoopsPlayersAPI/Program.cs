@@ -12,6 +12,7 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .Enrich.WithMachineName()
     .Enrich.WithProperty("Assembly", name)
+    .WriteTo.Seq("http://172.17.0.1:5341")  // Docker host static IP on Linux
     .WriteTo.Console()
     .CreateLogger();
 
@@ -50,6 +51,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// app.UseCustomRequestLogging();
 
 app.UseCors("HoopsPlayersOrigins");
 

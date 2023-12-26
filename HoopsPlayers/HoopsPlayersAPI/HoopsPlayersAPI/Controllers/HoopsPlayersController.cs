@@ -1,6 +1,7 @@
 using HoopsPlayersAPI.Logic;
 using HoopsPlayersAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace HoopsPlayersAPI.Controllers;
 
@@ -33,6 +34,8 @@ public class HoopsPlayersController : ControllerBase
             return NotFound();
         }
         
+        Log.ForContext("PlayerId", id)
+            .Information("Starting controller action GetHoopsPlayerById");
         var player = await _logic.GetPlayerById(id);
         return Ok(player);
     }
