@@ -7,10 +7,12 @@ namespace JockStop.Controllers;
 public class ProductsController : ControllerBase
 {
     private readonly DataContext _context;
+    private readonly ILogger<ProductsController> _logger;
 
-    public ProductsController(DataContext context)
+    public ProductsController(DataContext context, ILogger<ProductsController> logger)
     {
         _context = context;
+        _logger = logger;
     }
     
     [HttpGet]
@@ -22,6 +24,7 @@ public class ProductsController : ControllerBase
     [HttpGet("{id}")]
     public Product? GetProduct(long id)
     {
+        _logger.LogDebug("GetProduct action invoked");
         return _context.Products.Find(id);
     }    
 }
