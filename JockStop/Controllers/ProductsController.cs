@@ -32,5 +32,17 @@ public class ProductsController : ControllerBase
     public void SaveProduct([FromBody] Product product) {
         _context.Products.Add(product);
         _context.SaveChanges();
-    }    
+    }  
+    
+    [HttpPut]
+    public void UpdateProduct([FromBody] Product product) {
+        _context.Products.Update(product);
+        _context.SaveChanges();
+    }
+    
+    [HttpDelete("{id}")]
+    public void DeleteProduct(long id) {
+        _context.Products.Remove(new Product() { ProductId = id });
+        _context.SaveChanges();
+    }
 }
