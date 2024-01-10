@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create AlbumRank DynamoDB table
+Resources:
+  MyBucket: 
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: AlbumRank
+      AttributeDefinitions:
+        - AttributeName: 'UserId'
+          AttributeType: 'N'
+        - AttributeName: 'AlbumTitle'
+          AttributeType: 'S'                 
+      KeySchema:
+        - AttributeName: 'UserId'
+          KeyType: 'HASH'
+        - AttributeName: 'AlbumTitle'
+          KeyType: 'RANGE'
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1          
+      GlobalSecondaryIndexes:
+        - IndexName: AlbumTitleIndex
+          KeySchema:
+            - AttributeName: AlbumTitle
+              KeyType: HASH
+          Projection:
+            ProjectionType: KEYS_ONLY   
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1                  
