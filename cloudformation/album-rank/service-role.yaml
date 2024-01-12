@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: IAM service role for CloudFormation
+Resources:
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AlbumRank-CloudFormation-ServiceRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'cloudformation.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'   
+      Policies:
+        - PolicyName: AlbumRank-CloudFormation-DynamoDB-Policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'dynamodb:DeleteTable'
+                  - 'dynamodb:DescribeTable'
+                  - 'dynamodb:CreateTable'
+                Resource:
+                  !Join
+                    - ''
+                    - - 'arn:aws:dynamodb:*:'
+                      - !Ref AWS::AccountId
+                      - ':table/AlbumRank'
+
+Outputs:
+  ServiceRoleARN:
+    Value: !GetAtt ServiceRole.Arn                 
