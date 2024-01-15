@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbumRank", "AlbumRank\AlbumRank.csproj", "{CEDE5736-8ADD-469D-9E1B-ECC94ED8868C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbumRank.Contracts", "AlbumRank.Contracts\AlbumRank.Contracts.csproj", "{78A55385-F444-45F1-A851-81428F92356C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{CEDE5736-8ADD-469D-9E1B-ECC94ED8868C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEDE5736-8ADD-469D-9E1B-ECC94ED8868C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDE5736-8ADD-469D-9E1B-ECC94ED8868C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78A55385-F444-45F1-A851-81428F92356C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A55385-F444-45F1-A851-81428F92356C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A55385-F444-45F1-A851-81428F92356C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A55385-F444-45F1-A851-81428F92356C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
