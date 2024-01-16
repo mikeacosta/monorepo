@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbumRank", "AlbumRank\Albu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbumRank.Contracts", "AlbumRank.Contracts\AlbumRank.Contracts.csproj", "{78A55385-F444-45F1-A851-81428F92356C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbumRank.Libs", "AlbumRank.Libs\AlbumRank.Libs.csproj", "{7E84DE3A-ED73-40D0-A5FE-B0082CAF1AB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{78A55385-F444-45F1-A851-81428F92356C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78A55385-F444-45F1-A851-81428F92356C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78A55385-F444-45F1-A851-81428F92356C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E84DE3A-ED73-40D0-A5FE-B0082CAF1AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E84DE3A-ED73-40D0-A5FE-B0082CAF1AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E84DE3A-ED73-40D0-A5FE-B0082CAF1AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E84DE3A-ED73-40D0-A5FE-B0082CAF1AB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
