@@ -1,4 +1,5 @@
 using AlbumRank.Contracts;
+using AlbumRank.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlbumRank.Controllers;
@@ -6,6 +7,13 @@ namespace AlbumRank.Controllers;
 [Route("albums")]
 public class AlbumController : Controller
 {
+    private readonly IAlbumRankService _albumRankService;
+
+    public AlbumController(IAlbumRankService albumRankService)
+    {
+        _albumRankService = albumRankService;
+    }
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AlbumResponse>>> GetAllItems()
     {

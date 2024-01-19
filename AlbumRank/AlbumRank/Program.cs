@@ -1,3 +1,4 @@
+using AlbumRank.Services;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.Extensions.NETCore.Setup;
@@ -10,6 +11,10 @@ builder.Services.AddDefaultAWSOptions(new AWSOptions()
 {
     Region = RegionEndpoint.GetBySystemName("us-west-2")
 });
+
+builder.Services.AddSingleton<IAlbumRankService, AlbumRankService>();
+// builder.Services.AddSingleton<IMovieRankRepository, MovieRankRepository>();
+// builder.Services.AddSingleton<IMapper, Mapper>();
 
 var app = builder.Build();
 
