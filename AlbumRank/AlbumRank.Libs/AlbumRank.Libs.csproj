@@ -11,4 +11,8 @@
       <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.300" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AlbumRank.Contracts\AlbumRank.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>

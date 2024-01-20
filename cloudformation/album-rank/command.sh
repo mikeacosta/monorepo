@@ -8,7 +8,7 @@ aws cloudformation create-stack \
 aws cloudformation create-stack \
   --stack-name album-rank-table \
   --template-body file://table.yaml \
-  --role-arn "arn:aws:iam::489967615225:role/AlbumRank-Cloudformation-ServiceRole"
+  --role-arn "arn:aws:iam::489967615225:role/AlbumRank-CloudFormation-ServiceRole"
 
 # delete table
 aws cloudformation delete-stack --stack-name album-rank-table

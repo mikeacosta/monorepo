@@ -1,3 +1,5 @@
+using AlbumRank.Libs.Mappers;
+using AlbumRank.Libs.Repositories;
 using AlbumRank.Services;
 using Amazon;
 using Amazon.DynamoDBv2;
@@ -13,8 +15,8 @@ builder.Services.AddDefaultAWSOptions(new AWSOptions()
 });
 
 builder.Services.AddSingleton<IAlbumRankService, AlbumRankService>();
-// builder.Services.AddSingleton<IMovieRankRepository, MovieRankRepository>();
-// builder.Services.AddSingleton<IMapper, Mapper>();
+builder.Services.AddSingleton<IAlbumRankRepository, AlbumRankRepository>();
+builder.Services.AddSingleton<IMapper, Mapper>();
 
 var app = builder.Build();
 
