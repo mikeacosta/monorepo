@@ -1,0 +1,52 @@
+{
+  "AlbumRank": [
+    {
+      "PutRequest": {
+        "Item": {
+          "UserId": {"N": "1"},
+          "Title": {"S": "Blue Weekend"},
+          "Artist": {"S": "Wolf Alice"},
+          "Year": {"N": "2021"},
+          "Generes": {"SS": ["alternative rock",
+              "indie rock",
+              "dream pop",
+              "shoegaze",
+              "grunge"]},
+          "Ranking": {"N": "5"},
+          "DateTimeRanked": {"S": "2024-01-25"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserId": {
+            "N": "2"
+          },
+          "Title": {
+            "S": "My Favourite Worst Nightmare"
+          },
+          "Artist": {
+            "S": "Artic Monkeys"
+          },
+          "Year": {
+            "N": "2007"
+          },
+          "Generes": {
+            "SS": [
+              "alternative rock",
+              "indie rock",
+              "post punk revival"
+            ]
+          },
+          "Ranking": {
+            "N": "4"
+          },
+          "DateTimeRanked": {
+            "S": "2024-01-24"
+          }
+        }
+      }
+    }
+  ]
+}

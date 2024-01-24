@@ -10,6 +10,9 @@ aws cloudformation create-stack \
   --template-body file://table.yaml \
   --role-arn "arn:aws:iam::489967615225:role/AlbumRank-CloudFormation-ServiceRole"
 
+# write data
+aws dynamodb batch-write-item --request-items file://request-items.json 
+
 # delete table
 aws cloudformation delete-stack --stack-name album-rank-table
 
