@@ -16,5 +16,10 @@ public class AlbumRankRepository : IAlbumRankRepository
     public async Task<IEnumerable<AlbumDb>> GetAllItemsFromDb()
     {
         return await _context.ScanAsync<AlbumDb>(new List<ScanCondition>()).GetRemainingAsync();
-    }    
+    }
+
+    public async Task<AlbumDb> GetAlbum(int userId, string title)
+    {
+        return await _context.LoadAsync<AlbumDb>(userId, title);
+    }
 }

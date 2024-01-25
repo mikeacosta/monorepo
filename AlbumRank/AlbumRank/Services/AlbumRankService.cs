@@ -21,4 +21,10 @@ public class AlbumRankService : IAlbumRankService
         var response = await _albumRankRepository.GetAllItemsFromDb();
         return _mapper.ToAlbumContract(response);
     }
+
+    public async Task<AlbumResponse> GetAlbum(int userId, string title)
+    {
+        var response = await _albumRankRepository.GetAlbum(userId, title);
+        return _mapper.ToAlbumContract(response);
+    }
 }
