@@ -47,6 +47,38 @@
           }
         }
       }
-    }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserId": {
+            "N": "1"
+          },
+          "Title": {
+            "S": "Fuse"
+          },
+          "Artist": {
+            "S": "Everything But The Girl"
+          },
+          "Year": {
+            "N": "2023"
+          },
+          "Generes": {
+            "SS": [
+              "pop",
+              "electronic",
+              "indie",
+              "soul"
+            ]
+          },
+          "Ranking": {
+            "N": "5"
+          },
+          "DateTimeRanked": {
+            "S": "2024-01-26"
+          }
+        }
+      }
+    }    
   ]
 }
