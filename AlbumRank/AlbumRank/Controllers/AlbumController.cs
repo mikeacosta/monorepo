@@ -50,4 +50,12 @@ public class AlbumController : Controller
         var result = await _albumRankService.GetAlbum(userId, title);
         return Ok(result);
     }
+    
+    [HttpGet]
+    [Route("user/{userId}/rankedAlbums/{title}")]
+    public async Task<ActionResult<IEnumerable<AlbumResponse>>> GetUserRankedAlbumByTitle(int userId, string title)
+    {
+        var result = await _albumRankService.GetUserRankedAlbumByTitle(userId, title);
+        return Ok(result);
+    }
 }
