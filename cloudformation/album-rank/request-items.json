@@ -79,6 +79,38 @@
           }
         }
       }
-    }    
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserId": {
+            "N": "2"
+          },
+          "Title": {
+            "S": "Dummy"
+          },
+          "Artist": {
+            "S": "Portishead"
+          },
+          "Year": {
+            "N": "1994"
+          },
+          "Generes": {
+            "SS": [
+              "trip-hop",
+              "electronica",
+              "downtempo",
+              "alternative"
+            ]
+          },
+          "Ranking": {
+            "N": "5"
+          },
+          "DateTimeRanked": {
+            "S": "2024-02-02"
+          }
+        }
+      }
+    }
   ]
 }
