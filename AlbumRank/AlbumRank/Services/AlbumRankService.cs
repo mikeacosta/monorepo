@@ -28,8 +28,9 @@ public class AlbumRankService : IAlbumRankService
         return _mapper.ToAlbumContract(response);
     }
 
-    public Task<IEnumerable<AlbumResponse>> GetUserRankedAlbumByTitle(int userId, string title)
+    public async Task<IEnumerable<AlbumResponse>> GetUserRankedAlbumByTitle(int userId, string title)
     {
-        throw new NotImplementedException();
+        var response = await _albumRankRepository.GetUsersRankedAlbumsByTitle(userId, title);
+        return _mapper.ToAlbumContract(response);
     }
 }
