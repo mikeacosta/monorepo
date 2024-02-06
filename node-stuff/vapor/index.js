@@ -1,5 +1,5 @@
 const moment = require('moment');
-const msg = {
+const greeting = {
   "en": "hello",
   "fr": "bonjour",
   "es": "hola",

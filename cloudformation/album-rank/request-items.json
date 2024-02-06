@@ -111,6 +111,36 @@
           }
         }
       }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserId": {
+            "N": "2"
+          },
+          "Title": {
+            "S": "Definitely Maybe"
+          },
+          "Artist": {
+            "S": "Oasis"
+          },
+          "Year": {
+            "N": "21994"
+          },
+          "Generes": {
+            "SS": [
+              "rock",
+              "britpop"
+            ]
+          },
+          "Ranking": {
+            "N": "5"
+          },
+          "DateTimeRanked": {
+            "S": "2024-02-07"
+          }
+        }
+      }
     }
   ]
 }
