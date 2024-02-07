@@ -33,4 +33,9 @@ public class AlbumRankService : IAlbumRankService
         var response = await _albumRankRepository.GetUsersRankedAlbumsByTitle(userId, title);
         return _mapper.ToAlbumContract(response);
     }
+
+    public Task AddAlbum(int userId, AlbumRankRequest albumRankRequest)
+    {
+        throw new NotImplementedException();
+    }
 }
