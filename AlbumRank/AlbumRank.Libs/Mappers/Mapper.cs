@@ -1,3 +1,4 @@
+using System.Globalization;
 using AlbumRank.Contracts;
 using AlbumRank.Libs.Models;
 
@@ -21,6 +22,19 @@ public class Mapper : IMapper
             Generes = album.Genres,
             Ranking = album.Ranking,
             DateTimeRanked = album.DateTimeRanked
+        };
+    }
+
+    public AlbumDb ToAlbumDbModel(int userId, AlbumRankRequest albumRankRequest)
+    {
+        return new AlbumDb()
+        {
+            UserId = userId,
+            Title = albumRankRequest.Title,
+            Artist = albumRankRequest.Artist,
+            Year = albumRankRequest.Year,
+            Ranking = albumRankRequest.Ranking,
+            DateTimeRanked = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
         };
     }
 }

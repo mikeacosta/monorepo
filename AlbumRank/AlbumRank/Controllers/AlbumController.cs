@@ -38,7 +38,7 @@ public class AlbumController : Controller
     }
     
     [HttpPost]
-    [Route("{userId}")]
+    [Route("user/{userId}")]
     public async Task<IActionResult> AddAlbum(int userId, [FromBody] AlbumRankRequest albumRankRequest)
     {
         await _albumRankService.AddAlbum(userId, albumRankRequest);

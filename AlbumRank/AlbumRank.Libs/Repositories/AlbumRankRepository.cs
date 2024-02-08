@@ -36,4 +36,9 @@ public class AlbumRankRepository : IAlbumRankRepository
 
         return await _context.QueryAsync<AlbumDb>(userId, config).GetRemainingAsync();
     }
+
+    public async Task AddAlbum(AlbumDb albumDb)
+    {
+        await _context.SaveAsync(albumDb);
+    }
 }

@@ -34,8 +34,9 @@ public class AlbumRankService : IAlbumRankService
         return _mapper.ToAlbumContract(response);
     }
 
-    public Task AddAlbum(int userId, AlbumRankRequest albumRankRequest)
+    public async Task AddAlbum(int userId, AlbumRankRequest albumRankRequest)
     {
-        throw new NotImplementedException();
+        var albumDb = _mapper.ToAlbumDbModel(userId, albumRankRequest);
+        await _albumRankRepository.AddAlbum(albumDb);
     }
 }

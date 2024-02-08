@@ -7,4 +7,5 @@ public interface IMapper
 {
     IEnumerable<AlbumResponse> ToAlbumContract(IEnumerable<AlbumDb> items);
     AlbumResponse ToAlbumContract(AlbumDb album);
+    AlbumDb ToAlbumDbModel(int userId, AlbumRankRequest albumRankRequest);
 }
