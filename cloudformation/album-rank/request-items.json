@@ -7,7 +7,7 @@
           "Title": {"S": "Blue Weekend"},
           "Artist": {"S": "Wolf Alice"},
           "Year": {"N": "2021"},
-          "Generes": {"SS": ["alternative rock",
+          "Genres": {"SS": ["alternative rock",
               "indie rock",
               "dream pop",
               "shoegaze",
@@ -32,7 +32,7 @@
           "Year": {
             "N": "2007"
           },
-          "Generes": {
+          "Genres": {
             "SS": [
               "alternative rock",
               "indie rock",
@@ -63,7 +63,7 @@
           "Year": {
             "N": "2023"
           },
-          "Generes": {
+          "Genres": {
             "SS": [
               "pop",
               "electronic",
@@ -95,7 +95,7 @@
           "Year": {
             "N": "1994"
           },
-          "Generes": {
+          "Genres": {
             "SS": [
               "trip-hop",
               "electronica",
@@ -127,7 +127,7 @@
           "Year": {
             "N": "21994"
           },
-          "Generes": {
+          "Genres": {
             "SS": [
               "rock",
               "britpop"
