@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqs", "Sqs", "{0F587471-F80F-4550-8A58-34C2974806E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqsPublisher", "SqsPublisher\SqsPublisher.csproj", "{A871135F-5DB5-4DA8-AF03-4DA10730965D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A871135F-5DB5-4DA8-AF03-4DA10730965D} = {0F587471-F80F-4550-8A58-34C2974806E5}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
