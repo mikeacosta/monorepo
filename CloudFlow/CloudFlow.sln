@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqs", "Sqs", "{0F587471-F80F-4550-8A58-34C2974806E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqs", "Sqs", "{DC940963-9E1B-4821-B555-F4A8E8AA7515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqsPublisher", "SqsPublisher\SqsPublisher.csproj", "{A871135F-5DB5-4DA8-AF03-4DA10730965D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqsPublisher", "Sqs\SqsPublisher\SqsPublisher.csproj", "{FF21474E-7382-4BF8-BE27-933EF3FA2A3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqsConsumer", "Sqs\SqsConsumer\SqsConsumer.csproj", "{0631C2CF-5590-41A3-9E35-E1832DFB83FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,12 +12,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A871135F-5DB5-4DA8-AF03-4DA10730965D} = {0F587471-F80F-4550-8A58-34C2974806E5}
+		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F} = {DC940963-9E1B-4821-B555-F4A8E8AA7515}
+		{0631C2CF-5590-41A3-9E35-E1832DFB83FE} = {DC940963-9E1B-4821-B555-F4A8E8AA7515}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A871135F-5DB5-4DA8-AF03-4DA10730965D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
