@@ -39,4 +39,11 @@ public class AlbumRankService : IAlbumRankService
         var albumDb = _mapper.ToAlbumDbModel(userId, albumRankRequest);
         await _albumRankRepository.AddAlbum(albumDb);
     }
+
+    public async Task UpdateAlbum(int userId, AlbumUpdateRequest request)
+    {
+        var response = await _albumRankRepository.GetAlbum(userId, request.Title);
+        var albumDb = _mapper.ToAlbumDbModel(userId, response, request);
+        await _albumRankRepository.UpdateAlbum(albumDb);
+    }
 }

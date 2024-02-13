@@ -33,7 +33,22 @@ public class Mapper : IMapper
             Title = albumRankRequest.Title,
             Artist = albumRankRequest.Artist,
             Year = albumRankRequest.Year,
+            Genres = albumRankRequest.Genres,
             Ranking = albumRankRequest.Ranking,
+            DateTimeRanked = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
+        };
+    }
+
+    public AlbumDb ToAlbumDbModel(int userId, AlbumDb albumDbRequest, AlbumUpdateRequest albumUpdateRequest)
+    {
+        return new AlbumDb()
+        {
+            UserId = userId,
+            Title = albumDbRequest.Title,
+            Artist = albumDbRequest.Artist,
+            Year = albumDbRequest.Year,
+            Genres = albumDbRequest.Genres,
+            Ranking = albumUpdateRequest.Ranking,
             DateTimeRanked = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
         };
     }

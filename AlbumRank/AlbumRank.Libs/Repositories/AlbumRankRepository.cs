@@ -41,4 +41,9 @@ public class AlbumRankRepository : IAlbumRankRepository
     {
         await _context.SaveAsync(albumDb);
     }
+
+    public async Task UpdateAlbum(AlbumDb albumDb)
+    {
+        await _context.SaveAsync(albumDb);
+    }
 }

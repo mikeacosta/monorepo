@@ -8,4 +8,5 @@ public interface IAlbumRankRepository
     Task<AlbumDb> GetAlbum(int userId, string title);
     Task<IEnumerable<AlbumDb>> GetUsersRankedAlbumsByTitle(int userId, string title);
     Task AddAlbum(AlbumDb albumDb);
+    Task UpdateAlbum(AlbumDb albumDb);
 }

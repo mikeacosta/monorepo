@@ -44,4 +44,11 @@ public class AlbumController : Controller
         await _albumRankService.AddAlbum(userId, albumRankRequest);
         return Created($"albums/{userId}/{albumRankRequest.Title}", albumRankRequest);
     }
+
+    [HttpPatch]
+    public async Task<IActionResult> UpdateMovie(int userId, [FromBody] AlbumUpdateRequest request)
+    {
+        await _albumRankService.UpdateAlbum(userId, request);
+        return Ok();
+    }
 }
