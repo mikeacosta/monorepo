@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Create AlbumRank DynamoDB table
 Resources:
-  MyBucket: 
+  MyTable: 
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: AlbumRank
