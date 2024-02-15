@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create Document Mgmt System DynamoDB table
+Resources:
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: DocumentsTable
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: 'PK'
+          AttributeType: 'S'
+        - AttributeName: 'SK'
+          AttributeType: 'S'                 
+      KeySchema:
+        - AttributeName: 'PK'
+          KeyType: 'HASH'
+        - AttributeName: 'SK'
+          KeyType: 'RANGE'
+      GlobalSecondaryIndexes:
+        - IndexName: GSI1
+          KeySchema:
+            - AttributeName: 'SK'
+              KeyType: 'HASH'
+            - AttributeName: 'PK'
+              KeyType: 'RANGE'
+          Projection:
+            ProjectionType: INCLUDE
+            NonKeyAttributes:
+              - DateUploaded
+              - Processed
+              - Thumbnail
+              - Uploader
+              - FileSize
+              - Name
+              - Owner    
