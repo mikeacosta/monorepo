@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqsPublisher", "Sqs\SqsPubl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqsConsumer", "Sqs\SqsConsumer\SqsConsumer.csproj", "{0631C2CF-5590-41A3-9E35-E1832DFB83FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customers.Api", "Sqs\Customers.Api\Customers.Api.csproj", "{770FAADB-BE0E-411D-AFF0-ED4596547B4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F} = {DC940963-9E1B-4821-B555-F4A8E8AA7515}
 		{0631C2CF-5590-41A3-9E35-E1832DFB83FE} = {DC940963-9E1B-4821-B555-F4A8E8AA7515}
+		{770FAADB-BE0E-411D-AFF0-ED4596547B4B} = {DC940963-9E1B-4821-B555-F4A8E8AA7515}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FF21474E-7382-4BF8-BE27-933EF3FA2A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +27,9 @@ Global
 		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0631C2CF-5590-41A3-9E35-E1832DFB83FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{770FAADB-BE0E-411D-AFF0-ED4596547B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770FAADB-BE0E-411D-AFF0-ED4596547B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770FAADB-BE0E-411D-AFF0-ED4596547B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770FAADB-BE0E-411D-AFF0-ED4596547B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
