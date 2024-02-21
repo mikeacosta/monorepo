@@ -72,7 +72,7 @@ public class CustomerService : ICustomerService
         
         var response = await _customerRepository.UpdateAsync(customerDto);
         if (response)
-            await _sqsMessenger.SendMessageAsync(customer.ToCustomerCreatedMessage());
+            await _sqsMessenger.SendMessageAsync(customer.ToCustomerUpdatedMessage());
 
         return response;
     }

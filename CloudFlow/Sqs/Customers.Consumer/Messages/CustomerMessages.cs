@@ -1,6 +1,6 @@
-namespace Customers.Consumer;
+namespace Customers.Consumer.Messages;
 
-public class CustomerCreated
+public class CustomerCreated : ISqsMessage
 {
     public required Guid Id { get; set; }
     public required string FullName { get; set; }
@@ -9,7 +9,7 @@ public class CustomerCreated
     public required DateTime DateOfBirth { get; set; }
 }
 
-public class CustomerUpdated
+public class CustomerUpdated : ISqsMessage
 {
     public required Guid Id { get; set; }
     public required string FullName { get; set; }
@@ -18,7 +18,7 @@ public class CustomerUpdated
     public required DateTime DateOfBirth { get; set; }
 }
 
-public class CustomerDeleted
+public class CustomerDeleted : ISqsMessage
 {
     public required Guid Id { get; set; }
 }
