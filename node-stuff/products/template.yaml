@@ -3,11 +3,20 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: REST API
 
 Resources: 
-  ProductFunction:
+  ProductsFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
+      Runtime: nodejs18.x
+      MemorySize: 128
+      Timeout: 3
       Handler: index.handler
+      CodeUri: src/
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ProductsTable
       Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTable
       Events:
         GetProducts:
           Type: Api
@@ -28,11 +37,20 @@ Resources:
           Type: Api
           Properties:
             Path: /products/{id}
-            Method: PUT                      
+            Method: PUT     
+        DeleteProduct:
+          Type: Api
+          Properties:
+            Path: /products/{id}
+            Method: DELETE                              
 
-  Table:
+  ProductsTable:
     Type: 'AWS::Serverless::SimpleTable'
     Properties:
+      TableName: Products
       PrimaryKey:
         Name: id
         Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
