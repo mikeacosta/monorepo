@@ -9,7 +9,7 @@ Resources:
       MemorySize: 128
       Timeout: 3
       Handler: index.handler
-      CodeUri: s3://a-bucket-01234/9428ce3d05a950c0a2c35b8101d21721
+      CodeUri: s3://a-bucket-01234/d990b9c4c7cf7d26870fe69573ff19eb
       Environment:
         Variables:
           TABLE_NAME:
