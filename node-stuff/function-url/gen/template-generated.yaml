@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Write to Kinesis Data Firehose
+Resources:
+  lambdaToS3:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: FirehoseLambda
+      Runtime: nodejs18.x
+      MemorySize: 128
+      Timeout: 3
+      Role: arn:aws:iam::489967615225:role/lambda-basic-execution-role
+      Handler: app.handler
+      CodeUri: s3://a-bucket-01234/dc1d93c67d644d94ceafb29f61e318fd
+  lambdaUrl:
+    Type: AWS::Lambda::Url
+    DependsOn: lambdaToS3
+    Properties:
+      AuthType: NONE
+      TargetFunctionArn:
+        Fn::GetAtt:
+        - lambdaToS3
+        - Arn
+  lambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+        - lambdaToS3
+        - Arn
+      FunctionUrlAuthType: NONE
+      Action: lambda:InvokeFunctionUrl
+      Principal: '*'
