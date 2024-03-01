@@ -2,6 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: Write to Kinesis Data Firehose
 
+Parameters:
+  PermissionPrincipal:
+    Type: String
+
 Resources:
   lambdaToS3:
     Type: 'AWS::Serverless::Function'
@@ -18,13 +22,20 @@ Resources:
     Type: 'AWS::Lambda::Url'
     DependsOn: lambdaToS3
     Properties: 
-      AuthType: NONE
+      AuthType: AWS_IAM
       TargetFunctionArn: !GetAtt lambdaToS3.Arn
+
+  lambdaUrlPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !GetAtt lambdaToS3.Arn
+      FunctionUrlAuthType: 'AWS_IAM'
+      Action: lambda:InvokeFunctionUrl
+      Principal: !Ref PermissionPrincipal
 
   lambdaPermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
       FunctionName: !GetAtt lambdaToS3.Arn
-      FunctionUrlAuthType: 'NONE'
-      Action: lambda:InvokeFunctionUrl
-      Principal: '*'                  
+      Action: lambda:InvokeFunction
+      Principal: !Ref PermissionPrincipal      

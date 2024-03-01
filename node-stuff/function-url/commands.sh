@@ -7,6 +7,7 @@ aws cloudformation package --s3-bucket a-bucket-01234 \
 aws cloudformation deploy \
   --template-file gen/template-generated.yaml \
   --stack-name function-url-stack \
+  --parameter-overrides file://params.json \
   --capabilities CAPABILITY_IAM
 
 # clean up
