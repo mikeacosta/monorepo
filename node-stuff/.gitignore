@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 function-url/params.json
+property/data
