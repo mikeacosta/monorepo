@@ -46,6 +46,7 @@ public class AlbumController : Controller
     }
 
     [HttpPatch]
+    [Route("user/{userId}")]
     public async Task<IActionResult> UpdateMovie(int userId, [FromBody] AlbumUpdateRequest request)
     {
         await _albumRankService.UpdateAlbum(userId, request);
