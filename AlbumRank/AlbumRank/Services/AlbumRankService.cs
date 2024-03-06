@@ -46,4 +46,21 @@ public class AlbumRankService : IAlbumRankService
         var albumDb = _mapper.ToAlbumDbModel(userId, response, request);
         await _albumRankRepository.UpdateAlbum(albumDb);
     }
+
+    public async Task<AlbumRankResponse> GetAlbumRank(string title)
+    {
+        var response = await _albumRankRepository.GetAlbumRank(title);
+
+        var avgRanking = Math.Round(response.Select(x =>
+        {
+            Console.WriteLine(x.Ranking);
+            return x.Ranking;
+        }).Average());
+
+        return new AlbumRankResponse
+        {
+            Title = title,
+            OverallRanking = avgRanking
+        };
+    }
 }

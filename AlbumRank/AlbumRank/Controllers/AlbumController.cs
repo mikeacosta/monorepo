@@ -47,9 +47,18 @@ public class AlbumController : Controller
 
     [HttpPatch]
     [Route("user/{userId}")]
-    public async Task<IActionResult> UpdateMovie(int userId, [FromBody] AlbumUpdateRequest request)
+    public async Task<IActionResult> UpdateAlbum(int userId, [FromBody] AlbumUpdateRequest request)
     {
         await _albumRankService.UpdateAlbum(userId, request);
         return Ok();
     }
+    
+    [HttpGet]
+    [Route("{title}/ranking")]
+    public async Task<AlbumRankResponse> GetAlbumRanking(string title)
+    {
+        var result = await _albumRankService.GetAlbumRank(title);
+
+        return result;
+    }    
 }

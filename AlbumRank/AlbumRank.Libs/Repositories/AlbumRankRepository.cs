@@ -46,4 +46,14 @@ public class AlbumRankRepository : IAlbumRankRepository
     {
         await _context.SaveAsync(albumDb);
     }
+
+    public async Task<IEnumerable<AlbumDb>> GetAlbumRank(string title)
+    {
+        var config = new DynamoDBOperationConfig
+        {
+            IndexName = "AlbumTitleIndex"
+        };
+        
+        return await _context.QueryAsync<AlbumDb>(title, config).GetRemainingAsync();
+    }
 }

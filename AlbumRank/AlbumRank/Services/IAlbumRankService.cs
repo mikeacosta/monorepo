@@ -9,4 +9,5 @@ public interface IAlbumRankService
     Task<IEnumerable<AlbumResponse>> GetUserRankedAlbumByTitle(int userId, string title);
     Task AddAlbum(int userId, AlbumRankRequest albumRankRequest);
     Task UpdateAlbum(int userId, AlbumUpdateRequest albumUpdateRequest);
+    Task<AlbumRankResponse> GetAlbumRank(string title);
 }
