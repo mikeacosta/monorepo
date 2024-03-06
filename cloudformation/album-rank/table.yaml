@@ -24,7 +24,9 @@ Resources:
             - AttributeName: Title
               KeyType: HASH
           Projection:
-            ProjectionType: KEYS_ONLY   
+            ProjectionType: INCLUDE
+            NonKeyAttributes:
+                 - 'Ranking'
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1                  
