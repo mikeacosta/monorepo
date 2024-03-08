@@ -1,14 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
+Transform: AWS::Serverless-2016-10-31
 Description: SAM Template
-
 Resources:
   LogFunction:
-    Type: 'AWS::Serverless::Function'
+    Type: AWS::Serverless::Function
     Properties:
       Runtime: nodejs18.x
       Handler: index.handler
-      CodeUri: src/
+      CodeUri: s3://a-bucket-01234/4ef95db1d03f8bd55916652035cadf28
       Events:
         LogSchedule:
           Type: Schedule
@@ -17,11 +16,10 @@ Resources:
         S3Upload:
           Type: S3
           Properties:
-            Bucket: !Ref S3EventBucket
+            Bucket:
+              Ref: S3EventBucket
             Events: s3:ObjectCreated:*
-
   S3EventBucket:
-    Type: 'AWS::S3::Bucket'
+    Type: AWS::S3::Bucket
     Properties:
       BucketName: a-bucket-01234x
-     
