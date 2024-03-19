@@ -19,6 +19,11 @@ Resources:
             Bucket:
               Ref: S3EventBucket
             Events: s3:ObjectCreated:*
+        ApiResource:
+          Type: Api
+          Properties:
+            Path: /event
+            Method: GET
   S3EventBucket:
     Type: AWS::S3::Bucket
     Properties:
