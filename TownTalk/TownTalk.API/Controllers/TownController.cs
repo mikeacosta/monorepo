@@ -9,11 +9,13 @@ public class TownController : ControllerBase
     [HttpGet]
     public JsonResult GetTowns()
     {
-        return new JsonResult(
-            new List<object>
-            {
-                new { id = 1, Name = "London"},
-                new { id = 2, Name = "Oakland"}
-            });
+        return new JsonResult(TownsDataStore.Current.Towns);
+    }
+
+    [HttpGet("{id}")]
+    public JsonResult GetCity(int id)
+    {
+        var town = TownsDataStore.Current.Towns.FirstOrDefault(c => c.Id == id);
+        return new JsonResult(town);
     }
 }
