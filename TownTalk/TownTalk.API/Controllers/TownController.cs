@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TownTalk.API.Models;
 
 namespace TownTalk.API.Controllers;
 
@@ -7,15 +8,19 @@ namespace TownTalk.API.Controllers;
 public class TownController : ControllerBase
 {
     [HttpGet]
-    public JsonResult GetTowns()
+    public ActionResult<IEnumerable<TownDto>> GetTowns()
     {
-        return new JsonResult(TownsDataStore.Current.Towns);
+        return Ok(TownsDataStore.Current.Towns);
     }
 
     [HttpGet("{id}")]
-    public JsonResult GetCity(int id)
+    public ActionResult<TownDto> GetCity(int id)
     {
         var town = TownsDataStore.Current.Towns.FirstOrDefault(c => c.Id == id);
-        return new JsonResult(town);
+
+        if (town is null)
+            return NotFound();
+        
+        return (Ok(town));
     }
 }
