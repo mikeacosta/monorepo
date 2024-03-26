@@ -5,7 +5,7 @@ namespace TownTalk.API.Controllers;
 
 [ApiController]
 [Route("api/towns")]
-public class TownController : ControllerBase
+public class TownsController : ControllerBase
 {
     [HttpGet]
     public ActionResult<IEnumerable<TownDto>> GetTowns()
