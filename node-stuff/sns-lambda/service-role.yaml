@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: IAM service role for CloudFormation
+Resources:
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: GoalSnsTopic-CloudFormation-ServiceRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'cloudformation.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'   
+      Policies:
+        - PolicyName: GoalSnsTopic-CloudFormation-Sns-Policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'sns:CreateTopic'
+                  - 'sns:DeleteTopic'
+                  - 'sns:Subscribe'
+                  - 'sns:Unsubscribe'
+                  - 'sns:GetTopicAttributes'
+                  - 'sns:List*'
+                Resource:
+                  !Join
+                    - ''
+                    - - 'arn:aws:sns:'
+                      - !Ref AWS::Region
+                      - ':'
+                      - !Ref AWS::AccountId
+                      - ':goal-notification'
+
+Outputs:
+  ServiceRoleARN:
+    Value: !GetAtt ServiceRole.Arn                 
