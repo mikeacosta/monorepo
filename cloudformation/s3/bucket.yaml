@@ -3,4 +3,9 @@ Description: Create S3 Bucket
 Resources:
   S3Bucket: 
     Type: AWS::S3::Bucket
-    Properties: {}
+    Properties:
+      Tags: 
+        - Key: "format"
+          Value: "JSON"
+        - Key: "department"
+          Value: "Finance"     
