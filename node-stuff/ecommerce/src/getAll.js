@@ -1,6 +1,6 @@
 import { ScanCommand } from "@aws-sdk/client-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { ddbClient } from "./ddbClient.js";
+import { dbClient } from "./dbClient.js";
 
 export const handler = async (event) => {
   console.log("request:", JSON.stringify(event, undefined, 2));
@@ -36,7 +36,7 @@ const getProducts = async () => {
       TableName: process.env.TABLE_NAME
     };
 
-    const { Items } = await ddbClient.send(new ScanCommand(params));
+    const { Items } = await dbClient.send(new ScanCommand(params));
     console.log(Items);
     return (Items) ? Items.map((item) => unmarshall(item)) : {};
 

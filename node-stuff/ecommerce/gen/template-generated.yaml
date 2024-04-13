@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: REST API
+Globals:
+  Function:
+    Runtime: nodejs18.x
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: ProductsTable
+    MemorySize: 128
+    Timeout: 5
+Resources:
+  ProductsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: Products
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+  GetAllFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: getAll.handler
+      CodeUri: s3://a-bucket-01234/05c93da14d2406333090e3a36c307072
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: ProductsTable
+      Events:
+        GetProducts:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: GET
