@@ -51,4 +51,19 @@ Resources:
           Type: Api
           Properties:
             Path: /products/{id}
-            Method: GET               
+            Method: GET  
+
+  CreateFunction:
+    Type: 'AWS::Serverless::Function'    
+    Properties:
+      Handler: post.handler
+      CodeUri: src/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTable      
+      Events:
+        CreateProduct:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: POST                 

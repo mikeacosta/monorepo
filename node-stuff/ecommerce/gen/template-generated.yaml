@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: getAll.handler
-      CodeUri: s3://a-bucket-01234/af1dd13eb48c2545dd7c88fc6d739488
+      CodeUri: s3://a-bucket-01234/0b32f71dd52001f3ef137b3381cde741
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -40,7 +40,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: get.handler
-      CodeUri: s3://a-bucket-01234/af1dd13eb48c2545dd7c88fc6d739488
+      CodeUri: s3://a-bucket-01234/0b32f71dd52001f3ef137b3381cde741
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -51,3 +51,18 @@ Resources:
           Properties:
             Path: /products/{id}
             Method: GET
+  CreateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: post.handler
+      CodeUri: s3://a-bucket-01234/0b32f71dd52001f3ef137b3381cde741
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: ProductsTable
+      Events:
+        CreateProduct:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: POST
