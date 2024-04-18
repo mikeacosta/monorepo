@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using TownTalk.API.Models;
 
@@ -81,6 +82,39 @@ public class PointsOfInterestController : ControllerBase
 
         return NoContent();
     }
+    
+    [HttpPatch("{pointofinterestid}")]
+    public ActionResult PartiallyUpdatePointOfInterest(
+        int townId, int pointOfInterestId,
+        JsonPatchDocument<PointOfInterestForUpdateDto> patchDocument)
+    {
+        var town = TownsDataStore.Current.Towns.FirstOrDefault(c => c.Id == townId);
+        if (town == null)
+            return NotFound();
+
+        var pointOfInterestFromStore = town.PointsOfInterest.FirstOrDefault(p => p.Id == pointOfInterestId);
+        if (pointOfInterestFromStore == null)
+            return NotFound();
+
+        var pointOfInterestToPatch = new PointOfInterestForUpdateDto()
+        {
+            Name = pointOfInterestFromStore.Name,
+            Description = pointOfInterestFromStore.Description
+        };
+
+        patchDocument.ApplyTo(pointOfInterestToPatch, ModelState);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
+        if (!TryValidateModel(pointOfInterestToPatch))
+            return BadRequest(ModelState);
+
+        pointOfInterestFromStore.Name = pointOfInterestToPatch.Name;
+        pointOfInterestFromStore.Description = pointOfInterestToPatch.Description;
+
+        return NoContent();
+    }    
 
     [HttpDelete("{pointofinterestid}")]
     public ActionResult DeletePointOfInterest(int townId, int pointOfInterestId)
