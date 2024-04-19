@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: AWS SAM app
+ 
+Resources:
+  PersonTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      # Define table properties here
+  StorePersonFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Define function properties here
+  GetPersonByHTTPParamFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Define function properties here
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      # Define API properties here
