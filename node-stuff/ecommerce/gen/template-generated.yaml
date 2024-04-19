@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: getAll.handler
-      CodeUri: s3://a-bucket-01234/bbb7a0c7066afed93c128ab54d966507
+      CodeUri: s3://a-bucket-01234/d05687b58b490bbec045b68e79a6175c
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -40,7 +40,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: get.handler
-      CodeUri: s3://a-bucket-01234/bbb7a0c7066afed93c128ab54d966507
+      CodeUri: s3://a-bucket-01234/d05687b58b490bbec045b68e79a6175c
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -55,7 +55,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: post.handler
-      CodeUri: s3://a-bucket-01234/bbb7a0c7066afed93c128ab54d966507
+      CodeUri: s3://a-bucket-01234/d05687b58b490bbec045b68e79a6175c
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -70,7 +70,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: put.handler
-      CodeUri: s3://a-bucket-01234/bbb7a0c7066afed93c128ab54d966507
+      CodeUri: s3://a-bucket-01234/d05687b58b490bbec045b68e79a6175c
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -81,3 +81,18 @@ Resources:
           Properties:
             Path: /products/{id}
             Method: PUT
+  DeleteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: delete.handler
+      CodeUri: s3://a-bucket-01234/d05687b58b490bbec045b68e79a6175c
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: ProductsTable
+      Events:
+        DeleteProduct:
+          Type: Api
+          Properties:
+            Path: /products/{id}
+            Method: DELETE

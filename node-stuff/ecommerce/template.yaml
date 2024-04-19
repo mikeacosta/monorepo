@@ -81,4 +81,19 @@ Resources:
           Type: Api
           Properties:
             Path: /products/{id}
-            Method: PUT                        
+            Method: PUT    
+
+  DeleteFunction:
+    Type: 'AWS::Serverless::Function'    
+    Properties:
+      Handler: delete.handler
+      CodeUri: src/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTable      
+      Events:
+        DeleteProduct:
+          Type: Api
+          Properties:
+            Path: /products/{id}
+            Method: DELETE                                  
