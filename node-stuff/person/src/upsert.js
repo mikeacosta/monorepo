@@ -1,17 +1,20 @@
-import { GetItemCommand, ScanCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
-import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
+import { PutItemCommand } from "@aws-sdk/client-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
 import { v4 as uuidv4 } from 'uuid';
-import { ddbClient } from "./ddbClient.js";
+import { dbClient } from "./dbClient.js";
 
 export const handler = async (event) => {
   console.log("request:", JSON.stringify(event, undefined, 2));
 
   try {
     let body = {};
+    console.log("event.httpMethod", event.httpMethod);
 
     if (event.httpMethod === "POST") {
-      body = createPerson(event);
+      body = await createPerson(event);
     }
+
+    console.log("response body: ", JSON.stringify(body));
 
     return {
       statusCode: 200,
@@ -34,21 +37,21 @@ export const handler = async (event) => {
 
 const createPerson = async (event) => {
   try {
-    console.log(`createPerson, event: "${event}"`);
-
     const personRequest = JSON.parse(event.body);
     const id = uuidv4();
     personRequest.id = id;
+
+    console.log(`personRequest: "${JSON.stringify(personRequest)}"`);
 
     const params = {
       TableName: process.env.TABLE_NAME,
       Item: marshall(personRequest || {})
     };
 
-    const createResult = await ddbClient.send(new PutItemCommand(params));
-    console.log(createResult);
+    const createResult = await dbClient.send(new PutItemCommand(params));
     return createResult;
   } catch (e) {
+    console.error(e);
     throw e;
   }
 }

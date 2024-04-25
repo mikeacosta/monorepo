@@ -1,19 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
+Transform: AWS::Serverless-2016-10-31
 Description: AWS SAM app
-
 Globals:
   Function:
     Runtime: nodejs18.x
     Environment:
       Variables:
-        TABLE_NAME: !Ref PersonTable
+        TABLE_NAME:
+          Ref: PersonTable
     MemorySize: 128
     Timeout: 5
   Api:
     EndpointConfiguration: REGIONAL
-    Name: "PersonAPI"    
- 
+    Name: PersonAPI
 Resources:
   PersonTable:
     Type: AWS::Serverless::SimpleTable
@@ -24,16 +23,16 @@ Resources:
         Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 1
-        WriteCapacityUnits: 1 
-
+        WriteCapacityUnits: 1
   StorePersonFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: upsert.handler
-      CodeUri: src/
+      CodeUri: s3://a-bucket-01234/e60230f0014c3ac4b5433e4ae3111b43
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref PersonTable      
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: PersonTable
       Events:
         CreateApi:
           Type: Api
