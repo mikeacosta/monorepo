@@ -2,6 +2,11 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: AWS SAM app
 
+Outputs:
+  ApiInvokeUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${ServerlessRestApi.Stage}/"          
+
 Globals:
   Function:
     Runtime: nodejs18.x
@@ -9,7 +14,7 @@ Globals:
       Variables:
         TABLE_NAME: !Ref PersonTable
     MemorySize: 128
-    Timeout: 5
+    Timeout: 15
   Api:
     EndpointConfiguration: REGIONAL
     Name: "PersonAPI"    
@@ -40,3 +45,28 @@ Resources:
           Properties:
             Path: /persons
             Method: POST
+        UpdateApi:
+          Type: Api
+          Properties:
+            Path: /persons/{id}
+            Method: PUT       
+
+  GetPersonFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get.handler
+      CodeUri: src/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PersonTable      
+      Events:
+        GetAllApi:
+          Type: Api
+          Properties:
+            Path: /persons
+            Method: GET
+        GetOneApi:
+          Type: Api
+          Properties:
+            Path: /persons/{id}
+            Method: GET                   
