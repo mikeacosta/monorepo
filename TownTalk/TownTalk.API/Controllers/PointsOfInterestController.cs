@@ -8,14 +8,24 @@ namespace TownTalk.API.Controllers;
 [Route("api/towns/{townId}/pointsofinterest")]
 public class PointsOfInterestController : ControllerBase
 {
+    private readonly ILogger<PointsOfInterestController> _logger;
+
+    public PointsOfInterestController(ILogger<PointsOfInterestController> logger)
+    {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+    
     [HttpGet]
     public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int townId)
     {
         var town = TownsDataStore.Current.Towns.FirstOrDefault(t => t.Id == townId);
 
         if (town is null)
+        {
+            _logger.LogInformation($"Town with id {townId} wasn't found");
             return NotFound();
-
+        }
+        
         return Ok(town.PointsOfInterest);
     }
 
