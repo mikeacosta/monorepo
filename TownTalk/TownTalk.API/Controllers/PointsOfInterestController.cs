@@ -18,15 +18,23 @@ public class PointsOfInterestController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int townId)
     {
-        var town = TownsDataStore.Current.Towns.FirstOrDefault(t => t.Id == townId);
-
-        if (town is null)
+        try
         {
-            _logger.LogInformation($"Town with id {townId} wasn't found");
-            return NotFound();
-        }
+            var town = TownsDataStore.Current.Towns.FirstOrDefault(t => t.Id == townId);
+
+            if (town is null)
+            {
+                _logger.LogInformation($"Town with id {townId} wasn't found");
+                return NotFound();
+            }
         
-        return Ok(town.PointsOfInterest);
+            return Ok(town.PointsOfInterest);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogCritical($"Exception while getting points of interest for town with id {townId}.", ex);
+            return StatusCode(500, "A problem occurred while handling the request.");
+        }
     }
 
     [HttpGet("{pointOfInterestId}", Name = "GetPointOfInterest")]

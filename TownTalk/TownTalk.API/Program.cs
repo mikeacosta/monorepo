@@ -10,15 +10,16 @@ builder.Services.AddControllers(options =>
 }).AddNewtonsoftJson()
     .AddXmlDataContractSerializerFormatters();
 
-builder.Services.AddProblemDetails(options =>
-{
-    options.CustomizeProblemDetails = ctx =>
-    {
-        ctx.ProblemDetails.Extensions.Add("user", Environment.UserName);
-        ctx.ProblemDetails.Extensions.Add("server", Environment.MachineName);
-        ctx.ProblemDetails.Extensions.Add("64-bit OS", Environment.Is64BitOperatingSystem);
-    };
-});
+builder.Services.AddProblemDetails();
+// builder.Services.AddProblemDetails(options =>
+// {
+//     options.CustomizeProblemDetails = ctx =>
+//     {
+//         ctx.ProblemDetails.Extensions.Add("user", Environment.UserName);
+//         ctx.ProblemDetails.Extensions.Add("server", Environment.MachineName);
+//         ctx.ProblemDetails.Extensions.Add("64-bit OS", Environment.Is64BitOperatingSystem);
+//     };
+// });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,6 +33,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseExceptionHandler();
 }
 
 app.UseHttpsRedirection();
