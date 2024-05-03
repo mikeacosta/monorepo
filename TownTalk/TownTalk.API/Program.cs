@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Serilog;
+using TownTalk.API.Services;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -32,6 +33,12 @@ builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+
+#if DEBUG
+builder.Services.AddTransient<IMailService, LocalMailService>();
+#else 
+builder.Services.AddTransient<IMailService, CloudMailService>();
+#endif
 
 var app = builder.Build();
 
