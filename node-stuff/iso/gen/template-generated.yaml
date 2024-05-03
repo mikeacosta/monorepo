@@ -8,7 +8,7 @@ Resources:
     Properties:
       Runtime: nodejs18.x
       Handler: app.handler
-      CodeUri: s3://a-bucket-01234/459e406d09c948b2521fe412d0e7b360
+      CodeUri: s3://a-bucket-01234/d633917d81a1ff2ba1ff4e20d1aac402
       Events:
         ApiEvent:
           Type: Api
