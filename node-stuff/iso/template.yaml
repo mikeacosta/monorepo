@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: SAM Template
+
+Resources:
+  LambdaFunction:
+    Type: 'AWS::Serverless::Function'
+    FunctionName: 'XmlLambda'
+    Properties:
+      Runtime: nodejs18.x
+      Handler: app.handler
+      CodeUri: src/
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiResource 
+            Method: POST
+            Path: /xml
+
+  ApiResource:
+    Type: 'AWS::Serverless::Api'
+    OpenApiVersion: '2.0'
+    Properties:
+      StageName: prod
+      EndpointConfiguration: REGIONAL
+      DefinitionBody:
+        swagger: 2.0
+        info:
+          title: ISO Response API
+        basePath: /prod
+        schemes:
+          - https         
+        paths:
+          /xml:
+            post:
+              produces:
+                - application/json
+              consumes:
+                - application/xml
+                - text/xml
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws
+                uri:  
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations
+                passthroughBehavior: when_no_templates
+                contentHandling: 'CONVERT_TO_TEXT'
+                requestTemplates:
+                  application/xml: |
+                    {"body": $input.json('$')}
+                  text/xml: |
+                    {"body": $input.json('$')}    
+                responses:
+                  default:
+                    statusCode: 200
+                    responseTemplates:
+                      application/json: |
+                    
+              responses: 
+                '200':
+                  description: 'Method response'
+                  schema:
+                    $ref: '#/definitions/Empty'        
+          definitions:
+            Empty:
+              type: 'object'
+              title: 'Empty Schema'                                       
