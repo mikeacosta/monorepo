@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create SQS queue
+Resources:
+  SqsQueue: 
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: "sqs-queue"
+
+Outputs: 
+  QueueURL: 
+    Description: "URL of new Amazon SQS Queue"
+    Value: 
+      Ref: "SqsQueue"
+  QueueARN: 
+    Description: "ARN of new AmazonSQS Queue"
+    Value: 
+      Fn::GetAtt: 
+        - "SqsQueue"
+        - "Arn"
+  QueueName: 
+    Description: "Name of new Amazon SQS Queue"
+    Value: 
+      Fn::GetAtt: 
+        - "SqsQueue"
+        - "QueueName"      
