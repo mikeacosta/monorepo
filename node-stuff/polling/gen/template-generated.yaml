@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Process messages on an SQS queue with Lambda
+Resources:
+  SqsQueueFunction:
+    Type: AWS::Serverless::Function
+    FunctionName: sqs-queue-lambda
+    Properties:
+      Handler: index.handler
+      CodeUri: s3://a-bucket-01234/20208795522d054eee5b9fd4baf05f05
+      Runtime: nodejs18.x
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue:
+              Fn::GetAtt:
+              - SqsQueue
+              - Arn
+            BatchSize: 10
+  SqsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: sqs-queue
