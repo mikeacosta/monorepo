@@ -7,7 +7,7 @@ Resources:
     FunctionName: sqs-queue-lambda
     Properties:
       Handler: index.handler
-      CodeUri: s3://a-bucket-01234/20208795522d054eee5b9fd4baf05f05
+      CodeUri: s3://a-bucket-01234/4f36990ec8a0cbb38c5a6ae078c7c450
       Runtime: nodejs18.x
       Events:
         MySQSEvent:
