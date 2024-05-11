@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using TownTalk.API.DbContexts;
 using TownTalk.API.Services;
 
 Log.Logger = new LoggerConfiguration()
@@ -11,6 +13,10 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 // Add services to the container.
+
+builder.Services.AddDbContext<TownTalkContext>(
+    dbContextOptions => dbContextOptions.UseNpgsql(
+        builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
 builder.Services.AddControllers(options =>
 {
@@ -39,6 +45,8 @@ builder.Services.AddTransient<IMailService, LocalMailService>();
 #else 
 builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
+
+builder.Services.AddDbContext<TownTalkContext>();
 
 var app = builder.Build();
 
