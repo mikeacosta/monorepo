@@ -2,7 +2,7 @@ import { ScanCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dbClient } from "./dbClient.js";
 
-const TABLE_NAME = "harrypotter-api";
+const TABLE_NAME = "HarryPotter";
 
 const getCharacters = async () => {
   const params = {

@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create HarryPotter DynamoDB table
+Resources:
+  MyTable: 
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: HarryPotter
+      AttributeDefinitions:
+        - AttributeName: 'id'
+          AttributeType: 'S'                 
+      KeySchema:
+        - AttributeName: 'id'
+          KeyType: 'HASH'
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1                 
