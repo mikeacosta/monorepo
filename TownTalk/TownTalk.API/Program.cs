@@ -48,6 +48,8 @@ builder.Services.AddTransient<IMailService, CloudMailService>();
 
 builder.Services.AddDbContext<TownTalkContext>();
 
+builder.Services.AddScoped<ITownTalkRepository, TownTalkRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

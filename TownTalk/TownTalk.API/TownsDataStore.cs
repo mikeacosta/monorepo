@@ -71,7 +71,7 @@ public class TownsDataStore
                     {
                         Id = 6,
                         Name = "Oakland Zoo",
-                        Description = "Long-standing zoo features over 850 native and exotic animals, a wildlife theater and educational programs"
+                        Description = "Long-standing zoo features over 850 native and exotic animals, a wildlife theater andx` educational programs"
                     }                    
                 }
             }

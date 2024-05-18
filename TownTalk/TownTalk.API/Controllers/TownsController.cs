@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TownTalk.API.Models;
+using TownTalk.API.Services;
 
 namespace TownTalk.API.Controllers;
 
@@ -7,10 +8,24 @@ namespace TownTalk.API.Controllers;
 [Route("api/towns")]
 public class TownsController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult<IEnumerable<TownDto>> GetTowns()
+    private readonly ITownTalkRepository _repository;
+
+    public TownsController(ITownTalkRepository repository)
     {
-        return Ok(TownsDataStore.Current.Towns);
+        _repository = repository;
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TownWithoutPointsOfInterestDto>>> GetTowns()
+    {
+        var townEntities = await _repository.GetTownsAsync();
+        var towns = townEntities.Select(t => new TownWithoutPointsOfInterestDto
+        {
+            Id = t.Id,
+            Name = t.Name,
+            Description = t.Description
+        });
+        return Ok(towns);
     }
 
     [HttpGet("{id}")]
