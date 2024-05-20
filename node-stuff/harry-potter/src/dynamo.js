@@ -1,10 +1,10 @@
-import { ScanCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import { ScanCommand, GetItemCommand, PutItemCommand, DeleteItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dbClient } from "./dbClient.js";
 
 const TABLE_NAME = "HarryPotter";
 
-const getCharacters = async () => {
+export const getCharacters = async () => {
   const params = {
     TableName: TABLE_NAME
   };
@@ -12,9 +12,20 @@ const getCharacters = async () => {
   const { Items } = await dbClient.send(new ScanCommand(params));
   console.log(Items);
   return (Items) ? Items.map((item) => unmarshall(item)) : {};  
-}
+};
 
-const addOrUpdateCharacter = async (character) => {
+export const getCharacterById = async (id) => {
+  const params = {
+    TableName: TABLE_NAME,
+    Key: marshall({ id: id })
+  };
+
+  const { Item } = await dbClient.send(new GetItemCommand(params));
+  console.log(Item);
+  return (Item) ? unmarshall(Item) : {};
+};
+
+export const addOrUpdateCharacter = async (character) => {
   const params = {
     TableName: TABLE_NAME,
     Item: marshall(character)
@@ -23,9 +34,21 @@ const addOrUpdateCharacter = async (character) => {
   const result = await dbClient.send(new PutItemCommand(params));
   console.log(result);
   return result;
-}
+};
 
-getCharacters();
+export const deleteCharacter = async (id) => {
+  const params = {
+    TableName: TABLE_NAME,
+    Key: marshall({ id: id })
+  };
+
+  const deleteResult = await dbClient.send(new DeleteItemCommand(params));  
+  return deleteResult
+};
+
+//getCharacters();
+//getCharacterById("0");
+//deleteCharacter("0");
 
 const hp = {
   "id": "0",
