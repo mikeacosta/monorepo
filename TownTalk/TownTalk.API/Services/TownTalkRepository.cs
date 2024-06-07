@@ -18,18 +18,27 @@ public class TownTalkRepository : ITownTalkRepository
         return await _context.Towns.OrderBy(t => t.Name).ToListAsync();
     }
 
-    public Task<Town?> GetTownAsync(int townId)
+    public async Task<Town?> GetTownAsync(int townId, bool includePointsOfInterest)
     {
-        throw new NotImplementedException();
+        if (includePointsOfInterest)
+            return await _context.Towns.Include(t => t.PointsOfInterest)
+                .Where(t => t.Id == townId).FirstOrDefaultAsync();
+        
+        return await _context.Towns
+            .Where(t => t.Id == townId).FirstOrDefaultAsync();        
     }
 
-    public Task<IEnumerable<PointOfInterest>> GetPointsOfInterestForTownAsync(int townId)
+    public async Task<IEnumerable<PointOfInterest>> GetPointsOfInterestForTownAsync(int townId)
     {
-        throw new NotImplementedException();
+        return await _context.PointsOfInterest
+            .Where(p => p.TownId == townId)
+            .ToListAsync();
     }
 
-    public Task<PointOfInterest?> GetPointOfInterestForTownAsync(int townId, int pointOfInterestId)
+    public async Task<PointOfInterest?> GetPointOfInterestForTownAsync(int townId, int pointOfInterestId)
     {
-        throw new NotImplementedException();
+        return await _context.PointsOfInterest
+            .Where(p => p.TownId == townId && p.Id == pointOfInterestId)
+            .FirstOrDefaultAsync();
     }
 }

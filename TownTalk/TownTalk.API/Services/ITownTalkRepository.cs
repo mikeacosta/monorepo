@@ -6,7 +6,7 @@ public interface ITownTalkRepository
 {
     Task<IEnumerable<Town>> GetTownsAsync();
 
-    Task<Town?> GetTownAsync(int townId);
+    Task<Town?> GetTownAsync(int townId, bool includePointsOfInterest);
     
     Task<IEnumerable<PointOfInterest>> GetPointsOfInterestForTownAsync(int townId);
 
