@@ -1,8 +1,14 @@
 using System.Threading.RateLimiting;
+using CodePulse.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<AppDbContext>(
+    dbContextOptions => dbContextOptions.UseNpgsql(
+        builder.Configuration["ConnectionStrings:DbConnectionString"]));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
