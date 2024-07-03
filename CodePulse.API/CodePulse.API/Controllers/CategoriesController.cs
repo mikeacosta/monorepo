@@ -38,4 +38,24 @@ public class CategoriesController : ControllerBase
 
         return Created(String.Empty, dto);
     }
+    
+    // GET: /api/categories
+    [HttpGet]
+    public async Task<IActionResult> GetAllCategories()
+    {
+        var categories = await _repo.GetAllAsync();
+
+        var result = new List<CategoryDto>();
+        foreach (var category in categories)
+        {
+            result.Add(new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            });
+        }
+
+        return Ok(result);
+    }
 }
