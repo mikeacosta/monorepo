@@ -76,5 +76,29 @@ public class CategoriesController : ControllerBase
         };
 
         return Ok(dto);
-    }    
+    }
+    
+    // PUT: /api/categories/{id}
+    [HttpPut]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> EditCategory([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto requestDto)
+    {
+        var entity = await _repo.GetByIdAsync(id);
+        if (entity is null)
+            return NotFound();
+
+        entity.Name = requestDto.Name;
+        entity.UrlHandle = requestDto.UrlHandle;
+
+        var category = await _repo.UpdateAsync(entity);
+
+        var result = new CategoryDto
+        {
+            Id = category.Id,
+            Name = category.Name,
+            UrlHandle = category.UrlHandle
+        };
+
+        return Ok(result);
+    }
 }

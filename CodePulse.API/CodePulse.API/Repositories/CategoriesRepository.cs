@@ -29,4 +29,11 @@ public class CategoriesRepository : ICategoriesRepository
     {
         return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
     }
+
+    public async Task<Category> UpdateAsync(Category category)
+    {
+        _context.Set<Category>().Update(category);
+        await _context.SaveChangesAsync();
+        return category;
+    }
 }
