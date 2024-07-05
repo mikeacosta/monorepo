@@ -18,7 +18,7 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto requestDto)
+    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto requestDto)
     {
         var category = new Category()
         {
@@ -58,4 +58,23 @@ public class CategoriesController : ControllerBase
 
         return Ok(result);
     }
+    
+    // GET: /api/categories/{id}
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> GetCategoryById([FromRoute] Guid id)
+    {
+        var category = await _repo.GetByIdAsync(id);
+        if (category is null)
+            return NotFound();
+
+        var dto = new CategoryDto
+        {
+            Id = category.Id,
+            Name = category.Name,
+            UrlHandle = category.UrlHandle
+        };
+
+        return Ok(dto);
+    }    
 }
