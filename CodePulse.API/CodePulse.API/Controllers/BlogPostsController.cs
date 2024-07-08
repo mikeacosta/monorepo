@@ -49,4 +49,30 @@ public class BlogPostsController : ControllerBase
         
         return Created(String.Empty, dto);
     }
+    
+    // GET: /api/blogposts
+    [HttpGet]
+    public async Task<IActionResult> GetAllBlogPosts()
+    {
+        var blogPosts = await _repo.GetAllAsync();
+        
+        var result = new List<BlogPostDto>();
+        foreach (var blogPost in blogPosts)
+        {
+            result.Add(new BlogPostDto
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible
+            });
+        }
+
+        return Ok(result);
+    }
 }
