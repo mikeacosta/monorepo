@@ -17,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+builder.Services.AddScoped<IBlogPostsRepository, BlogPostsRepository>();
 
 var app = builder.Build();
 

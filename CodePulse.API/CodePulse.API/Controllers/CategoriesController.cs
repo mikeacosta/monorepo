@@ -1,4 +1,3 @@
-using CodePulse.API.Data;
 using CodePulse.API.Entities;
 using CodePulse.API.Models;
 using CodePulse.API.Repositories;
