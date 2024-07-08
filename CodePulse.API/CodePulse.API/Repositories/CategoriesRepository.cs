@@ -36,4 +36,15 @@ public class CategoriesRepository : ICategoriesRepository
         await _context.SaveChangesAsync();
         return category;
     }
+
+    public async Task<Category?> DeleteAsync(Guid id)
+    {
+        var entity = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+        if (entity is null)
+            return null;
+
+        _context.Categories.Remove(entity);
+        await _context.SaveChangesAsync();
+        return entity;
+    }
 }

@@ -11,4 +11,6 @@ public interface ICategoriesRepository
     Task<Category?> GetByIdAsync(Guid id);
     
     Task<Category> UpdateAsync(Category category);
+    
+    Task<Category?> DeleteAsync(Guid id);
 }

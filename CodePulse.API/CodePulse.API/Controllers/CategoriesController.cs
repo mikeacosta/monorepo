@@ -101,4 +101,23 @@ public class CategoriesController : ControllerBase
 
         return Ok(result);
     }
+    
+    // DELETE: /api/categories/{id}
+    [HttpDelete]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+    {
+        var category = await _repo.DeleteAsync(id);
+        if (category is null)
+            return NotFound();
+
+        var dto = new CategoryDto
+        {
+            Id = category.Id,
+            Name = category.Name,
+            UrlHandle = category.UrlHandle
+        };
+
+        return Ok(dto);
+    }
 }
