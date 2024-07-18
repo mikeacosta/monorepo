@@ -11,4 +11,6 @@ public class BlogPost
     public DateTime PublishedDate { get; set; }
     public String Author { get; set; } = string.Empty;
     public bool IsVisible { get; set; }
+
+    public ICollection<Category> Categories { get; set; }
 }
