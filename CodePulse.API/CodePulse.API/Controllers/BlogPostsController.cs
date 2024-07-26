@@ -9,11 +9,13 @@ namespace CodePulse.API.Controllers;
 [Route("api/blogposts")]
 public class BlogPostsController : ControllerBase
 {
-    private readonly IBlogPostsRepository _repo;
+    private readonly IBlogPostsRepository _blogPostsRepo;
+    private readonly ICategoriesRepository _categoriesRepo;
     
-    public BlogPostsController(IBlogPostsRepository repo)
+    public BlogPostsController(IBlogPostsRepository blogPostsRepo, ICategoriesRepository categoriesRepo)
     {
-        _repo = repo;
+        _blogPostsRepo = blogPostsRepo;
+        _categoriesRepo = categoriesRepo;
     }
 
     [HttpPost]
@@ -29,10 +31,18 @@ public class BlogPostsController : ControllerBase
             UrlHandle = requestDto.UrlHandle,
             PublishedDate = requestDto.PublishedDate,
             Author = requestDto.Author,
-            IsVisible = requestDto.IsVisible
+            IsVisible = requestDto.IsVisible,
+            Categories = new List<Category>()
         };
 
-        await _repo.CreateAsync(blogPost);
+        foreach (var id in requestDto.Categories)
+        {
+            var cat = await _categoriesRepo.GetByIdAsync(id);
+            if (cat is not null)
+                blogPost.Categories.Add(cat);
+        }
+
+        await _blogPostsRepo.CreateAsync(blogPost);
 
         var dto = new BlogPostDto
         {
@@ -44,17 +54,24 @@ public class BlogPostsController : ControllerBase
             UrlHandle = blogPost.UrlHandle,
             PublishedDate = blogPost.PublishedDate,
             Author = blogPost.Author,
-            IsVisible = blogPost.IsVisible
+            IsVisible = blogPost.IsVisible,
+            Categories = blogPost.Categories.Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                UrlHandle = c.UrlHandle
+            }).ToList()
         };
-        
+    
         return Created(String.Empty, dto);
+
     }
     
     // GET: /api/blogposts
     [HttpGet]
     public async Task<IActionResult> GetAllBlogPosts()
     {
-        var blogPosts = await _repo.GetAllAsync();
+        var blogPosts = await _blogPostsRepo.GetAllAsync();
         
         var result = new List<BlogPostDto>();
         foreach (var blogPost in blogPosts)

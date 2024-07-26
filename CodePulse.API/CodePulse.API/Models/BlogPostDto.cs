@@ -11,4 +11,5 @@ public class BlogPostDto
     public DateTime PublishedDate { get; set; }
     public String Author { get; set; } = string.Empty;
     public bool IsVisible { get; set; }
+    public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 }
