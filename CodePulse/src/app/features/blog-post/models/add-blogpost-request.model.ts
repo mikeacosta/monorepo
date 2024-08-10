@@ -7,4 +7,5 @@ export interface AddBlogpostRequest {
   publishedDate: Date;
   author: String;
   isVisible: boolean;
+  categories: string[];
 }
