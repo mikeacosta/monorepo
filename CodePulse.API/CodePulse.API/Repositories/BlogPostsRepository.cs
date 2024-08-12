@@ -24,4 +24,10 @@ public class BlogPostsRepository : IBlogPostsRepository
     {
         return await _context.BlogPosts.Include(b => b.Categories).ToListAsync();
     }
+
+    public async Task<BlogPost?> GetByIdAsync(Guid id)
+    {
+        return await _context.BlogPosts.Include(b => b.Categories)
+            .FirstOrDefaultAsync(b => b.Id == id);
+    }
 }
