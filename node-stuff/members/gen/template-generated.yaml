@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: REST API
+Globals:
+  Function:
+    Runtime: nodejs18.x
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: MembersTable
+    MemorySize: 128
+    Timeout: 5
+Resources:
+  ProductsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: Members
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
