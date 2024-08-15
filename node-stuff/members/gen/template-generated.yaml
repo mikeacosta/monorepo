@@ -11,7 +11,7 @@ Globals:
     MemorySize: 128
     Timeout: 5
 Resources:
-  ProductsTable:
+  MembersTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
       TableName: Members
@@ -21,3 +21,18 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
+  CreateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: create.handler
+      CodeUri: s3://a-bucket-01234/327fcc1ba687b9d985b55c0a6222bb1e
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: MembersTable
+      Events:
+        CreateMember:
+          Type: Api
+          Properties:
+            Path: /members
+            Method: POST
