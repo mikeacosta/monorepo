@@ -129,4 +129,56 @@ public class BlogPostsController : ControllerBase
 
         return Ok(response);
     }
+    
+    // PUT: /api/blogposts/{id}
+    [HttpPut]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> EditBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDto requestDto)
+    {
+        var entity = await _blogPostsRepo.GetByIdAsync(id);
+        if (entity is null)
+            return NotFound();
+
+        entity.Title = requestDto.Title;
+        entity.UrlHandle = requestDto.UrlHandle;
+        entity.ShortDescription = requestDto.ShortDescription;
+        entity.Content = requestDto.Content;
+        entity.FeaturedImageUrl = requestDto.FeaturedImageUrl;
+        entity.PublishedDate = requestDto.PublishedDate;
+        entity.Author = requestDto.Author;
+        entity.IsVisible = requestDto.IsVisible;
+        requestDto.Categories = new List<Guid>();
+
+        foreach (var guid in requestDto.Categories)
+        {
+            var existingCategory = await _categoriesRepo.GetByIdAsync(guid);
+            if (existingCategory is null)
+                continue;
+            
+            entity.Categories.Add(existingCategory);
+        }
+
+        var updated = await _blogPostsRepo.UpdateAsync(entity);
+        
+        var result = new BlogPostDto
+        {
+            Id = updated.Id,
+            Title = updated.Title,
+            ShortDescription = updated.ShortDescription,
+            Content = updated.Content,
+            FeaturedImageUrl = updated.FeaturedImageUrl,
+            UrlHandle = updated.UrlHandle,
+            PublishedDate = updated.PublishedDate,
+            Author = updated.Author,
+            IsVisible = updated.IsVisible,
+            Categories = updated.Categories.Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                UrlHandle = c.UrlHandle
+            }).ToList()
+        };
+
+        return Ok(result);        
+    }
 }
