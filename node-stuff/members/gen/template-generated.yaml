@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: create.handler
-      CodeUri: s3://a-bucket-01234/327fcc1ba687b9d985b55c0a6222bb1e
+      CodeUri: s3://a-bucket-01234/2c9f7e8cf18609bfd37c9ee8d58924ab
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -36,3 +36,23 @@ Resources:
           Properties:
             Path: /members
             Method: POST
+  GetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get.handler
+      CodeUri: s3://a-bucket-01234/2c9f7e8cf18609bfd37c9ee8d58924ab
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: MembersTable
+      Events:
+        GetAllMembers:
+          Type: Api
+          Properties:
+            Path: /members
+            Method: GET
+        GetMember:
+          Type: Api
+          Properties:
+            Path: /members/{id}
+            Method: GET

@@ -36,4 +36,24 @@ Resources:
           Type: Api
           Properties:
             Path: /members
-            Method: POST         
+            Method: POST  
+
+  GetFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: get.handler
+      CodeUri: src/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MembersTable 
+      Events:
+        GetAllMembers:
+          Type: Api
+          Properties:
+            Path: /members
+            Method: GET
+        GetMember:
+          Type: Api
+          Properties:
+            Path: /members/{id}
+            Method: GET                                           
