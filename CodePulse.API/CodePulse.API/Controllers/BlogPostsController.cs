@@ -147,7 +147,7 @@ public class BlogPostsController : ControllerBase
         entity.PublishedDate = requestDto.PublishedDate;
         entity.Author = requestDto.Author;
         entity.IsVisible = requestDto.IsVisible;
-        requestDto.Categories = new List<Guid>();
+        entity.Categories = new List<Category>();
 
         foreach (var guid in requestDto.Categories)
         {
