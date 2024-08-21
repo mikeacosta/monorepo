@@ -52,7 +52,6 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(): void {
-    //console.log(this.blogPost);
     if (this.blogPost && this.id) {
       var updateBlogpostRequest: UpdateBlogpostRequest = {
         title: this.blogPost.title,
@@ -74,6 +73,20 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
       });      
     }
    
+  }
+
+  onDelete(): void {
+    if (!confirm('Are you sure?'))
+      return;
+    
+    if (this.id) {
+      this.blogPostService.deleteBlogPost(this.id)
+        .subscribe({
+          next: (response) => {
+            this.router.navigateByUrl('/admin/blogposts');
+          }
+        });
+    }      
   }
 
   ngOnDestroy(): void {
