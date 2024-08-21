@@ -181,4 +181,29 @@ public class BlogPostsController : ControllerBase
 
         return Ok(result);        
     }
+    
+    // DELETE: /api/blogposts/{id}
+    [HttpDelete]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
+    {
+        var blogPost = await _blogPostsRepo.DeleteAsync(id);
+        if (blogPost is null)
+            return NotFound();
+
+        var dto = new BlogPostDto
+        {
+            Id = blogPost.Id,
+            Title = blogPost.Title,
+            ShortDescription = blogPost.ShortDescription,
+            Content = blogPost.Content,
+            FeaturedImageUrl = blogPost.FeaturedImageUrl,
+            UrlHandle = blogPost.UrlHandle,
+            PublishedDate = blogPost.PublishedDate,
+            Author = blogPost.Author,
+            IsVisible = blogPost.IsVisible
+        };
+        
+        return Ok(dto);
+    }    
 }

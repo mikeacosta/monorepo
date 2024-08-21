@@ -44,4 +44,15 @@ public class BlogPostsRepository : IBlogPostsRepository
         await _context.SaveChangesAsync();
         return blogPost;
     }
+
+    public async Task<BlogPost?> DeleteAsync(Guid id)
+    {
+        var entity = await _context.BlogPosts.FirstOrDefaultAsync(b => b.Id == id);
+        if (entity is null)
+            return null;
+
+        _context.BlogPosts.Remove(entity);
+        await _context.SaveChangesAsync();
+        return entity;        
+    }
 }
