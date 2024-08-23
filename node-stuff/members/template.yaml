@@ -56,4 +56,19 @@ Resources:
           Type: Api
           Properties:
             Path: /members/{id}
-            Method: GET                                           
+            Method: GET 
+
+  UpdateFunction:
+    Type: 'AWS::Serverless::Function'    
+    Properties:
+      Handler: update.handler
+      CodeUri: src/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MembersTable      
+      Events:
+        UpdateMember:
+          Type: Api
+          Properties:
+            Path: /members/{id}
+            Method: PUT                                             
