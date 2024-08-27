@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: create.handler
-      CodeUri: s3://a-bucket-01234/6e7266e9f30b1ae89dbdbacd034239bf
+      CodeUri: s3://a-bucket-01234/cb50b54dd55bc1530165a72cac0cfc8e
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -40,7 +40,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: get.handler
-      CodeUri: s3://a-bucket-01234/6e7266e9f30b1ae89dbdbacd034239bf
+      CodeUri: s3://a-bucket-01234/cb50b54dd55bc1530165a72cac0cfc8e
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -60,7 +60,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: update.handler
-      CodeUri: s3://a-bucket-01234/6e7266e9f30b1ae89dbdbacd034239bf
+      CodeUri: s3://a-bucket-01234/cb50b54dd55bc1530165a72cac0cfc8e
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -71,3 +71,18 @@ Resources:
           Properties:
             Path: /members/{id}
             Method: PUT
+  DeleteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: delete.handler
+      CodeUri: s3://a-bucket-01234/cb50b54dd55bc1530165a72cac0cfc8e
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: MembersTable
+      Events:
+        DeleteProduct:
+          Type: Api
+          Properties:
+            Path: /members/{id}
+            Method: DELETE
