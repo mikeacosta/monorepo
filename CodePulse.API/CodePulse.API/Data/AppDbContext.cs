@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<BlogPost> BlogPosts { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
 
+    public DbSet<BlogImage> BlogImages { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
