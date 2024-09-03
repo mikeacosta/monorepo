@@ -12,12 +12,14 @@ builder.Services.AddDbContext<AppDbContext>(
         builder.Configuration["ConnectionStrings:DbConnectionString"]));
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 builder.Services.AddScoped<IBlogPostsRepository, BlogPostsRepository>();
+builder.Services.AddScoped<IImagesRespository, ImagesRepository>();
 
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

@@ -1,5 +1,6 @@
 using CodePulse.API.Entities;
 using CodePulse.API.Models;
+using CodePulse.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodePulse.API.Controllers;
@@ -8,6 +9,13 @@ namespace CodePulse.API.Controllers;
 [Route("api/images")]
 public class ImagesController : ControllerBase
 {
+    private readonly IImagesRespository _imagesRespository;
+    
+    public ImagesController(IImagesRespository imagesRespository)
+    {
+        _imagesRespository = imagesRespository;
+    }
+    
     // POST: /api/images
     [HttpPost]
     public async Task<IActionResult> CreateImage([FromForm] IFormFile file, 
@@ -16,7 +24,7 @@ public class ImagesController : ControllerBase
     {
         ValidateFileUpload(file);
         if (!ModelState.IsValid)
-            return null;
+            return BadRequest(ModelState);
 
         var blogImage = new BlogImage
         {
@@ -25,12 +33,13 @@ public class ImagesController : ControllerBase
             Title = title,
             DateCreated = DateTime.Now
         };
-        
-        // TODO: implement repository
+
+        blogImage = await _imagesRespository.Upload(file, blogImage);
 
         var dto = new BlogImageDto
         {
             Id = blogImage.Id,
+            FileName = blogImage.FileName,
             FileExtension = blogImage.FileExtension,
             Title = blogImage.Title,
             DateCreated = blogImage.DateCreated
