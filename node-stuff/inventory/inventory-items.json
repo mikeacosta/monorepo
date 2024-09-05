@@ -1,0 +1,52 @@
+{
+  "Inventory": [
+    {
+      "PutRequest": {
+        "Item": {
+          "qty": {
+            "N": "1"
+          },
+          "category": {
+            "S": "book"
+          },
+          "price": {
+            "N": "24.95"
+          },
+          "clientId": {
+            "S": "pj@example.com"
+          },
+          "weight": {
+            "N": "200"
+          },
+          "sku": {
+            "S": "SKU-P122"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "qty": {
+            "N": "2"
+          },
+          "category": {
+            "S": "shoes"
+          },
+          "price": {
+            "N": "59.99"
+          },
+          "clientId": {
+            "S": "joe@blow.com"
+          },
+          "weight": {
+            "N": "250"
+          },
+          "sku": {
+            "S": "SKU-P185"
+          }
+        }
+      }
+    }
+  ]
+}
