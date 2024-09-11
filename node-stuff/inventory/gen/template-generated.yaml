@@ -1,19 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
+Transform: AWS::Serverless-2016-10-31
 Description: Inventory REST API
-
 Globals:
   Function:
     Runtime: nodejs18.x
     Environment:
       Variables:
-        TABLE_NAME: !Ref InventoryTable
+        TABLE_NAME:
+          Ref: InventoryTable
     MemorySize: 128
     Timeout: 5
-
 Resources:
   InventoryTable:
-    Type: 'AWS::Serverless::SimpleTable'
+    Type: AWS::Serverless::SimpleTable
     Properties:
       TableName: Inventory
       PrimaryKey:
@@ -21,19 +20,19 @@ Resources:
         Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 1
-        WriteCapacityUnits: 1   
-
+        WriteCapacityUnits: 1
   InventoryFunction:
-    Type: 'AWS::Serverless::Function'
+    Type: AWS::Serverless::Function
     Properties:
       Handler: lambda.handler
-      CodeUri: src/
+      CodeUri: s3://a-bucket-01234/95c4b9521a03bebd6ee699225c252c8c
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref InventoryTable 
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: InventoryTable
       Events:
         GetAllItems:
           Type: Api
           Properties:
             Path: /inventory
-            Method: GET         
+            Method: GET
