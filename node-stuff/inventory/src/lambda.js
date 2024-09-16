@@ -1,5 +1,5 @@
-import { ScanCommand } from "@aws-sdk/client-dynamodb";
-import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { ScanCommand, GetItemCommand } from "@aws-sdk/client-dynamodb";
+import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dbClient } from "./dbClient.js";
 
 export const handler = async (event) => {
@@ -11,7 +11,7 @@ export const handler = async (event) => {
     switch (event.httpMethod) {
       case "GET":
         if (event.pathParameters != null) {
-          //body = await getItem(event.pathParameters.sku);
+          body = await getItem(event.pathParameters.sku);
         } else {
           body = await getAllItems();
         }
@@ -56,6 +56,23 @@ const getAllItems = async () => {
     console.log(Items);
     return (Items) ? Items.map((item) => unmarshall(item)) : {};
 
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+const getItem = async (itemSku) => {
+  console.log("getItem");
+  try {
+    const params = {
+      TableName: process.env.TABLE_NAME,
+      Key: marshall({ sku: itemSku })
+    };
+
+    const { Item } = await dbClient.send(new GetItemCommand(params));
+    console.log(Item);
+    return (Item) ? unmarshall(Item) : {};
   } catch (e) {
     console.error(e);
     throw e;

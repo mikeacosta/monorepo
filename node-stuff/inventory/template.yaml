@@ -36,4 +36,9 @@ Resources:
           Type: Api
           Properties:
             Path: /inventory
-            Method: GET         
+            Method: GET
+        GetItem:
+          Type: Api
+          Properties:
+            Path: /inventory/{sku}
+            Method: GET                      

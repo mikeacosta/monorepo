@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda.handler
-      CodeUri: s3://a-bucket-01234/95c4b9521a03bebd6ee699225c252c8c
+      CodeUri: s3://a-bucket-01234/2f63a2285e08ec9c1e26c61cec9b2e94
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -35,4 +35,9 @@ Resources:
           Type: Api
           Properties:
             Path: /inventory
+            Method: GET
+        GetItem:
+          Type: Api
+          Properties:
+            Path: /inventory/{sku}
             Method: GET
