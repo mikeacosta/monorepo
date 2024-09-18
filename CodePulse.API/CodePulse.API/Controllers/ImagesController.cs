@@ -42,6 +42,7 @@ public class ImagesController : ControllerBase
             FileName = blogImage.FileName,
             FileExtension = blogImage.FileExtension,
             Title = blogImage.Title,
+            Url = blogImage.Url,
             DateCreated = blogImage.DateCreated
         };
 
