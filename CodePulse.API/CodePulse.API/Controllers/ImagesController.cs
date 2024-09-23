@@ -16,6 +16,29 @@ public class ImagesController : ControllerBase
         _imagesRespository = imagesRespository;
     }
     
+    // GET: /api/images
+    [HttpGet]
+    public async Task<IActionResult> GetAllImages()
+    {
+        var images = await _imagesRespository.GetAll();
+
+        var dtos = new List<BlogImageDto>();
+        foreach (var image in images)
+        {
+            dtos.Add(new BlogImageDto()
+            {
+                Id = image.Id,
+                FileName = image.FileName,
+                FileExtension = image.FileExtension,
+                Title = image.Title,
+                Url = image.Url,
+                DateCreated = image.DateCreated
+            });
+        }
+
+        return Ok(dtos);
+    }
+    
     // POST: /api/images
     [HttpPost]
     public async Task<IActionResult> CreateImage([FromForm] IFormFile file, 

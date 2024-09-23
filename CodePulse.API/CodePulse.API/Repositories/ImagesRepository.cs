@@ -1,5 +1,6 @@
 using CodePulse.API.Data;
 using CodePulse.API.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodePulse.API.Repositories;
 
@@ -31,5 +32,10 @@ public class ImagesRepository : IImagesRespository
         await _context.BlogImages.AddAsync(image);
         await _context.SaveChangesAsync();
         return image;
+    }
+
+    public async Task<IEnumerable<BlogImage>> GetAll()
+    {
+        return await _context.BlogImages.ToListAsync();
     }
 }
