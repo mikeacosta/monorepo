@@ -1,4 +1,4 @@
-import { ScanCommand, GetItemCommand } from "@aws-sdk/client-dynamodb";
+import { ScanCommand, GetItemCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dbClient } from "./dbClient.js";
 
@@ -18,6 +18,7 @@ export const handler = async (event) => {
         break;
 
       case "POST":
+        body = await createItem(event);
         break;
 
       default:
@@ -73,6 +74,29 @@ const getItem = async (itemSku) => {
     const { Item } = await dbClient.send(new GetItemCommand(params));
     console.log(Item);
     return (Item) ? unmarshall(Item) : {};
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+
+const createItem = async (event) => {
+  try {
+    console.log(`createItem, event: "${event}"`);
+
+    const itemRequest = JSON.parse(event.body);
+    // const id = uuidv4();
+    // itemRequest.id = id;
+
+    const params = {
+      TableName: process.env.TABLE_NAME,
+      Item: marshall(itemRequest || {})
+    };
+
+    const createResult = await dbClient.send(new PutItemCommand(params));
+    console.log(createResult);
+    return createResult;
   } catch (e) {
     console.error(e);
     throw e;
