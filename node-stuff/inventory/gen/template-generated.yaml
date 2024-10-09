@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda.handler
-      CodeUri: s3://a-bucket-01234/b5be75fb3b6398c2f076a42af839f0c6
+      CodeUri: s3://a-bucket-01234/8f5fc4c29c84ee41ebe66e1e08b19ea2
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -41,18 +41,13 @@ Resources:
           Properties:
             Path: /inventory/{sku}
             Method: GET
-  CreateFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: lambda.handler
-      CodeUri: s3://a-bucket-01234/b5be75fb3b6398c2f076a42af839f0c6
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: InventoryTable
-      Events:
-        CreateMember:
+        CreateItem:
           Type: Api
           Properties:
             Path: /inventory
             Method: POST
+        UpdateItem:
+          Type: Api
+          Properties:
+            Path: /inventory/{sku}
+            Method: PUT

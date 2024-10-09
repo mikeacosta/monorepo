@@ -42,18 +42,13 @@ Resources:
           Properties:
             Path: /inventory/{sku}
             Method: GET
-
-  CreateFunction:
-    Type: 'AWS::Serverless::Function'    
-    Properties:
-      Handler: lambda.handler
-      CodeUri: src/
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref InventoryTable      
-      Events:
-        CreateMember:
+        CreateItem:
           Type: Api
           Properties:
             Path: /inventory
-            Method: POST                               
+            Method: POST
+        UpdateItem:
+          Type: Api
+          Properties:
+            Path: /inventory/{sku}
+            Method: PUT                                         

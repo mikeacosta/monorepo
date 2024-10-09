@@ -1,4 +1,4 @@
-import { ScanCommand, GetItemCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import { ScanCommand, GetItemCommand, PutItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dbClient } from "./dbClient.js";
 
@@ -19,6 +19,10 @@ export const handler = async (event) => {
 
       case "POST":
         body = await createItem(event);
+        break;
+
+      case "PUT":
+        body = await updateItem(event);
         break;
 
       default:
@@ -86,8 +90,6 @@ const createItem = async (event) => {
     console.log(`createItem, event: "${event}"`);
 
     const itemRequest = JSON.parse(event.body);
-    // const id = uuidv4();
-    // itemRequest.id = id;
 
     const params = {
       TableName: process.env.TABLE_NAME,
@@ -97,6 +99,34 @@ const createItem = async (event) => {
     const createResult = await dbClient.send(new PutItemCommand(params));
     console.log(createResult);
     return createResult;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+const updateItem = async (event) => {
+  try {
+    const requestBody = JSON.parse(event.body);
+    const objKeys = Object.keys(requestBody);
+    console.log(`updateItem function. requestBody : "${requestBody}", objKeys: "${objKeys}"`);
+
+    const params = {
+      TableName: process.env.TABLE_NAME,
+      Key: marshall({ sku: event.pathParameters.sku }),
+      UpdateExpression: `SET ${objKeys.map((_, index) => `#key${index} = :value${index}`).join(", ")}`,
+      ExpressionAttributeNames: objKeys.reduce((acc, key, index) => ({
+        ...acc,
+        [`#key${index}`]: key,
+      }), {}),
+      ExpressionAttributeValues: marshall(objKeys.reduce((acc, key, index) => ({
+        ...acc,
+        [`:value${index}`]: requestBody[key],
+      }), {})),
+    };
+
+    const updateResult = await dbClient.send(new UpdateItemCommand(params));
+    return updateResult;
   } catch (e) {
     console.error(e);
     throw e;
