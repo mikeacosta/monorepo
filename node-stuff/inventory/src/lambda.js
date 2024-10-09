@@ -1,4 +1,4 @@
-import { ScanCommand, GetItemCommand, PutItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import { ScanCommand, GetItemCommand, PutItemCommand, UpdateItemCommand, DeleteItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dbClient } from "./dbClient.js";
 
@@ -23,6 +23,10 @@ export const handler = async (event) => {
 
       case "PUT":
         body = await updateItem(event);
+        break;
+
+      case "DELETE":
+        body = await deleteItem(event);
         break;
 
       default:
@@ -127,6 +131,24 @@ const updateItem = async (event) => {
 
     const updateResult = await dbClient.send(new UpdateItemCommand(params));
     return updateResult;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+const deleteItem = async (event) => {
+  try {
+    console.log("request:", JSON.stringify(event, undefined, 2));
+
+    const params = {
+      TableName: process.env.TABLE_NAME,
+      Key: marshall({ sku: event.pathParameters.sku })
+    }; 
+    
+    const deleteResult = await dbClient.send(new DeleteItemCommand(params));
+    console.log(deleteResult);
+    return deleteResult;
   } catch (e) {
     console.error(e);
     throw e;

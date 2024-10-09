@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda.handler
-      CodeUri: s3://a-bucket-01234/8f5fc4c29c84ee41ebe66e1e08b19ea2
+      CodeUri: s3://a-bucket-01234/7f9d092ba366d1a5b53506209d9e617f
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -51,3 +51,8 @@ Resources:
           Properties:
             Path: /inventory/{sku}
             Method: PUT
+        DeleteItem:
+          Type: Api
+          Properties:
+            Path: /inventory/{sku}
+            Method: DELETE

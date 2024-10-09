@@ -51,4 +51,9 @@ Resources:
           Type: Api
           Properties:
             Path: /inventory/{sku}
-            Method: PUT                                         
+            Method: PUT
+        DeleteItem:
+          Type: Api
+          Properties:
+            Path: /inventory/{sku}
+            Method: DELETE                                                     
