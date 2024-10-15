@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category.service';
 import { Category } from '../../category/models/category.model';
 import { UpdateBlogpostRequest } from '../models/update-blogpost-request.model';
+import { ImageService } from 'src/app/shared/components/image-selector/image.service';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -22,11 +23,13 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   selectedCategories?: string[];
   getBlogPostSubscription?: Subscription;
   isImageSelectorVisible: boolean = false;
+  imageSelectSubscription?: Subscription
 
   constructor(private route: ActivatedRoute, 
     private blogPostService: BlogPostService,
     private router: Router,
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService,
+    private imageService: ImageService) {
 
   }
 
@@ -48,6 +51,16 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
               }
             });
         }
+
+        this.imageSelectSubscription = this.imageService.onSelectImage()
+          .subscribe({
+            next: (response) => {
+              if (this.blogPost) {
+                this.blogPost.featuredImageUrl = response.url;
+                this.isImageSelectorVisible = false;
+              }
+            }
+          });
       }
     });
   }
@@ -102,5 +115,6 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     this.paramsSubscription?.unsubscribe();
     this.editBlogPostSubscription?.unsubscribe();
     this.getBlogPostSubscription?.unsubscribe();
+    this.imageSelectSubscription?.unsubscribe();
   }
 }
