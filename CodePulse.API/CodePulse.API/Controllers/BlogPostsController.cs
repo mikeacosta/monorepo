@@ -130,6 +130,37 @@ public class BlogPostsController : ControllerBase
         return Ok(response);
     }
     
+    // GET: /api/blogposts/{urlHandle}
+    [HttpGet]
+    [Route("{urlHandle}")]
+    public async Task<IActionResult> GetBlogPostByUrlHandle([FromRoute] string urlHandle)
+    {
+        var blogPost = await _blogPostsRepo.GetByUrlHandleAsync(urlHandle);
+        if (blogPost is null)
+            return NotFound();
+
+        var response = new BlogPostDto
+        {
+            Id = blogPost.Id,
+            Title = blogPost.Title,
+            ShortDescription = blogPost.ShortDescription,
+            Content = blogPost.Content,
+            FeaturedImageUrl = blogPost.FeaturedImageUrl,
+            UrlHandle = blogPost.UrlHandle,
+            PublishedDate = blogPost.PublishedDate,
+            Author = blogPost.Author,
+            IsVisible = blogPost.IsVisible,
+            Categories = blogPost.Categories.Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                UrlHandle = c.UrlHandle
+            }).ToList()
+        };
+
+        return Ok(response);        
+    }
+    
     // PUT: /api/blogposts/{id}
     [HttpPut]
     [Route("{id:guid}")]
