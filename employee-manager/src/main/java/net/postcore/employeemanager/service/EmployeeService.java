@@ -28,8 +28,11 @@ public class EmployeeService {
     }
 
     public Employee getEmployee(Long id) {
-        return employeeRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User id " + id + " not found"));
+        return employeeRepo.findById(id).orElse(null);
+    }
+
+    public Employee updateEmployee(Employee employee) {
+        return employeeRepo.save(employee);
     }
 
     public void deleteEmployee(Long id) {
