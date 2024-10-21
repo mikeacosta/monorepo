@@ -18,7 +18,9 @@ public class EmployeeManagerApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/employees").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/employees/**")
+                        .allowedOrigins("http://localhost:4200", "http://localhost:8080")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
     }

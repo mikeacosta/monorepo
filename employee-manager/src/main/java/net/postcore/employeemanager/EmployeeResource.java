@@ -51,6 +51,7 @@ public class EmployeeResource {
         employee.setJobTitle(employeeRequest.getJobTitle());
         employee.setPhone(employeeRequest.getPhone());
         employee.setImageUrl(employeeRequest.getImageUrl());
+        employeeService.updateEmployee(employee);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
