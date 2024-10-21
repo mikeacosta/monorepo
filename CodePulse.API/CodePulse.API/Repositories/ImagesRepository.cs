@@ -25,8 +25,8 @@ public class ImagesRepository : IImagesRespository
         await using var stream = new FileStream(localPath, FileMode.Create);
         await file.CopyToAsync(stream);
 
-        var httpRequest = _httpContextAccessor.HttpContext.Request;
-        var urlPath = $"{httpRequest.Scheme}://{httpRequest.Host}{httpRequest.PathBase}/Images/{image.FileName}{image.FileExtension}";
+        var httpRequest = _httpContextAccessor.HttpContext?.Request;
+        var urlPath = $"{httpRequest?.Scheme}://{httpRequest?.Host}{httpRequest?.PathBase}/Images/{image.FileName}{image.FileExtension}";
 
         image.Url = urlPath;
         await _context.BlogImages.AddAsync(image);

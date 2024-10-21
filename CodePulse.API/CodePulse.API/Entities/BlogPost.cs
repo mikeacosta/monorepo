@@ -9,8 +9,9 @@ public class BlogPost
     public String FeaturedImageUrl { get; set; } = string.Empty;
     public String UrlHandle { get; set; } = string.Empty;
     public DateTime PublishedDate { get; set; }
-    public String Author { get; set; } = string.Empty;
+    public String Author { get; set; }
     public bool IsVisible { get; set; }
 
     public ICollection<Category> Categories { get; set; }
+        = new List<Category>();
 }

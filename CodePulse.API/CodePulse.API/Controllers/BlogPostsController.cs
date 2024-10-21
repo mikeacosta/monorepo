@@ -1,3 +1,4 @@
+using System.Net;
 using CodePulse.API.Entities;
 using CodePulse.API.Models;
 using CodePulse.API.Repositories;
@@ -35,6 +36,9 @@ public class BlogPostsController : ControllerBase
             Categories = new List<Category>()
         };
 
+        if (requestDto?.Categories is null)
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        
         foreach (var id in requestDto.Categories)
         {
             var cat = await _categoriesRepo.GetByIdAsync(id);
@@ -190,6 +194,8 @@ public class BlogPostsController : ControllerBase
         }
 
         var updated = await _blogPostsRepo.UpdateAsync(entity);
+        if (updated is null)
+            return NotFound();
         
         var result = new BlogPostDto
         {

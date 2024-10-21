@@ -10,5 +10,6 @@ public class CreateBlogPostRequestDto
     public DateTime PublishedDate { get; set; }
     public String Author { get; set; } = string.Empty;
     public bool IsVisible { get; set; }
-    public Guid[] Categories { get; set; }
+
+    public Guid[]? Categories { get; set; }
 }

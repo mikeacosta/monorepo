@@ -7,4 +7,5 @@ public class Category
     public String UrlHandle { get; set; } = string.Empty;
 
     public ICollection<BlogPost> BlogPosts { get; set; }
+        = new List<BlogPost>();
 }
