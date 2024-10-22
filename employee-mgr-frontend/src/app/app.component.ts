@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'employee-mgr-frontend';
   employees: Employee[] = [];
   editEmployee: Employee | undefined;
+  deleteEmployee: Employee | undefined;
 
   constructor(private service: EmployeeService){}
 
@@ -48,8 +49,11 @@ export class AppComponent implements OnInit {
         this.editEmployee = employee;
     }
 
-    if (mode === 'delete')
+    if (mode === 'delete') {
       button.setAttribute('data-target', '#deleteEmployeeModal'); 
+      if (employee)
+        this.deleteEmployee = employee;
+    }
 
     container?.appendChild(button);
     button.click();
@@ -81,4 +85,15 @@ export class AppComponent implements OnInit {
       }
     );
   }  
+
+  public onDeleteEmployee(id: number): void {
+    this.service.deleteEmployee(id).subscribe(
+      (response: void) => {
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
+  }
 }
