@@ -14,6 +14,32 @@ public class AuthController : ControllerBase
     {
         _userManager = userManager;
     }
+    
+    // POST: /api/auth/login
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+    {
+        var identityUser = await _userManager.FindByEmailAsync(request.Email);
+        if (identityUser is not null)
+        {
+            var passwordResult = await _userManager.CheckPasswordAsync(identityUser, request.Password);
+            if (passwordResult)
+            {
+                var roles = await _userManager.GetRolesAsync(identityUser);
+                var response = new LoginResponseDto()
+                {
+                    Email = request.Email,
+                    Roles = roles.ToList(),
+                    Token = "TOKEN"
+                };
+                return Ok();
+            }
+        }
+        
+        ModelState.AddModelError("", "Email or Password is incorrect");
+        return ValidationProblem(ModelState);
+    }    
 
     // POST: /api/auth/register
     [HttpPost]
