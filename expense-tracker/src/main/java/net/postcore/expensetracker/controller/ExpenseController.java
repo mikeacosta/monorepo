@@ -24,8 +24,8 @@ public class ExpenseController {
     }
 
     @PostMapping("/expenses")
-    public ResponseEntity<Expense> createExpense(Expense expense) {
+    public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) {
         var newExpense = expenseService.save(expense);
-        return new ResponseEntity<Expense>(newExpense, HttpStatus.CREATED);
+        return new ResponseEntity<>(newExpense, HttpStatus.CREATED);
     }
 }
