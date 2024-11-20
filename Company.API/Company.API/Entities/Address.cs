@@ -11,22 +11,26 @@ public class Address
     
     [Required]
     [MaxLength(100)]
-    public string Address1 { get; set; }
+    public string Address1 { get; set; } = string.Empty;
     
     [MaxLength(100)]
-    public string Address2 { get; set; }
+    public string? Address2 { get; set; }
     
     [Required]
     [MaxLength(50)]
-    public string City { get; set; }
+    public string City { get; set; } = string.Empty;
     
     [MaxLength(2)]
-    public string State { get; set; }
+    public string? State { get; set; }
     
     [MaxLength(50)]
-    public string PostalCode { get; set; }
+    public string? PostalCode { get; set; }
     
     [Required]
     [MaxLength(100)]
-    public string Country { get; set; }
+    public string Country { get; set; } = string.Empty;
+    
+    [ForeignKey("CompanyId")]
+    public Company? Company { get; set; }    
+    public int CompanyId { get; set; }    
 }

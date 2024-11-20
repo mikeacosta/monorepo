@@ -11,7 +11,10 @@ public class Company
     
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     
-    public int AddressId { get; set; }
+    public Address? Address { get; set; }
+    
+    public ICollection<Contact> Contacts { get; set; }
+        = new List<Contact>();    
 }

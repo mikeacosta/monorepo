@@ -11,14 +11,16 @@ public class Contact
     
     [Required]
     [MaxLength(50)]
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
     
     [Required]
     [MaxLength(50)]
-    public string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
     
     [MaxLength(100)]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
+    [ForeignKey("CompanyId")]
+    public Company? Company { get; set; }    
     public int CompanyId { get; set; }
 }
