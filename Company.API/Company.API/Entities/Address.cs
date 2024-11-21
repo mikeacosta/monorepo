@@ -30,7 +30,7 @@ public class Address
     [MaxLength(100)]
     public string Country { get; set; } = string.Empty;
     
-    [ForeignKey("CompanyId")]
-    public Company? Company { get; set; }    
-    public int CompanyId { get; set; }    
+    [ForeignKey("Company")]
+    public int CompanyId { get; set; }
+    public Company Company { get; set; } = null!;
 }

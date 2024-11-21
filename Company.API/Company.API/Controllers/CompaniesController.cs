@@ -27,4 +27,14 @@ public class CompaniesController : ControllerBase
         var result = _mapper.Map<IEnumerable<CompanyDto>>(companies);
         return Ok(result);
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Entities.Company>> GetCompany(int id)
+    {
+        var company = await _repository.GetCompanyAsync(id);
+        if (company == null)
+            return NotFound();
+        
+        return Ok(company);
+    }
 }
