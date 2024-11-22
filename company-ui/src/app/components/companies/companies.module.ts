@@ -6,7 +6,8 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyCreateComponent } from './company-create/company-create.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
-
+import { MatTableModule } from '@angular/material/table'; 
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
   ],
   imports: [
     CommonModule,
-    CompaniesRoutingModule
+    CompaniesRoutingModule,
+    MatTableModule,
+    MatButtonModule
   ]
 })
 export class CompaniesModule { }
