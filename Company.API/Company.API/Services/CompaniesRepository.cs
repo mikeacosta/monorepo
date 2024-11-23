@@ -25,4 +25,23 @@ public class CompaniesRepository : ICompaniesRepository
             .Include(c => c.Address)
             .FirstOrDefaultAsync();
     }
+
+    public async Task<Entities.Company?> CreateCompanyAsync(Entities.Company company)
+    {
+        await _context.Companies.AddAsync(company);
+        await _context.SaveChangesAsync();
+        return company;
+    }
+
+    public async Task UpdateCompanyAsync(Entities.Company company)
+    {
+        _context.Entry(company).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+    }
+
+    public void DeleteCompany(Entities.Company company)
+    {
+        _context.Companies.Remove(company);
+        _context.SaveChanges();
+    }
 }

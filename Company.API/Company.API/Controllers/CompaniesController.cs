@@ -29,12 +29,48 @@ public class CompaniesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Entities.Company>> GetCompany(int id)
+    public async Task<ActionResult<CompanyDto>> GetCompany(int id)
     {
         var company = await _repository.GetCompanyAsync(id);
         if (company == null)
             return NotFound();
         
-        return Ok(company);
+        var dto = _mapper.Map<CompanyDto>(company);
+        return Ok(dto);
+    }
+    
+    [HttpPost]
+    public async Task<ActionResult<CompanyDto>> PostCompany([FromBody] CompanyDto dto)
+    {
+        var entity = _mapper.Map<Entities.Company>(dto);
+        var company = await _repository.CreateCompanyAsync(entity);
+        var createdDto = _mapper.Map<CompanyDto>(company);
+    
+        return CreatedAtAction("PostCompany", new { id = createdDto.Id }, createdDto);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutCompany(int id, [FromBody] CompanyDto dto)
+    {
+        if (id != dto.Id)
+            return BadRequest();
+        
+        var entity = await _repository.GetCompanyAsync(id);
+        if (entity == null)
+            return NotFound();
+
+        await _repository.UpdateCompanyAsync(_mapper.Map(dto, entity));
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCompany(int id)
+    {
+        var company = await _repository.GetCompanyAsync(id);
+        if (company == null)
+            return NotFound();
+        
+        _repository.DeleteCompany(company);
+        return NoContent();
     }
 }
