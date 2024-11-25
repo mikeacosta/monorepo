@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CompanyService {
-  apiUrl = 'http://localhost:5018/api/companies/'
+  apiUrl = 'https://localhost:7108/api/companies/'
   constructor(private http: HttpClient) { }
 
   get(): Observable<Company[]> {
@@ -16,5 +16,9 @@ export class CompanyService {
 
   getById(id: number): Observable<Company> {
     return this.http.get<Company>(`${this.apiUrl}${id}`);
+  }
+
+  post(company: Company): Observable<Company> {
+    return this.http.post<Company>(this.apiUrl, company);
   }  
 }

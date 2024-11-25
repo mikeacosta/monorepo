@@ -8,6 +8,10 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
 import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,12 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     CompaniesRoutingModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatIconModule
   ]
 })
 export class CompaniesModule { }
