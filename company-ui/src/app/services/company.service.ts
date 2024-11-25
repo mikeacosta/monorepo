@@ -20,5 +20,10 @@ export class CompanyService {
 
   post(company: Company): Observable<Company> {
     return this.http.post<Company>(this.apiUrl, company);
+  }
+
+  put(companyId: number, company: Company): Observable<Company> {
+    console.log(company);
+    return this.http.put<Company>(this.apiUrl + companyId, company);
   }  
 }
