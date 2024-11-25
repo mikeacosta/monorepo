@@ -8,8 +8,8 @@ public class CompanyDto
 
     public string Name { get; set; } = String.Empty;
     
-    public Address? Address { get; set; }
+    public AddressDto? Address { get; set; }
     
-    public ICollection<Contact> Contacts { get; set; }
-        = new List<Contact>();    
+    public ICollection<ContactDto> Contacts { get; set; }
+        = new List<ContactDto>();    
 }
