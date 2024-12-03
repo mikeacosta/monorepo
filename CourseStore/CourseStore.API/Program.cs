@@ -27,15 +27,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// routing matches a request UTI to an action on a controller
+
+// adds route matching to the middleware pipeline.
+// This middleware looks at the set of endpoints defined in the app, and selects the best match based on the request.
 app.UseRouting();
 
 //app.UseAuthorization();
 
+// adds endpoint execution to the middleware pipeline. It runs the delegate associated with the selected endpoint.
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
 
+// replaces app.UseRouting and app.UseEndpoints
 //app.MapControllers();
 
 app.Run();
