@@ -10,7 +10,6 @@ namespace CourseStore.API.Controllers;
 [Route("api/courses")]
 public class CoursesController : ControllerBase
 {
-    
     private readonly AppDbContext _context;
 
     public CoursesController(AppDbContext context)
