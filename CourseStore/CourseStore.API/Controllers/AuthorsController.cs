@@ -18,7 +18,7 @@ public class AuthorsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<AuthorDto>> GetCourses()
+    public async Task<ActionResult<AuthorDto>> GetAuthors()
     {
         var list = new List<AuthorDto>();
 

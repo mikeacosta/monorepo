@@ -1,28 +1,27 @@
-using CourseStore.API.Data;
 using CourseStore.API.Models;
+using CourseStore.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CourseStore.API.Controllers;
 
 [ApiController]
 [Produces("application/json")]
-[Route("api/courses")]
+[Route("api/author/{authorId}/courses")]
 public class CoursesController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly ICourseStoreRepository _repo;
 
-    public CoursesController(AppDbContext context)
+    public CoursesController(ICourseStoreRepository repo)
     {
-        _context = context;
+        _repo = repo;
     }
     
     [HttpGet]
-    public async Task<ActionResult<CourseDto>> GetCourses()
+    public async Task<ActionResult<CourseDto>> GetCoursesForAuthor(Guid authorId)
     {
         var list = new List<CourseDto>();
         
-        var courses = await _context.Courses.ToListAsync();
+        var courses = await _repo.GetCoursesAsync(authorId);
         foreach (var course in courses)
         {
             var dto = new CourseDto
@@ -37,10 +36,13 @@ public class CoursesController : ControllerBase
         return Ok(list);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
+    [HttpGet("{courseId}")]
+    public async Task<ActionResult<CourseDto>> GetCourse(Guid authorId, Guid courseId)
     {
-        var course = await _context.Courses.FindAsync(id);
+        if (!await _repo.AuthorExistsAsync(authorId))
+            return NotFound();
+        
+        var course = await _repo.GetCourseAsync(authorId, courseId);
         if (course == null)
             return NotFound();
 
