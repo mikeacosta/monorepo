@@ -1,7 +1,6 @@
-using CourseStore.API.Data;
 using CourseStore.API.Models;
+using CourseStore.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CourseStore.API.Controllers;
 
@@ -10,11 +9,11 @@ namespace CourseStore.API.Controllers;
 [Route("api/authors")]
 public class AuthorsController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly ICourseStoreRepository _repo;
 
-    public AuthorsController(AppDbContext context)
+    public AuthorsController(ICourseStoreRepository repo)
     {
-        _context = context;
+        _repo = repo;
     }
 
     [HttpGet]
@@ -22,8 +21,7 @@ public class AuthorsController : ControllerBase
     {
         var list = new List<AuthorDto>();
 
-        var authors = await _context.Authors
-            .Include(a => a.Courses).ToListAsync();
+        var authors = await _repo.GetAuthorsAsync();
         
         foreach (var author in authors)
         {
@@ -51,12 +49,10 @@ public class AuthorsController : ControllerBase
         return Ok(list);
     }
     
-    [HttpGet("{id}")]
-    public async Task<ActionResult<AuthorDto>> GetAuthor(Guid id)
+    [HttpGet("{authorId}")]
+    public async Task<ActionResult<AuthorDto>> GetAuthor(Guid authorId)
     {
-        var author = await _context.Authors
-            .Include(a => a.Courses)
-            .FirstOrDefaultAsync(a => a.Id == id);
+        var author = await _repo.GetAuthorAsync(authorId);
         
         if (author == null)
             return NotFound();

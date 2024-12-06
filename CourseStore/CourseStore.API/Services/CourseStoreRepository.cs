@@ -13,6 +13,21 @@ public class CourseStoreRepository : ICourseStoreRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+    public async Task<IEnumerable<Author>> GetAuthorsAsync()
+    {
+        return await _context.Authors
+            .Include(a => a.Courses).ToListAsync();
+    }
+
+    public async Task<Author?> GetAuthorAsync(Guid authorId)
+    {
+        if (authorId == Guid.Empty)
+            throw new ArgumentNullException(nameof(authorId));
+        
+        return await _context.Authors.Include(a => a.Courses)
+            .FirstOrDefaultAsync(a => a.Id == authorId);
+    }
+
     public async Task<IEnumerable<Course>> GetCoursesAsync(Guid authorId)
     {
         if (authorId == Guid.Empty)
