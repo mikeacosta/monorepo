@@ -37,7 +37,7 @@ public class CoursesController : ControllerBase
         return Ok(list);
     }
 
-    [HttpGet("{courseId}")]
+    [HttpGet("{courseId}", Name = "GetCourse")]
     public async Task<ActionResult<CourseDto>> GetCourse(Guid authorId, Guid courseId)
     {
         if (!await _repo.AuthorExistsAsync(authorId))
@@ -71,11 +71,19 @@ public class CoursesController : ControllerBase
         _repo.AddCourse(authorId, entity);
         await _repo.SaveAsync();
 
-        return new CourseDto
+        var courseToReturn = new CourseDto
         {
             Id = entity.Id,
             Title = course.Title,
             Description = course.Description
         };
+        
+        return CreatedAtRoute("GetCourse",
+            new
+            {
+                authorId = authorId,
+                courseId = courseToReturn.Id
+            },
+            courseToReturn);
     }
 }
