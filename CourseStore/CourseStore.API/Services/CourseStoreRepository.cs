@@ -55,4 +55,18 @@ public class CourseStoreRepository : ICourseStoreRepository
 
         return await _context.Authors.AnyAsync(a => a.Id == authorId);
     }
+
+    public void AddCourse(Guid authorId, Course course)
+    {
+        if (authorId == Guid.Empty || course == null)
+            throw new ArgumentNullException(nameof(authorId));
+        
+        course.AuthorId = authorId;
+        _context.Courses.Add(course);
+    }
+    
+    public async Task<bool> SaveAsync()
+    {
+        return (await _context.SaveChangesAsync() >= 0);
+    }    
 }

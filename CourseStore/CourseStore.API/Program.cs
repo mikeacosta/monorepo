@@ -12,6 +12,14 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddScoped<ICourseStoreRepository, CourseStoreRepository>();
 
 builder.Services.AddControllers();
+
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = context =>
+    {
+        context.ProblemDetails.Extensions.Add("server", Environment.MachineName);
+    };
+});
     
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

@@ -1,3 +1,4 @@
+using CourseStore.API.Entities;
 using CourseStore.API.Models;
 using CourseStore.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ namespace CourseStore.API.Controllers;
 
 [ApiController]
 [Produces("application/json")]
-[Route("api/author/{authorId}/courses")]
+[Route("api/authors/{authorId}/courses")]
 public class CoursesController : ControllerBase
 {
     private readonly ICourseStoreRepository _repo;
@@ -53,5 +54,28 @@ public class CoursesController : ControllerBase
             Description = course.Description
         };
         return Ok(dto);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<CourseDto>> CreateCourse(Guid authorId, CourseForCreationDto course)
+    {
+        if (!await _repo.AuthorExistsAsync(authorId))
+            return NotFound();
+
+        var entity = new Course
+        {
+            Title = course.Title,
+            Description = course.Description
+        };
+        
+        _repo.AddCourse(authorId, entity);
+        await _repo.SaveAsync();
+
+        return new CourseDto
+        {
+            Id = entity.Id,
+            Title = course.Title,
+            Description = course.Description
+        };
     }
 }
