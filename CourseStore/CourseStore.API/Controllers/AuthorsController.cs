@@ -10,10 +10,12 @@ namespace CourseStore.API.Controllers;
 public class AuthorsController : ControllerBase
 {
     private readonly ICourseStoreRepository _repo;
+    private readonly IMapper _mapper;
 
-    public AuthorsController(ICourseStoreRepository repo)
+    public AuthorsController(ICourseStoreRepository repo, IMapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -25,23 +27,10 @@ public class AuthorsController : ControllerBase
         
         foreach (var author in authors)
         {
-            var authorDto = new AuthorDto
-            {
-                Id = author.Id,
-                FirstName = author.FirstName,
-                LastName = author.LastName
-            };
+            var authorDto = _mapper.ToAuthorDto(author);
             
             foreach (var course in author.Courses)
-            {
-                var courseDto = new CourseDto
-                {
-                    Id = course.Id,
-                    Title = course.Title,
-                    Description = course.Description
-                };
-                authorDto.Courses.Add(courseDto);
-            }
+                authorDto.Courses.Add(_mapper.ToCourseDto(course));
 
             list.Add(authorDto);
         }
@@ -57,23 +46,10 @@ public class AuthorsController : ControllerBase
         if (author == null)
             return NotFound();
 
-        var authorDto = new AuthorDto
-        {
-            Id = author.Id,
-            FirstName = author.FirstName,
-            LastName = author.LastName
-        };
+        var authorDto = _mapper.ToAuthorDto(author);
         
         foreach (var course in author.Courses)
-        {
-            var courseDto = new CourseDto
-            {
-                Id = course.Id,
-                Title = course.Title,
-                Description = course.Description
-            };
-            authorDto.Courses.Add(courseDto);            
-        }
+            authorDto.Courses.Add(_mapper.ToCourseDto(course));            
         
         return Ok(authorDto);
     }    

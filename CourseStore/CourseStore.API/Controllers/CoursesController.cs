@@ -1,4 +1,3 @@
-using CourseStore.API.Entities;
 using CourseStore.API.Models;
 using CourseStore.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +10,12 @@ namespace CourseStore.API.Controllers;
 public class CoursesController : ControllerBase
 {
     private readonly ICourseStoreRepository _repo;
+    private readonly IMapper _mapper;
 
-    public CoursesController(ICourseStoreRepository repo)
+    public CoursesController(ICourseStoreRepository repo, IMapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
     
     [HttpGet]
@@ -24,15 +25,7 @@ public class CoursesController : ControllerBase
         
         var courses = await _repo.GetCoursesAsync(authorId);
         foreach (var course in courses)
-        {
-            var dto = new CourseDto
-            {
-                Id = course.Id,
-                Title = course.Title,
-                Description = course.Description
-            };
-            list.Add(dto);
-        }
+            list.Add(_mapper.ToCourseDto(course));
         
         return Ok(list);
     }
@@ -47,12 +40,7 @@ public class CoursesController : ControllerBase
         if (course == null)
             return NotFound();
 
-        var dto = new CourseDto
-        {
-            Id = course.Id,
-            Title = course.Title,
-            Description = course.Description
-        };
+        var dto = _mapper.ToCourseDto(course);
         return Ok(dto);
     }
 
@@ -62,21 +50,12 @@ public class CoursesController : ControllerBase
         if (!await _repo.AuthorExistsAsync(authorId))
             return NotFound();
 
-        var entity = new Course
-        {
-            Title = course.Title,
-            Description = course.Description
-        };
+        var entity = _mapper.ToCourseEntity(course);
         
         _repo.AddCourse(authorId, entity);
         await _repo.SaveAsync();
 
-        var courseToReturn = new CourseDto
-        {
-            Id = entity.Id,
-            Title = course.Title,
-            Description = course.Description
-        };
+        var courseToReturn = _mapper.ToCourseDto(entity);
         
         return CreatedAtRoute("GetCourse",
             new

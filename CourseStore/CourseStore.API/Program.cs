@@ -10,6 +10,7 @@ builder.Services.AddDbContext<AppDbContext>(
         builder.Configuration["ConnectionStrings:DbConnectionString"]));
 
 builder.Services.AddScoped<ICourseStoreRepository, CourseStoreRepository>();
+builder.Services.AddSingleton<IMapper, Mapper>();
 
 builder.Services.AddControllers();
 
