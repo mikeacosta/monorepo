@@ -47,6 +47,9 @@ public class CoursesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CourseDto>> CreateCourse(Guid authorId, CourseForCreationDto course)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         if (!await _repo.AuthorExistsAsync(authorId))
             return NotFound();
 
@@ -65,4 +68,23 @@ public class CoursesController : ControllerBase
             },
             courseToReturn);
     }
+    
+    [HttpPut("{courseId}")]
+    public async Task<ActionResult> UpdatePointOfInterest(Guid authorId, Guid courseId,
+        CourseForUpdateDto course)
+    {
+        if (!await _repo.AuthorExistsAsync(authorId))
+            return NotFound();
+
+        var courseEntity = await _repo.GetCourseAsync(authorId, courseId);
+        if (courseEntity == null)
+            return NotFound();
+
+        courseEntity.Title = course.Title;
+        courseEntity.Description = course.Description;
+
+        await _repo.SaveAsync();
+
+        return NoContent();
+    }    
 }
