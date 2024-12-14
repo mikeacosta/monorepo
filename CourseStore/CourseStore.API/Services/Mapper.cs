@@ -26,20 +26,30 @@ public class Mapper : IMapper
 
     public AuthorDto ToAuthorDto(Author author)
     {
-        return new AuthorDto
+        var dto = new AuthorDto
         {
             Id = author.Id,
             FirstName = author.FirstName,
             LastName = author.LastName
         };
+        
+        foreach (var course in author.Courses)
+            dto.Courses.Add(ToCourseDto(course));
+        
+        return dto;
     }
 
     public Author ToAuthorEntity(AuthorForCreationDto dto)
     {
-        return new Author
+        var entity = new Author
         {
             FirstName = dto.FirstName,
-            LastName = dto.LastName
+            LastName = dto.LastName,
         };
+
+        foreach (var courseForCreationDto in dto.Courses)
+            entity.Courses.Add(ToCourseEntity(courseForCreationDto));
+        
+        return entity;
     }
 }

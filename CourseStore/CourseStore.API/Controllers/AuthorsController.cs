@@ -26,14 +26,7 @@ public class AuthorsController : ControllerBase
         var authors = await _repo.GetAuthorsAsync();
         
         foreach (var author in authors)
-        {
-            var authorDto = _mapper.ToAuthorDto(author);
-            
-            foreach (var course in author.Courses)
-                authorDto.Courses.Add(_mapper.ToCourseDto(course));
-
-            list.Add(authorDto);
-        }
+            list.Add(_mapper.ToAuthorDto(author));
         
         return Ok(list);
     }
@@ -47,9 +40,6 @@ public class AuthorsController : ControllerBase
             return NotFound();
 
         var authorDto = _mapper.ToAuthorDto(author);
-        
-        foreach (var course in author.Courses)
-            authorDto.Courses.Add(_mapper.ToCourseDto(course));            
         
         return Ok(authorDto);
     }
