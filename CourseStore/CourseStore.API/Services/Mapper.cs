@@ -33,4 +33,13 @@ public class Mapper : IMapper
             LastName = author.LastName
         };
     }
+
+    public Author ToAuthorEntity(AuthorForCreationDto dto)
+    {
+        return new Author
+        {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName
+        };
+    }
 }

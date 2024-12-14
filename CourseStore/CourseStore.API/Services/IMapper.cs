@@ -8,4 +8,5 @@ public interface IMapper
     CourseDto ToCourseDto(Course course);
     Course ToCourseEntity(CourseForCreationDto dto);
     AuthorDto ToAuthorDto(Author author);
+    Author ToAuthorEntity(AuthorForCreationDto dto);
 }

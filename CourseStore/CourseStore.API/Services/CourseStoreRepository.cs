@@ -64,7 +64,12 @@ public class CourseStoreRepository : ICourseStoreRepository
         course.AuthorId = authorId;
         _context.Courses.Add(course);
     }
-    
+
+    public void AddAuthor(Author author)
+    {
+        _context.Authors.Add(author);
+    }
+
     public async Task<bool> SaveAsync()
     {
         return (await _context.SaveChangesAsync() >= 0);

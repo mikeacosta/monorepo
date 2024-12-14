@@ -38,7 +38,7 @@ public class AuthorsController : ControllerBase
         return Ok(list);
     }
     
-    [HttpGet("{authorId}")]
+    [HttpGet("{authorId}", Name = "GetAuthor")]
     public async Task<ActionResult<AuthorDto>> GetAuthor(Guid authorId)
     {
         var author = await _repo.GetAuthorAsync(authorId);
@@ -52,5 +52,19 @@ public class AuthorsController : ControllerBase
             authorDto.Courses.Add(_mapper.ToCourseDto(course));            
         
         return Ok(authorDto);
-    }    
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<AuthorDto>> CreateAuthor(AuthorForCreationDto author)
+    {
+        var authorEntity = _mapper.ToAuthorEntity(author);
+        _repo.AddAuthor(authorEntity);
+        await _repo.SaveAsync();
+        
+        var authorToReturn = _mapper.ToAuthorDto(authorEntity);
+        
+        return CreatedAtRoute("GetAuthor", 
+            new { authorId = authorToReturn.Id }, 
+            authorToReturn);
+    }
 }
