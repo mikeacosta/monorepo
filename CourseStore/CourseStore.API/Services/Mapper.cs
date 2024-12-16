@@ -52,4 +52,9 @@ public class Mapper : IMapper
         
         return entity;
     }
+
+    public IEnumerable<Author> ToAuthorEntities(IEnumerable<AuthorForCreationDto> dtos)
+    {
+        return dtos.Select(dto => ToAuthorEntity(dto));
+    }
 }
