@@ -26,6 +26,25 @@ public class AuthorCollectionsController : ControllerBase
             _repo.AddAuthor(author);
 
         await _repo.SaveAsync();
-        return Ok();    // TODO: change to CreatedAtRoute()
+
+        var result = _mapper.ToAuthorsDtos(authorEntities);
+        var authorIds = string.Join(", ", result.Select(a => a.Id));
+        return CreatedAtRoute("GetAuthorCollection",
+            new { authorIds = authorIds },
+            result);
+    }
+
+    [HttpGet("({authorIds})", Name = "GetAuthorCollection")]
+    public async Task<ActionResult<IEnumerable<AuthorForCreationDto>>> GetAuthorCollection(
+            [FromRoute] string authorIds)
+    {
+        var guids = authorIds.Split(",").Select(id => Guid.Parse(id));
+        var entities = await _repo.GetAuthorsAsync(guids);
+
+        if (entities.Count() != guids.Count())
+            return NotFound();
+
+        var authorsToReturn = _mapper.ToAuthorsDtos(entities);
+        return Ok(authorsToReturn);
     }
 }

@@ -28,6 +28,17 @@ public class CourseStoreRepository : ICourseStoreRepository
             .FirstOrDefaultAsync(a => a.Id == authorId);
     }
 
+    public async Task<IEnumerable<Author>> GetAuthorsAsync(IEnumerable<Guid> authorIds)
+    {
+        if (authorIds == null)
+            throw new ArgumentNullException(nameof(authorIds));
+
+        return await _context.Authors.Where(a => authorIds.Contains(a.Id))
+            .OrderBy(a => a.FirstName)
+            .OrderBy(a => a.LastName)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Course>> GetCoursesAsync(Guid authorId)
     {
         if (authorId == Guid.Empty)
