@@ -57,3 +57,38 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Backend API
+
+Upload artifacts to S3 bucket
+
+```
+aws cloudformation package --s3-bucket a-bucket-01234 \
+  --template-file template.yaml \
+  --output-template-file gen/template-generated.yaml
+```
+
+Deploy CloudFormation template
+```
+aws cloudformation deploy \
+  --template-file gen/template-generated.yaml \
+  --stack-name checklist-api-stack \
+  --capabilities CAPABILITY_IAM  
+```
+
+Get API Gateway URL (use in `task.service.ts`)
+```
+aws cloudformation describe-stacks --stack-name checklist-api-stack \
+  --query 'Stacks[0].Outputs[?OutputKey==`ApiInvokeUrl`].OutputValue' \
+  --output text 
+```
+
+Write data to DynamoDB table
+```
+aws dynamodb batch-write-item --request-items file://list-items.json   
+```
+
+Delete stack and resources when done
+```
+aws cloudformation delete-stack --stack-name checklist-api-stack 
+```
