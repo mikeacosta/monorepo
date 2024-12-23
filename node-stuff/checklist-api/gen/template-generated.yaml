@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Checklist REST API
+Globals:
+  Function:
+    Runtime: nodejs22.x
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: ChecklistTable
+    MemorySize: 128
+    Timeout: 5
+Resources:
+  ChecklistTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: Checklist
+      PrimaryKey:
+        Name: id
+        Type: Number
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+  ChecklistFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      CodeUri: s3://a-bucket-01234/3ad189a2ca026b95acc01dd14c212999
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: ChecklistTable
+      Events:
+        GetAllItems:
+          Type: Api
+          Properties:
+            Path: /checklist
+            Method: GET

@@ -1,0 +1,58 @@
+{
+  "Checklist": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "N": "1"
+          },
+          "text": {
+            "S": "Doctors Appointment"
+          },
+          "day": {
+            "S": "May 5th at 2:30pm"
+          },
+          "reminder": {
+            "BOOL": true
+          }
+        }
+      }
+    },   
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "N": "2"
+          },
+          "text": {
+            "S": "Meeting at School"
+          },
+          "day": {
+            "S": "May 6th at 2:30pm"
+          },
+          "reminder": {
+            "BOOL": true
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "N": "3"
+          },
+          "text": {
+            "S": "Food Shopping"
+          },
+          "day": {
+            "S": "May 7th at 12:30pm"
+          },
+          "reminder": {
+            "BOOL": false
+          }
+        }
+      }
+    }
+  ]
+}
