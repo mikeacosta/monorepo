@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Checklist REST API
+Outputs:
+  ApiInvokeUrl:
+    Description: API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${ServerlessRestApi.Stage}/
 Globals:
   Function:
     Runtime: nodejs22.x
@@ -10,6 +15,11 @@ Globals:
           Ref: ChecklistTable
     MemorySize: 128
     Timeout: 5
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'content-type'"
+      AllowOrigin: "'*'"
 Resources:
   ChecklistTable:
     Type: AWS::Serverless::SimpleTable
@@ -25,7 +35,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://a-bucket-01234/3ad189a2ca026b95acc01dd14c212999
+      CodeUri: s3://a-bucket-01234/2608e76124ffe2b44ba023fea805c22e
       Policies:
       - DynamoDBCrudPolicy:
           TableName:

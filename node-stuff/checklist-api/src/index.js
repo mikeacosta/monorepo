@@ -24,7 +24,12 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
-      "headers": { "content-type": "application/json" },
+      "headers": { 
+        "content-type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET"        
+      },
       body: JSON.stringify(body)
     };    
     

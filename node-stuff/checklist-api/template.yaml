@@ -2,6 +2,11 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: Checklist REST API
 
+Outputs:
+  ApiInvokeUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${ServerlessRestApi.Stage}/"  
+
 Globals:
   Function:
     Runtime: nodejs22.x
@@ -10,6 +15,11 @@ Globals:
         TABLE_NAME: !Ref ChecklistTable
     MemorySize: 128
     Timeout: 5
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'content-type'"
+      AllowOrigin: "'*'"      
 
 Resources:
   ChecklistTable:
