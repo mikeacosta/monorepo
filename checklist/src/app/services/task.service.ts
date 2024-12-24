@@ -7,11 +7,16 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'https://4xzsdmlcsb.execute-api.us-west-2.amazonaws.com/Prod/checklist';
+  private apiUrl = 'https://pxml2pbhy4.execute-api.us-west-2.amazonaws.com/Prod/checklist';
 
   constructor(private httpClient: HttpClient) { }
 
   getTasks(): Observable<Task[]> {
     return this.httpClient.get<Task[]>(this.apiUrl);
   }
+
+  deleteTask(task: Task): Observable<Task> {
+    const url = `${this.apiUrl}/${task.id}`;
+    return this.httpClient.delete<Task>(url);
+  }  
 }

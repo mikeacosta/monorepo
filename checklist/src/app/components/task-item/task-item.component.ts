@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../Task';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -12,9 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class TaskItemComponent {
   @Input() task!: Task
+  @Output() onDeleteTask: EventEmitter<Task> = new EventEmitter();
   faTimes = faTimes;
 
   onIconClick(task: Task | undefined) {
-    console.log('icon clicked:' + task?.id);
+    this.onDeleteTask.emit(task);
   }
 }
