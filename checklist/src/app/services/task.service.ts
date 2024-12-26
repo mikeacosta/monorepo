@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../Task';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'https://pxml2pbhy4.execute-api.us-west-2.amazonaws.com/Prod/checklist';
+  private apiUrl = 'https://yklmyc68y5.execute-api.us-west-2.amazonaws.com/Prod/checklist';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,5 +24,15 @@ export class TaskService {
   deleteTask(task: Task): Observable<Task> {
     const url = `${this.apiUrl}/${task.id}`;
     return this.httpClient.delete<Task>(url);
+  }  
+
+  updateTaskReminder(task: Task): Observable<Task> {
+    const url = `${this.apiUrl}/${task.id}`;
+    var taskForUpdate = {
+      text: task.text,
+      day: task.day,
+      reminder: task.reminder
+    };
+    return this.httpClient.put<Task>(url, taskForUpdate, httpOptions);
   }  
 }
