@@ -17,8 +17,8 @@ Globals:
     Timeout: 5
   Api:
     Cors:
-      AllowMethods: "'GET,POST,OPTIONS'"
-      AllowHeaders: "'content-type'"
+      AllowMethods: "'GET, POST, OPTIONS, PUT, DELETE'"
+      AllowHeaders: "'Content-Type'"
       AllowOrigin: "'*'"      
 
 Resources:
@@ -46,4 +46,24 @@ Resources:
           Type: Api
           Properties:
             Path: /checklist
-            Method: GET             
+            Method: GET  
+        GetItem:
+          Type: Api
+          Properties:
+            Path: /checklist/{id}
+            Method: GET 
+        CreateItem:
+          Type: Api
+          Properties:
+            Path: /checklist
+            Method: POST  
+        UpdateItem:
+          Type: Api
+          Properties:
+            Path: /checklist/{id}
+            Method: PUT                                 
+        DeleteItem:
+          Type: Api
+          Properties:
+            Path: /checklist/{id}
+            Method: DELETE                        

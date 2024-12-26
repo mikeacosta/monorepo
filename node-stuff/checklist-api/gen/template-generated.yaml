@@ -17,8 +17,8 @@ Globals:
     Timeout: 5
   Api:
     Cors:
-      AllowMethods: "'GET,POST,OPTIONS'"
-      AllowHeaders: "'content-type'"
+      AllowMethods: "'GET, POST, OPTIONS, PUT, DELETE'"
+      AllowHeaders: "'Content-Type'"
       AllowOrigin: "'*'"
 Resources:
   ChecklistTable:
@@ -35,7 +35,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://a-bucket-01234/2608e76124ffe2b44ba023fea805c22e
+      CodeUri: s3://a-bucket-01234/66f771bf2f241c370306e3398713f1e7
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
@@ -46,3 +46,23 @@ Resources:
           Properties:
             Path: /checklist
             Method: GET
+        GetItem:
+          Type: Api
+          Properties:
+            Path: /checklist/{id}
+            Method: GET
+        CreateItem:
+          Type: Api
+          Properties:
+            Path: /checklist
+            Method: POST
+        UpdateItem:
+          Type: Api
+          Properties:
+            Path: /checklist/{id}
+            Method: PUT
+        DeleteItem:
+          Type: Api
+          Properties:
+            Path: /checklist/{id}
+            Method: DELETE
