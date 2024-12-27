@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'https://vq1w5417vk.execute-api.us-west-2.amazonaws.com/Prod/checklist';
+  private apiUrl = 'https://200g6jznzc.execute-api.us-west-2.amazonaws.com/Prod/checklist';
 
   constructor(private httpClient: HttpClient) { }
 

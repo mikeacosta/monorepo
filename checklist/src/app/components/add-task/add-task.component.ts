@@ -3,6 +3,7 @@ import { Task } from '../../Task';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-add-task',
@@ -15,15 +16,18 @@ export class AddTaskComponent {
   text!: string;
   day!: string;
   reminder: boolean = false;
-  showAddTask: boolean | undefined = true;
+  showAddTask: boolean | undefined;
+  subscription: Subscription;
 
-  constructor() {
-    
+  constructor(private uiService: UiService) {
+    this.subscription = this.uiService
+      .onToggle()
+      .subscribe((value) => this.showAddTask = value);    
   }
 
 
   ngOnDestroy() {
-    
+    this.subscription.unsubscribe();   
   }
 
   onSubmit() {
@@ -42,6 +46,6 @@ export class AddTaskComponent {
 
     this.text = '';
     this.day = '';
-    this.reminder = false;    
+    this.reminder = false;
   }
 }
