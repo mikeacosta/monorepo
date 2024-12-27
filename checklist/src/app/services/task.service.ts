@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'https://yklmyc68y5.execute-api.us-west-2.amazonaws.com/Prod/checklist';
+  private apiUrl = 'https://vq1w5417vk.execute-api.us-west-2.amazonaws.com/Prod/checklist';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,6 +25,10 @@ export class TaskService {
     const url = `${this.apiUrl}/${task.id}`;
     return this.httpClient.delete<Task>(url);
   }  
+
+  addTask(task: Task): Observable<Task> {
+    return this.httpClient.post<Task>(this.apiUrl, task, httpOptions);
+  }   
 
   updateTaskReminder(task: Task): Observable<Task> {
     const url = `${this.apiUrl}/${task.id}`;
