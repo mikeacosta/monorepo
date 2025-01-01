@@ -1,5 +1,6 @@
 using CourseStore.API.Models;
 using CourseStore.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseStore.API.Controllers;
@@ -70,7 +71,7 @@ public class CoursesController : ControllerBase
     }
     
     [HttpPut("{courseId}")]
-    public async Task<ActionResult> UpdatePointOfInterest(Guid authorId, Guid courseId,
+    public async Task<IActionResult> UpdateCourse(Guid authorId, Guid courseId,
         CourseForUpdateDto course)
     {
         if (!await _repo.AuthorExistsAsync(authorId))
@@ -86,5 +87,31 @@ public class CoursesController : ControllerBase
         await _repo.SaveAsync();
 
         return NoContent();
-    }    
+    }
+
+    [HttpPatch("{courseId}")]
+    public async Task<IActionResult> PartiallyUpdateCourse(Guid authorId, Guid courseId,
+        JsonPatchDocument<CourseForUpdateDto> patchDocument)
+    {
+        if (!await _repo.AuthorExistsAsync(authorId))
+            return NotFound();
+
+        var courseEntity = await _repo.GetCourseAsync(authorId, courseId);
+        if (courseEntity == null)
+            return NotFound();    
+        
+        var courseToPatch = new CourseForUpdateDto()
+        {
+            Title = courseEntity.Title,
+            Description = courseEntity.Description
+        };    
+        patchDocument.ApplyTo(courseToPatch);
+        
+        courseEntity.Title = courseToPatch.Title;
+        courseEntity.Description = courseToPatch.Description;
+
+        await _repo.SaveAsync();
+
+        return NoContent();
+    }
 }

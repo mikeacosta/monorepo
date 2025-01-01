@@ -1,6 +1,7 @@
 using CourseStore.API.Data;
 using CourseStore.API.Services;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,11 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddScoped<ICourseStoreRepository, CourseStoreRepository>();
 builder.Services.AddSingleton<IMapper, Mapper>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(setupAction =>
+    {
+        setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    });
 
 builder.Services.AddProblemDetails(options =>
 {
