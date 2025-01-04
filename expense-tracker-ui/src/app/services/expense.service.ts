@@ -15,4 +15,8 @@ export class ExpenseService {
     return this.httpClient.get<Expense[]>(`${this.baseUrl}/expenses`)
       .pipe(map(response => response));
   }  
+
+  saveExpense(expense: Expense): Observable<Expense> {
+    return this.httpClient.post<Expense>(`${this.baseUrl}/expenses`, expense);
+  }
 }

@@ -1,1 +1,25 @@
-<p>add-expense works!</p>
+<form (ngSubmit)="saveExpense()">
+  <div>
+    <label for="expense">Expense Name</label>&nbsp;
+    <input type="text" 
+      name="expense"
+      [(ngModel)]="expense.expense"
+      placeholder="Enter expense name" />
+  </div>
+
+  <div>
+    <label for="amount">Amount</label>&nbsp;
+    <input type="text" name="amount" [(ngModel)]="expense.amount" placeholder="Enter amount" />
+  </div>
+
+  <div>
+    <label for="description">Description</label>&nbsp;
+    <input type="text" name="description" [(ngModel)]="expense.description" placeholder="Enter description" />
+  </div>
+
+  <div>&nbsp;</div>
+
+  <div>
+    <button type="submit">Add Expense</button>
+  </div>
+</form>
