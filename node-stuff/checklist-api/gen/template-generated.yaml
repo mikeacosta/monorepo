@@ -35,7 +35,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://a-bucket-01234/66f771bf2f241c370306e3398713f1e7
+      CodeUri: s3://a-bucket-01234/e763d371ac1a0f8688048fbc621c018f
       Policies:
       - DynamoDBCrudPolicy:
           TableName:

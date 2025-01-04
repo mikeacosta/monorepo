@@ -32,7 +32,7 @@ export const handler = async (event) => {
       default:
         throw new Error(`Unsupported route: "${event.httpMethod}"`);
     }  
-    console.log(body);
+    console.log('response body: ' + JSON.stringify(body));
 
     return {
       statusCode: 200,
