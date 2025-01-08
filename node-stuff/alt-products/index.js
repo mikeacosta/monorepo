@@ -1,5 +1,6 @@
-import { GetItemCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
+import { GetItemCommand, ScanCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
+import { v4 as uuidv4 } from 'uuid';
 import { dbClient } from "./dbClient.js";
 
 export const handler = async (event) => {
@@ -15,6 +16,10 @@ export const handler = async (event) => {
         } else {
           body = await getProducts();
         }
+        break;
+
+      case "POST":
+        body = await createProduct(event);
         break;
 
       default:
@@ -42,12 +47,12 @@ export const handler = async (event) => {
   }
 };
 
-const getProduct = async (id) => {
+const getProduct = async (productId) => {
   console.log("getProduct");
   try {
     const params = {
       TableName: process.env.TABLE_NAME,
-      Key: marshall({ id: Number(id) })
+      Key: marshall({ id: productId })
     };
 
     const { Item } = await dbClient.send(new GetItemCommand(params));
@@ -66,10 +71,32 @@ const getProducts = async () => {
       TableName: process.env.TABLE_NAME
     };
 
-    const { Items } = await ddbClient.send(new ScanCommand(params));
+    const { Items } = await dbClient.send(new ScanCommand(params));
     console.log(Items);
     return (Items) ? Items.map((item) => unmarshall(item)) : {};
 
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+const createProduct = async (event) => {
+  try {
+    console.log(`createProduct, event: "${event}"`);
+
+    const productRequest = JSON.parse(event.body);
+    const id = uuidv4();
+    productRequest.id = id;
+
+    const params = {
+      TableName: process.env.TABLE_NAME,
+      Item: marshall(productRequest || {})
+    };
+
+    const createResult = await dbClient.send(new PutItemCommand(params));
+    console.log(createResult);
+    return createResult;
   } catch (e) {
     console.error(e);
     throw e;
