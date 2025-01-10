@@ -22,4 +22,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     public Expense save(Expense expense) {
         return expenseRepository.save(expense);
     }
+
+    @Override
+    public Expense findById(Long id) {
+        return expenseRepository.findById(id).isPresent()
+                ? expenseRepository.findById(id).get()
+                : null;
+    }
 }

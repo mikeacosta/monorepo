@@ -28,4 +28,12 @@ public class ExpenseController {
         var newExpense = expenseService.save(expense);
         return new ResponseEntity<>(newExpense, HttpStatus.CREATED);
     }
+
+    @GetMapping("/expenses/{id}")
+    public ResponseEntity<Expense> getExpense(@PathVariable("id") Long id) {
+        var expense = expenseService.findById(id);
+        return expense != null
+                ? new ResponseEntity<>(expense, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
