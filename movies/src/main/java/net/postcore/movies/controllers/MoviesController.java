@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,5 +30,14 @@ public class MoviesController {
         var response = movies.stream().map(mapper::toMovieDto)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{imdbId}")
+    public ResponseEntity<Optional<MovieDto>> getSingleMovie(@PathVariable String imdbId){
+        var movie = moviesService.getMovieByImdbId(imdbId);
+        return movie.isPresent()
+                ? new ResponseEntity<>(movie.map(mapper::toMovieDto), HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 }
