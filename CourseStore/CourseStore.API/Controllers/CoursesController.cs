@@ -1,3 +1,4 @@
+using CourseStore.API.Entities;
 using CourseStore.API.Models;
 using CourseStore.API.Services;
 using Microsoft.AspNetCore.JsonPatch;
@@ -79,7 +80,21 @@ public class CoursesController : ControllerBase
 
         var courseEntity = await _repo.GetCourseAsync(authorId, courseId);
         if (courseEntity == null)
-            return NotFound();
+        {
+            var courseToAdd = _mapper.ToCourseEntity(course);
+            courseToAdd.Id = courseId;
+;           _repo.AddCourse(authorId, courseToAdd);
+            await _repo.SaveAsync();
+
+            var courseToReturn = _mapper.ToCourseDto(courseToAdd);
+            return CreatedAtRoute("GetCourse",
+                new
+                {
+                    authorId = authorId,
+                    courseId = courseToReturn.Id
+                },
+                courseToReturn);            
+        }
 
         courseEntity.Title = course.Title;
         courseEntity.Description = course.Description;

@@ -24,6 +24,15 @@ public class Mapper : IMapper
         };
     }
 
+    public Course ToCourseEntity(CourseForUpdateDto dto)
+    {
+        return new Course
+        {
+            Title = dto.Title,
+            Description = dto.Description
+        };
+    }
+
     public AuthorDto ToAuthorDto(Author author)
     {
         var dto = new AuthorDto
