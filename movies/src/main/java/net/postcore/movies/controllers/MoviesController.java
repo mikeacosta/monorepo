@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/movies")
+@CrossOrigin(origins = "*")
 public class MoviesController {
 
     private final MoviesService moviesService;
