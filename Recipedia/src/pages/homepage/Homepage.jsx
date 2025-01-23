@@ -2,9 +2,14 @@ import './Homepage.css';
 import Search from '../../components/search/Search';
 
 const Homepage = () => {
+
+  const getDataFromSearchComponent = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="homepage">
-      <Search />
+      <Search sendDataToHomeComponent={getDataFromSearchComponent} />
     </div>
   );
 };
