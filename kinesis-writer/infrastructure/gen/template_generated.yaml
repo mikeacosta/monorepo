@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Kinesis Data Stream
+Resources:
+  Stream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      Name: aws-data-stream
+      ShardCount: 1
+      RetentionPeriodHours: 24
+Outputs:
+  StreamArn:
+    Value:
+      Fn::GetAtt:
+      - Stream
+      - Arn
+    Export:
+      Name: AwsDataStreamArn
