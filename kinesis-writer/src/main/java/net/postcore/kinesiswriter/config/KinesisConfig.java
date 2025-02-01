@@ -9,12 +9,22 @@ import com.amazonaws.services.kinesis.producer.UserRecordResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.FutureCallback;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j
 public class KinesisConfig {
+
+    @Value("${aws.access.key.id}")
+    private String accessKeyId;
+
+    @Value("${aws.secret.access.key}")
+    private String secretKey;
+
+    @Value("${aws.region}")
+    private String region;
 
     @Bean
     public KinesisProducer kinesisProducer() {
@@ -23,11 +33,7 @@ public class KinesisConfig {
 
     @Bean
     public KinesisProducerConfiguration kinesisProducerConfiguration() {
-        String accessKey = System.getenv("AWS_ACCESS_KEY_ID");
-        String secretKey = System.getenv("AWS_SECRET_ACCESS_KEY");
-        String region = System.getenv("region");
-
-        BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+        BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKeyId, secretKey);
 
         return new KinesisProducerConfiguration()
                 .setCredentialsProvider(new AWSStaticCredentialsProvider(awsCredentials))
