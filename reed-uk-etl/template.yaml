@@ -9,4 +9,5 @@ Resources:
       Handler: lambda_extract.handler
       CodeUri: src/
       Role: !Sub arn:aws:iam::${AWS::AccountId}:role/lambda-basic-execution-role
-      Runtime: python3.13   
+      Runtime: python3.12
+      Timeout: 30
