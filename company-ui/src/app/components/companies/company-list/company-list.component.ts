@@ -45,4 +45,8 @@ export class CompanyListComponent {
       })   
   }
 
+  onDeleteClick = (company: Company) => {
+    console.log('delete ' + company.name);
+  };
+
 }

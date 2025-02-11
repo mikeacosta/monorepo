@@ -26,6 +26,14 @@
           <mat-icon>edit</mat-icon>
           Edit
         </button>
+        <button mat-raised-button color="primary" [routerLink]="['details/', element.id]">
+          <mat-icon>details</mat-icon>
+          Details
+        </button>
+        <button mat-raised-button color="primary" (click)="onDeleteClick(element)">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
       </td>
     </ng-container>
 
