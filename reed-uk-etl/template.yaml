@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
+Parameters:
+  EtlBucketArn:
+    Type: String
+    Default: arn:aws:s3:::a-bucket-01234
+
 Resources:
   ReedApiFunction:
     Type: 'AWS::Serverless::Function'
@@ -11,3 +16,35 @@ Resources:
       Role: !Sub arn:aws:iam::${AWS::AccountId}:role/lambda-basic-execution-role
       Runtime: python3.12
       Timeout: 30
+
+  GlueRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: 
+            - glue.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Policies:
+        - PolicyName: ReedGluePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:ListBucket"
+                  - s3:GetObject
+                  - s3:PutObjectAcl
+                  - s3:DeleteObject
+                Resource:
+                  - !Sub ${EtlBucketArn}
+                  - !Sub ${EtlBucketArn}/*
+
+Outputs:
+  GlueRoleARN:
+    Value: !GetAtt GlueRole.Arn                    
