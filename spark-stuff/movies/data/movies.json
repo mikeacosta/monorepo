@@ -1,0 +1,682 @@
+[
+  {
+    "_id": "1",
+    "name": "The Shawshank Redemption",
+    "year": 1994,
+    "genre": ["Drama"],
+    "rating": 9.3,
+    "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
+  },
+  {
+    "_id": "2",
+    "name": "The Godfather",
+    "year": 1972,
+    "genre": ["Crime", "Drama"],
+    "rating": 9.2,
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son."
+  },
+  {
+    "_id": "3",
+    "name": "The Dark Knight",
+    "year": 2008,
+    "genre": ["Action", "Crime", "Drama"],
+    "rating": 9.0,
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
+  },
+  {
+    "_id": "4",
+    "name": "Pulp Fiction",
+    "year": 1994,
+    "genre": ["Crime", "Drama"],
+    "rating": 8.9,
+    "description": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+  },
+  {
+    "_id": "5",
+    "name": "Schindler's List",
+    "year": 1993,
+    "genre": ["Biography", "Drama", "History"],
+    "rating": 8.9,
+    "description": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis."
+  },
+  {
+    "_id": "6",
+    "name": "The Lord of the Rings: The Return of the King",
+    "year": 2003,
+    "genre": ["Action", "Adventure", "Drama", "Fantasy"],
+    "rating": 8.9,
+    "description": "Gandalf and Aragorn lead the World of Men against Sauron's army amassing at the Black Gate of Mordor, as Frodo and Sam approach Mount Doom with the One Ring."
+  },
+  {
+    "_id": "7",
+    "name": "12 Angry Men",
+    "year": 1957,
+    "genre": ["Drama"],
+    "rating": 8.9,
+    "description": "A jury of 12 men must decide the guilt or innocence of a young man accused of murder."
+  },
+  {
+    "_id": "8",
+    "name": "Fight Club",
+    "year": 1999,
+    "genre": ["Drama"],
+    "rating": 8.8,
+    "description": "An insomniac office worker looking for a way to change his life crosses paths with a devil-may-care soap maker and they form an underground fight club that evolves into something much, much more."
+  },
+  {
+    "_id": "9",
+    "name": "Forrest Gump",
+    "year": 1994,
+    "genre": ["Comedy", "Drama", "Romance"],
+    "rating": 8.8,
+    "description": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold through the perspective of an Alabama man with an IQ of 75."
+  },
+  {
+    "_id": "10",
+    "name": "Inception",
+    "year": 2010,
+    "genre": ["Action", "Adventure", "Sci-Fi", "Thriller"],
+    "rating": 8.8,
+    "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given his inverse task of planting an idea into the mind of a CEO."
+  },
+  {
+    "_id": "11",
+    "name": "The Lord of the Rings: The Fellowship of the Ring",
+    "year": 2001,
+    "genre": ["Action", "Adventure", "Drama", "Fantasy"],
+    "rating": 8.8,
+    "description": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron."
+  },
+  {
+    "_id": "12",
+    "name": "Goodfellas",
+    "year": 1990,
+    "genre": ["Biography", "Crime", "Drama"],
+    "rating": 8.7,
+    "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his partners Jimmy Conway and Tommy DeVito in the Italian-American crime syndicate."
+  },
+  {
+    "_id": "13",
+    "name": "The Matrix",
+    "year": 1999,
+    "genre": ["Action", "Sci-Fi"],
+    "rating": 8.7,
+    "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
+  },
+  {
+    "_id": "14",
+    "name": "Seven Samurai",
+    "year": 1954,
+    "genre": ["Action", "Adventure", "Drama"],
+    "rating": 8.6,
+    "description": "A poor village under attack by bandits hires seven ronin to protect them."
+  },
+  {
+    "_id": "15",
+    "name": "Star Wars: Episode V - The Empire Strikes Back",
+    "year": 1980,
+    "genre": ["Action", "Adventure", "Fantasy", "Sci-Fi"],
+    "rating": 8.6,
+    "description": "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Master Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett."
+  },
+  {
+    "_id": "16",
+    "name": "One Flew Over the Cuckoo's Nest",
+    "year": 1975,
+    "genre": ["Drama"],
+    "rating": 8.6,
+    "description": "A criminal pleads insanity and is admitted to a mental institution, where he rebels against the oppressive nurse and rallies up the other patients."
+  },
+  {
+    "_id": "17",
+    "name": "Parasite",
+    "year": 2019,
+    "genre": ["Comedy", "Drama", "Thriller"],
+    "rating": 8.6,
+    "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan."
+  },
+  {
+    "_id": "18",
+    "name": "Interstellar",
+    "year": 2014,
+    "genre": ["Adventure", "Drama", "Sci-Fi"],
+    "rating": 8.6,
+    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+  },
+  {
+    "_id": "19",
+    "name": "City Lights",
+    "year": 1931,
+    "genre": ["Comedy", "Drama", "Romance"],
+    "rating": 8.5,
+    "description": "With the aid of a wealthy erratic tippler, a dewy-eyed tramp falls in love with a sightless flower girl."
+  },
+  {
+    "_id": "20",
+    "name": "The Silence of the Lambs",
+    "year": 1991,
+    "genre": ["Crime", "Drama", "Thriller"],
+    "rating": 8.5,
+    "description": "A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a deranged maniac who skins his victims."
+  },
+  {
+    "_id": "21",
+    "name": "Saving Private Ryan",
+    "year": 1998,
+    "genre": ["Drama", "War"],
+    "rating": 8.5,
+    "description": "Following the Normandy Landings, a group of U.S. soldiers go behind enemy lines to retrieve a paratrooper whose brothers have been killed in action."
+  },
+  {
+    "_id": "22",
+    "name": "Life Is Beautiful",
+    "year": 1997,
+    "genre": ["Comedy", "Drama", "War"],
+    "rating": 8.5,
+    "description": "When an open-minded Jewish waiter and his family become victims of the Holocaust, he uses his humor, imagination, and wit to protect his son from the dangers of their concentration camp."
+  },
+  {
+    "_id": "23",
+    "name": "Spirited Away",
+    "year": 2001,
+    "genre": ["Animation", "Adventure", "Family", "Fantasy", "Mystery"],
+    "rating": 8.5,
+    "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts."
+  },
+  {
+    "_id": "24",
+    "name": "The Green Mile",
+    "year": 1999,
+    "genre": ["Crime", "Drama", "Fantasy", "Mystery"],
+    "rating": 8.5,
+    "description": "The lives of guards on Georgia's Death Row are changed forever when one of their charges, a black man accused of murdering two girls, reveals he has supernatural healing power."
+  },
+  {
+    "_id": "25",
+    "name": "Psycho",
+    "year": 1960,
+    "genre": ["Horror", "Mystery", "Thriller"],
+    "rating": 8.5,
+    "description": "A Phoenix secretary embezzles forty thousand dollars from her employer's client, goes on the run, and checks into a remote motel run by a mysterious man with a dominating mother."
+  },
+  {
+    "_id": "26",
+    "name": "The Intouchables",
+    "year": 2011,
+    "genre": ["Biography", "Comedy", "Drama"],
+    "rating": 8.5,
+    "description": "After becoming tetraplegic from a paragliding accident, an aristocrat hires a young man from the projects to be his caregiver."
+  },
+  {
+    "_id": "27",
+    "name": "Back to the Future",
+    "year": 1985,
+    "genre": ["Adventure", "Comedy", "Sci-Fi"],
+    "rating": 8.5,
+    "description": "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the eccentric scientist Doc Brown."
+  },
+  {
+    "_id": "28",
+    "name": "Once Upon a Time in the West",
+    "year": 1968,
+    "genre": ["Western"],
+    "rating": 8.5,
+    "description": "A mysterious stranger with a harmonica joins forces with a notorious desperado to protect a beautiful widow from a ruthless land-grabber."
+  },
+  {
+    "_id": "29",
+    "name": "Casablanca",
+    "year": 1942,
+    "genre": ["Drama", "Romance", "War"],
+    "rating": 8.5,
+    "description": "A cynical expatriate American cafe owner struggles to decide what to do when his former lover and her fugitive husband show up in his Moroccan city amid World War II."
+  },
+  {
+    "_id": "30",
+    "name": "Whiplash",
+    "year": 2014,
+    "genre": ["Drama", "Music"],
+    "rating": 8.5,
+    "description": "A promising young drummer enrolls at a cut-throat music conservatory where his dreams of greatness are mentored by an instructor who will stop at nothing to realize a student's potential."
+  },
+  {
+    "_id": "31",
+    "name": "Modern Times",
+    "year": 1936,
+    "genre": ["Comedy", "Drama", "Romance"],
+    "rating": 8.5,
+    "description": "The Tramp struggles to live in modern industrial society with the help of a young homeless woman."
+  },
+  {
+    "_id": "32",
+    "name": "Raiders of the Lost Ark",
+    "year": 1981,
+    "genre": ["Action", "Adventure"],
+    "rating": 8.4,
+    "description": "In 1936, archaeologist and adventurer Indiana Jones is tasked by the U.S. government to find the Ark of the Covenant before Adolf Hitler's Nazi regime can obtain its awesome powers."
+  },
+  {
+    "_id": "33",
+    "name": "Rear Window",
+    "year": 1954,
+    "genre": ["Mystery", "Thriller"],
+    "rating": 8.4,
+    "description": "A wheelchair-bound photographer spies on his neighbors from his apartment window and becomes convinced one of them has committed murder."
+  },
+  {
+    "_id": "34",
+    "name": "The Departed",
+    "year": 2006,
+    "genre": ["Crime", "Drama", "Thriller"],
+    "rating": 8.4,
+    "description": "An undercover cop and a mole in the police force try to identify each other while infiltrating an Irish gang in South Boston."
+  },
+  {
+    "_id": "35",
+    "name": "Terminator 2: Judgment Day",
+    "year": 1991,
+    "genre": ["Action", "Sci-Fi"],
+    "rating": 8.4,
+    "description": "A cyborg, identical to the one who failed to kill Sarah Connor, must now protect her teenage son John from an even more advanced and powerful terminator."
+  },
+  {
+    "_id": "36",
+    "name": "Memento",
+    "year": 2000,
+    "genre": ["Mystery", "Thriller"],
+    "rating": 8.4,
+    "description": "A man with short-term memory loss hunts for his wife's killer."
+  },
+  {
+    "_id": "37",
+    "name": "Sunset Boulevard",
+    "year": 1950,
+    "genre": ["Drama", "Film-Noir"],
+    "rating": 8.4,
+    "description": "A screenwriter develops a dangerous relationship with a faded silent-film star determined to make a triumphant return to the screen."
+  },
+  {
+    "_id": "38",
+    "name": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+    "year": 1964,
+    "genre": ["Comedy", "War"],
+    "rating": 8.4,
+    "description": "An insane general triggers a path to nuclear holocaust that a war room full of politicians and generals frantically tries to stop."
+  },
+  {
+    "_id": "39",
+    "name": "Paths of Glory",
+    "year": 1957,
+    "genre": ["Drama", "War"],
+    "rating": 8.4,
+    "description": "After refusing to attack an enemy stronghold, a general accuses his soldiers of cowardice and arranges for three of them to be court-martialed."
+  },
+  {
+    "_id": "40",
+    "name": "Django Unchained",
+    "year": 2012,
+    "genre": ["Drama", "Western"],
+    "rating": 8.4,
+    "description": "With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner."
+  },
+  {
+    "_id": "41",
+    "name": "The Shining",
+    "year": 1980,
+    "genre": ["Drama", "Horror"],
+    "rating": 8.4,
+    "description": "A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence, while his psychic son sees horrific forebodings from both past and future."
+  },
+  {
+    "_id": "42",
+    "name": "Citizen Kane",
+    "year": 1941,
+    "genre": ["Drama", "Mystery"],
+    "rating": 8.3,
+    "description": "Following the death of a publishing tycoon, news reporters scramble to discover the meaning of his final utterance."
+  },
+  {
+    "_id": "43",
+    "name": "The Prestige",
+    "year": 2006,
+    "genre": ["Drama", "Mystery"],
+    "rating": 8.5,
+    "description": "Rival 19th-century magicians engage in a bitter battle for trade secrets."
+  },
+  {
+    "_id": "44",
+    "name": "Oppenheimer",
+    "year": 2023,
+    "genre": ["Biography", "Drama", "History"],
+    "rating": 9.3,
+    "description": "Christopher Nolan's gripping portrayal of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II."
+  },
+  {
+    "_id": "45",
+    "name": "Apocalypse Now",
+    "year": 1979,
+    "genre": ["Drama", "War"],
+    "rating": 8.3,
+    "description": "A U.S. Army officer serving in Vietnam is tasked with assassinating a renegade and presumed insane colonel."
+  },
+  {
+    "_id": "46",
+    "name": "Alien",
+    "year": 1979,
+    "genre": ["Horror", "Sci-Fi"],
+    "rating": 8.3,
+    "description": "The crew of a commercial spacecraft encounter a deadly extraterrestrial lifeform after investigating a mysterious signal on a remote planet."
+  },
+  {
+    "_id": "47",
+    "name": "The Great Dictator",
+    "year": 1940,
+    "genre": ["Comedy", "Drama", "War"],
+    "rating": 8.3,
+    "description": "A Jewish barber in a Nazi concentration camp is mistaken for Adolf Hitler."
+  },
+  {
+    "_id": "48",
+    "name": "Amélie",
+    "year": 2001,
+    "genre": ["Comedy", "Fantasy", "Romance"],
+    "rating": 8.3,
+    "description": "In Montmartre, Paris, a shy waitress dedicates herself to making people happy."
+  },
+  {
+    "_id": "49",
+    "name": "Lawrence of Arabia",
+    "year": 1962,
+    "genre": ["Adventure", "Biography", "Drama", "History", "War"],
+    "rating": 8.3,
+    "description": "The story of T.E. Lawrence's adventures in the Middle East during World War I."
+  },
+  {
+    "_id": "50",
+    "name": "Double Indemnity",
+    "year": 1944,
+    "genre": ["Crime", "Drama", "Film-Noir", "Mystery", "Thriller"],
+    "rating": 8.3,
+    "description": "An insurance salesman gets seduced into a scheme of insurance fraud and murder by the seductive wife of one of his clients."
+  },
+  {
+    "_id": "51",
+    "name": "Taxi Driver",
+    "year": 1976,
+    "genre": ["Crime", "Drama", "Thriller"],
+    "rating": 8.3,
+    "description": "A mentally unstable Vietnam War veteran works as a night-time taxi driver in New York City where the perceived decadence and sleaze fuels his urge for violent action."
+  },
+  {
+    "_id": "52",
+    "name": "Vertigo",
+    "year": 1958,
+    "genre": ["Mystery", "Romance", "Thriller"],
+    "rating": 8.3,
+    "description": "A San Francisco detective suffering from acrophobia investigates the strange activities of an old friend's seductive wife, all the while grappling with his own peculiar demons."
+  },
+  {
+    "_id": "53",
+    "name": "Star Wars: Episode IV - A New Hope",
+    "year": 1977,
+    "genre": ["Action", "Adventure", "Fantasy", "Sci-Fi"],
+    "rating": 8.3,
+    "description": "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee, and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the evil Darth Vader."
+  },
+  {
+    "_id": "54",
+    "name": "The Lion King",
+    "year": 1994,
+    "genre": ["Animation", "Adventure", "Drama", "Family", "Musical"],
+    "rating": 8.3,
+    "description": "A young lion prince flees his kingdom after the murder of his father and returns years later to reclaim his throne."
+  },
+  {
+    "_id": "55",
+    "name": "The Usual Suspects",
+    "year": 1995,
+    "genre": ["Crime", "Mystery", "Thriller"],
+    "rating": 8.2,
+    "description": "A sole survivor tells of the mysterious events leading up to a massive gun battle on a boat, which began with the assembly of five criminals for an apparent petty crime."
+  },
+  {
+    "_id": "56",
+    "name": "Léon: The Professional",
+    "year": 1994,
+    "genre": ["Action", "Crime", "Drama", "Thriller"],
+    "rating": 8.2,
+    "description": "Mathilda, a 12-year-old girl, is reluctantly taken in by Léon, a professional assassin, after her family is murdered. Léon and Mathilda form an unusual relationship, as she becomes his protégée and learns the tricks of his trade."
+  },
+  {
+    "_id": "57",
+    "name": "The Pianist",
+    "year": 2002,
+    "genre": ["Biography", "Drama", "Music", "War"],
+    "rating": 8.2,
+    "description": "A Polish Jewish musician struggles to survive the destruction of the Warsaw Ghetto during World War II."
+  },
+  {
+    "_id": "58",
+    "name": "The Good, the Bad and the Ugly",
+    "year": 1966,
+    "genre": ["Western"],
+    "rating": 8.2,
+    "description": "In the American Civil War, three outlaws form an uneasy alliance in a search for Confederate gold."
+  },
+  {
+    "_id": "59",
+    "name": "American History X",
+    "year": 1998,
+    "genre": ["Crime", "Drama"],
+    "rating": 8.2,
+    "description": "A former neo-Nazi skinhead tries to prevent his younger brother from following in his footsteps."
+  },
+  {
+    "_id": "60",
+    "name": "The Sixth Sense",
+    "year": 1999,
+    "genre": ["Drama", "Horror", "Mystery", "Thriller"],
+    "rating": 8.2,
+    "description": "A child psychologist tries to help a young boy who claims he can see dead people."
+  },
+  {
+    "_id": "61",
+    "name": "Seven",
+    "year": 1995,
+    "genre": ["Crime", "Drama", "Mystery", "Thriller"],
+    "rating": 8.2,
+    "description": "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives."
+  },
+  {
+    "_id": "62",
+    "name": "Braveheart",
+    "year": 1995,
+    "genre": ["Biography", "Drama", "History", "War"],
+    "rating": 8.2,
+    "description": "In 13th century Scotland, William Wallace begins a revolt against King Edward I of England after the murder of his wife."
+  },
+  {
+    "_id": "63",
+    "name": "Reservoir Dogs",
+    "year": 1992,
+    "genre": ["Crime", "Thriller"],
+    "rating": 8.2,
+    "description": "After a simple jewelry heist goes terribly wrong, the surviving criminals begin to suspect that one of them is a police informant."
+  },
+  {
+    "_id": "64",
+    "name": "M",
+    "year": 1931,
+    "genre": ["Crime", "Drama", "Thriller"],
+    "rating": 8.2,
+    "description": "When the police in a German city are unable to catch a child-murderer, other criminals organize their own manhunt."
+  },
+  {
+    "_id": "65",
+    "name": "Witness for the Prosecution",
+    "year": 1957,
+    "genre": ["Crime", "Drama", "Mystery", "Thriller"],
+    "rating": 8.2,
+    "description": "A veteran British barrister must defend his client in a murder trial that has surprise after surprise."
+  },
+  {
+    "_id": "66",
+    "name": "High and Low",
+    "year": 1963,
+    "genre": ["Crime", "Drama", "Mystery", "Thriller"],
+    "rating": 8.2,
+    "description": "An executive of a shoe company becomes a victim of extortion when his chauffeur's son is kidnapped and held for ransom."
+  },
+  {
+    "_id": "67",
+    "name": "Oldboy",
+    "year": 2003,
+    "genre": ["Action", "Drama", "Mystery", "Thriller"],
+    "rating": 8.2,
+    "description": "After being kidnapped and imprisoned for fifteen years, Oh Dae-Su is released and must find his captor in five days."
+  },
+  {
+    "_id": "68",
+    "name": "Once Upon a Time in America",
+    "year": 1984,
+    "genre": ["Crime", "Drama"],
+    "rating": 8.2,
+    "description": "A former gangster returns to Manhattan after thirty-five years and must confront his past."
+  },
+  {
+    "_id": "69",
+    "name": "Princess Mononoke",
+    "year": 1997,
+    "genre": ["Animation", "Action", "Adventure", "Fantasy"],
+    "rating": 8.1,
+    "description": "On a journey to find the cure for a Tatarigami's curse, Ashitaka finds himself in the middle of a war between the forest gods and Tatara, a mining colony."
+  },
+  {
+    "_id": "70",
+    "name": "The Dark Knight Rises",
+    "year": 2012,
+    "genre": ["Action", "Crime", "Thriller"],
+    "rating": 8.1,
+    "description": "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced out of his exile to save Gotham City from a brutal guerrilla terrorist named Bane."
+  },
+  {
+    "_id": "71",
+    "name": "Aliens",
+    "year": 1986,
+    "genre": ["Action", "Adventure", "Sci-Fi", "Thriller"],
+    "rating": 8.1,
+    "description": "Fifty-seven years after her close encounter with the alien queen, Ripley is sent back to the planet LV-426 with a team of marines to investigate the disappearance of a group of colonists."
+  },
+  {
+    "_id": "72",
+    "name": "Capernaum",
+    "year": 2018,
+    "genre": ["Drama"],
+    "rating": 8.1,
+    "description": "A Lebanese boy sues his parents for the crime of giving him life."
+  },
+  {
+    "_id": "73",
+    "name": "The Lives of Others",
+    "year": 2006,
+    "genre": ["Drama", "Thriller"],
+    "rating": 8.1,
+    "description": "In 1984 East Berlin, an agent of the secret police, conducting surveillance on a writer and his lover, finds himself increasingly absorbed by their lives."
+  },
+  {
+    "_id": "74",
+    "name": "Paths of Glory",
+    "year": 1957,
+    "genre": ["Drama", "War"],
+    "rating": 8.4,
+    "description": "After refusing to attack an enemy stronghold, a general accuses his soldiers of cowardice and arranges for three of them to be court-martialed."
+  },
+  {
+    "_id": "75",
+    "name": "WALL·E",
+    "year": 2008,
+    "genre": ["Animation", "Adventure", "Family", "Sci-Fi"],
+    "rating": 8.4,
+    "description": "In the distant future, a small waste-collecting robot inadvertently embarks on a space journey that will ultimately decide the fate of mankind."
+  },
+  {
+    "_id": "76",
+    "name": "The Imitation Game",
+    "year": 2014,
+    "genre": ["Biography", "Drama", "Thriller", "War"],
+    "rating": 8.0,
+    "description": "During World War II, mathematician Alan Turing tries to crack the enigma code with help from fellow mathematicians."
+  },
+  {
+    "_id": "77",
+    "name": "Eternal Sunshine of the Spotless Mind",
+    "year": 2004,
+    "genre": ["Drama", "Fantasy", "Romance", "Sci-Fi"],
+    "rating": 8.3,
+    "description": "A heartbroken man undergoes a procedure to erase memories of his former girlfriend, but the process goes awry."
+  },
+  {
+    "_id": "78",
+    "name": "Amadeus",
+    "year": 1984,
+    "genre": ["Biography", "Drama", "History", "Music"],
+    "rating": 8.3,
+    "description": "The life, success and troubles of Wolfgang Amadeus Mozart as told by Antonio Salieri, an older contemporary who was deeply jealous of Mozart's talent."
+  },
+  {
+    "_id": "79",
+    "name": "Toy Story",
+    "year": 1995,
+    "genre": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"],
+    "rating": 8.3,
+    "description": "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room."
+  },
+  {
+    "_id": "80",
+    "name": "Inglourious Basterds",
+    "year": 2009,
+    "genre": ["Adventure", "Drama", "War"],
+    "rating": 8.3,
+    "description": "In Nazi-occupied France during World War II, a group of Jewish-American soldiers known as \"The Basterds\" are chosen to spread fear throughout the Third Reich by scalping and brutally killing Nazi soldiers. Meanwhile, a young French Jewish cinema owner is forced to host a Nazi premiere at her movie theater."
+  },
+  {
+    "_id": "81",
+    "name": "Good Will Hunting",
+    "year": 1997,
+    "genre": ["Drama", "Romance"],
+    "rating": 8.3,
+    "description": "Will Hunting, a janitor at M.I.T., has a gift for mathematics but needs help from a psychologist to find direction in his life."
+  },
+  {
+    "_id": "82",
+    "name": "2001: A Space Odyssey",
+    "year": 1968,
+    "genre": ["Mystery", "Sci-Fi"],
+    "rating": 8.3,
+    "description": "Humanity finds a mysterious, obviously artificial object buried beneath the Lunar surface and, with the intelligent computer H.A.L. 9000, sets off on a voyage of discovery."
+  },
+  {
+    "_id": "83",
+    "name": "Singin' in the Rain",
+    "year": 1952,
+    "genre": ["Comedy", "Musical", "Romance"],
+    "rating": 8.3,
+    "description": "A silent film star falls for a chorus girl just as he and his delusionally jealous screen partner are trying to make the difficult transition to talking pictures in 1920s Hollywood."
+  },
+  {
+    "_id": "84",
+    "name": "Star Wars: Episode VI - Return of the Jedi",
+    "year": 1983,
+    "genre": ["Action", "Adventure", "Fantasy", "Sci-Fi"],
+    "rating": 8.3,
+    "description": "Luke Skywalker and his friends must rescue Han Solo from the clutches of Jabba the Hutt and face the wrath of the Emperor."
+  },
+  {
+    "_id": "85",
+    "name": "The Apartment",
+    "year": 1960,
+    "genre": ["Comedy", "Drama", "Romance"],
+    "rating": 8.3,
+    "description": "A lonely office worker tries to rise in his company by letting its executives use his apartment for trysts, but complications arise when he falls for his boss's mistress."
+  }
+]
