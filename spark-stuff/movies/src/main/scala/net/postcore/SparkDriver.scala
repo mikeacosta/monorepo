@@ -18,7 +18,12 @@ object SparkDriver extends Serializable {
 
     val moviesDF= spark.read.option("multiline", value = true).json("data/movies.json")
 
-    moviesDF.filter(!array_contains(moviesDF("genre"), "Adventure")).show()
+    moviesDF
+      .filter(!array_contains(moviesDF("genre"), "Adventure"))
+      .withColumn("name", upper(col("name")))
+      .groupBy("year").agg(collect_list("name"))
+      .coalesce(1)
+      .write.json("data/output")
   }
 
   private def readSparkConfig: SparkConf ={
