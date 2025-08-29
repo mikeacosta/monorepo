@@ -1,0 +1,7 @@
+FROM postgres:latest
+
+ENV POSTGRES_PASSWORD=Abc12345
+
+ENV POSTGRES_DB=dev_db
+
+COPY ./reactivate.sql /docker-entrypoint-initdb.d/
