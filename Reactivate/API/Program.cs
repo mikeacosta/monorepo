@@ -9,11 +9,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
+builder.Services.AddCors();
 
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Configure the HTTP request pipeline.
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:3000", "https://localhost:3000"));
+
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();
