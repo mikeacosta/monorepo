@@ -8,7 +8,7 @@ const JobListings = ({ isHome = false }) => {
   const[loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get<Job[]>("https://demo6522576.mockable.io/jobs")
+    axios.get<Job[]>("https://localhost:5001/api/jobs")
       .then(response => {
         setJobs(response.data);
         setLoading(false);
