@@ -10,7 +10,7 @@ public class JobsDataStore
         {
             new JobDto
             {
-                Id = "1",
+                Id = 1,
                 Title = "Senior React Developer",
                 Type = "Full-Time",
                 Description = "We are seeking a talented Front-End Developer to join our team in Boston, MA. The ideal candidate will have strong skills in HTML, CSS, and JavaScript, with experience working with modern JavaScript frameworks such as React or Angular.",
@@ -26,7 +26,7 @@ public class JobsDataStore
             },
             new JobDto
             {
-                Id = "2",
+                Id = 2,
                 Title = "Front-End Engineer (React & Redux)",
                 Type = "Full-Time",
                 Description = "Join our team as a Front-End Developer in sunny Miami, FL. We are looking for a motivated individual with a passion for crafting beautiful and responsive web applications. Experience with UI/UX design principles and a strong attention to detail are highly desirable.",
@@ -42,7 +42,7 @@ public class JobsDataStore
             },
             new JobDto
             {
-                Id = "3",
+                Id = 3,
                 Title = "React.js Dev",
                 Type = "Full-Time",
                 Description = "Are you passionate about front-end development? Join our team in vibrant Brooklyn, NY, and work on exciting projects that make a difference. We offer competitive compensation and a collaborative work environment where your ideas are valued.",
@@ -58,7 +58,7 @@ public class JobsDataStore
             },
             new JobDto
             {
-                Id = "4",
+                Id = 4,
                 Title = "React Front-End Developer",
                 Type = "Part-Time",
                 Description = "Join our team as a Part-Time Front-End Developer in beautiful Pheonix, AZ. We are looking for a self-motivated individual with a passion for creating engaging user experiences. This position offers flexible hours and the opportunity to work remotely.",
@@ -74,7 +74,7 @@ public class JobsDataStore
             },
             new JobDto
             {
-                Id = "5",
+                Id = 5,
                 Title = "Full Stack React Developer",
                 Type = "Full-Time",
                 Description = "Exciting opportunity for a Full-Time Front-End Developer in bustling Atlanta, GA. We are seeking a talented individual with a passion for building elegant and scalable web applications. Join our team and make an impact!",
@@ -90,7 +90,7 @@ public class JobsDataStore
             },
             new JobDto
             {
-                Id = "6",
+                Id = 6,
                 Title = "React Native Developer",
                 Type = "Full-Time",
                 Description = "Join our team as a Front-End Developer in beautiful Portland, OR. We are looking for a skilled and enthusiastic individual to help us create innovative web solutions. Competitive salary and great benefits package available.",

@@ -21,7 +21,7 @@ public class JobsController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    public ActionResult<JobDto> GetJob(string id)
+    public ActionResult<JobDto> GetJob(int id)
     {
         var job = _jobsDataStore.Jobs.FirstOrDefault(j => j.Id == id);
 
