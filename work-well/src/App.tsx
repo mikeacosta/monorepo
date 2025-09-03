@@ -12,13 +12,17 @@ import NotFoundPage from './pages/NotFoundPage';
 import JobPage from './pages/JobPage';
 
 const App = () => {
+  const addJob = (job: Job) => {
+    console.log(job);
+  };
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path='/jobs' element={<JobsPage />} />
         <Route path='/jobs/:id' element={<JobPage />} />
-        <Route path='/add-job' element={<AddJobPage />} />
+        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob} />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )

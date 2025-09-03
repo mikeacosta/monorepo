@@ -1,5 +1,5 @@
 type Job = {
-  id: string
+  id: number
   title: string
   type: string
   description: string
