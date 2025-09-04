@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using WorkWell.API.Entities;
 using WorkWell.API.Models;
+using WorkWell.API.Services;
 
 namespace WorkWell.API.Controllers;
 
@@ -7,27 +9,68 @@ namespace WorkWell.API.Controllers;
 [Route("api/jobs")]
 public class JobsController : ControllerBase
 {
-    private readonly JobsDataStore _jobsDataStore;
+    private readonly IJobsRepository _jobsRepository;
 
-    public JobsController(JobsDataStore jobsDataStore)
+    public JobsController(IJobsRepository jobsRepository)
     {
-        _jobsDataStore = jobsDataStore ?? throw new ArgumentNullException(nameof(jobsDataStore));
+        _jobsRepository = jobsRepository ?? throw new ArgumentNullException(nameof(jobsRepository));
     }
     
     [HttpGet]
-    public ActionResult<IEnumerable<JobDto>> GetJobs()
+    public async Task<ActionResult<IEnumerable<JobDto>>> GetJobs()
     {
-        return Ok(_jobsDataStore.Jobs);
+        var jobEntities = await _jobsRepository.GetJobsAsync();
+        return Ok(EntitiesToDtos(jobEntities));
     }
     
     [HttpGet("{id}")]
-    public ActionResult<JobDto> GetJob(int id)
+    public async Task<ActionResult<JobDto>> GetJob(int id)
     {
-        var job = _jobsDataStore.Jobs.FirstOrDefault(j => j.Id == id);
+        var jobEntity = await _jobsRepository.GetJobAsync(id);
 
-        if (job == null)
+        if (jobEntity == null)
             return NotFound();
 
-        return Ok(job);
-    }    
+        return Ok(EntityToDto(jobEntity));
+    }
+
+    private IEnumerable<JobDto> EntitiesToDtos(IEnumerable<Job> jobEntities)
+    {
+        return jobEntities.Select(j => new JobDto
+        {
+            Id = j.Id,
+            Title = j.Title,
+            Type = j.Type,
+            Description = j.Description,
+            Location = j.Location,
+            Salary = j.Salary,
+            Company = new CompanyDto
+            {
+                Name = j.Company.Name,
+                Description = j.Company.Description,
+                ContactEmail = j.Company.ContactEmail,
+                ContactPhone = j.Company.ContactPhone
+            }
+        });
+    }
+
+    private JobDto EntityToDto(Job jobEntity)
+    {
+        return new JobDto
+        {
+            Id = jobEntity.Id,
+            Title = jobEntity.Title,
+            Type = jobEntity.Type,
+            Description = jobEntity.Description,
+            Location = jobEntity.Location,
+            Salary = jobEntity.Salary,
+            Company = new CompanyDto
+            {
+                Name = jobEntity.Company.Name,
+                Description = jobEntity.Company.Description,
+                ContactEmail = jobEntity.Company.ContactEmail,
+                ContactPhone = jobEntity.Company.ContactPhone
+            }
+        };
+    }
 }

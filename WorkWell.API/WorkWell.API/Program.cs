@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WorkWell.API.DbContexts;
 using WorkWell.API.Models;
+using WorkWell.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +12,9 @@ builder.Services.AddDbContext<JobsDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration["ConnectionStrings:DBConnectionString"]);
 });
+builder.Services.AddScoped<IJobsRepository, JobsRepository>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
-builder.Services.AddSingleton<JobsDataStore>();
 
 var app = builder.Build();
 

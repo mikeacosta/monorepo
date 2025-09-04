@@ -11,5 +11,5 @@ public class JobDto
     public string Location { get; set; }
     public string Salary { get; set; }
     [JsonPropertyName("company")]
-    public CompanyDto CompanyDto { get; set; }
+    public CompanyDto Company { get; set; }
 }
