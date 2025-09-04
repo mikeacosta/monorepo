@@ -27,4 +27,14 @@ public class JobsRepository : IJobsRepository
             .Include(j => j.Company)
             .FirstOrDefaultAsync(j => j.Id == jobId);
     }
+
+    public async Task AddJobAsync(Job job)
+    {
+        await _context.Jobs.AddAsync(job);
+    }
+
+    public async Task<bool> SaveChangesAsync()
+    {
+        return (await _context.SaveChangesAsync() >= 0);
+    }
 }

@@ -34,6 +34,15 @@ public class JobsController : ControllerBase
         return Ok(EntityToDto(jobEntity));
     }
 
+    [HttpPost]
+    public async Task<ActionResult> CreateJob(JobForCreationDto jobDto)
+    {
+        var jobEntity = DtoToEntity(jobDto);
+        await _jobsRepository.AddJobAsync(jobEntity);
+        await _jobsRepository.SaveChangesAsync();
+        return Created();
+    }
+
     private IEnumerable<JobDto> EntitiesToDtos(IEnumerable<Job> jobEntities)
     {
         return jobEntities.Select(j => new JobDto
@@ -70,6 +79,25 @@ public class JobsController : ControllerBase
                 Description = jobEntity.Company.Description,
                 ContactEmail = jobEntity.Company.ContactEmail,
                 ContactPhone = jobEntity.Company.ContactPhone
+            }
+        };
+    }
+
+    private Job DtoToEntity(JobForCreationDto jobDto)
+    {
+        return new Job
+        {
+            Title = jobDto.Title,
+            Type = jobDto.Type,
+            Description = jobDto.Description,
+            Location = jobDto.Location,
+            Salary = jobDto.Salary,
+            Company = new Company
+            {
+                Name = jobDto.Company.Name,
+                Description = jobDto.Company.Description,
+                ContactEmail = jobDto.Company.ContactEmail,
+                ContactPhone = jobDto.Company.ContactPhone
             }
         };
     }
