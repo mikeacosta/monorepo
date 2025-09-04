@@ -10,10 +10,11 @@ import JobsPage from './pages/JobsPage';
 import AddJobPage from './pages/AddJobPage';
 import NotFoundPage from './pages/NotFoundPage';
 import JobPage from './pages/JobPage';
+import axios from 'axios';
 
 const App = () => {
-  const addJob = (job: Job) => {
-    console.log(job);
+  const addJob = async (job: Job) => {
+    await axios.post<Job>("https://localhost:5001/api/jobs", job);
   };
 
   const router = createBrowserRouter(

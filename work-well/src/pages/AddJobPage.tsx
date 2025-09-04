@@ -38,7 +38,7 @@ const AddJobPage = ({ addJobSubmit }: AddJobPageProps) => {
 
     addJobSubmit(newJob);
 
-    return navigate('/jobs');
+    return navigate('/');
   }
 
   return (
