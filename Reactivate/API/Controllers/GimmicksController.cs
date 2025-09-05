@@ -1,26 +1,21 @@
+using Application.Gimmicks.Queries;
 using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers;
 
-public class GimmicksController(AppDbContext context) : BaseApiController
+public class GimmicksController() : BaseApiController
 {
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Gimmick>>> GetGimmicks()
+    {
+        return await Mediator.Send(new GetGimmicksList.Query());
+    }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Gimmick>> GetGimmick(string id)
     {
-        var gimmick = await context.Gimmicks.FindAsync(id);
-        if (gimmick == null)
-            return NotFound();
-        
-        return gimmick;
-    }
-    
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Gimmick>>> GetGimmicks()
-    {
-        return await context.Gimmicks.ToListAsync();
+        return await Mediator.Send(new GetGimmickDetails.Query { Id = id });
     }
 }
