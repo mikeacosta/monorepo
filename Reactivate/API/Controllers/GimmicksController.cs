@@ -1,3 +1,4 @@
+using Application.Gimmicks.Commands;
 using Application.Gimmicks.Queries;
 using Domain;
 using MediatR;
@@ -17,5 +18,11 @@ public class GimmicksController() : BaseApiController
     public async Task<ActionResult<Gimmick>> GetGimmick(string id)
     {
         return await Mediator.Send(new GetGimmickDetails.Query { Id = id });
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<string>> CreateGimmick(Gimmick gimmick)
+    {
+        return await Mediator.Send(new CreateGimmick.Command { Gimmick = gimmick });
     }
 }
