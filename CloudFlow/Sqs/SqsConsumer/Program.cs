@@ -16,8 +16,8 @@ var receiveMessageRequest = new ReceiveMessageRequest
 while (!cts.IsCancellationRequested)
 {
     var response = await sqsClient.ReceiveMessageAsync(receiveMessageRequest, cts.Token);
-
-    foreach (var message in response.Messages)
+    
+    foreach (var message in response.Messages ?? Enumerable.Empty<Message>())
     {
         Console.WriteLine($"Message ID: {message.MessageId}");
         Console.WriteLine($"Message Body: {message.Body}");

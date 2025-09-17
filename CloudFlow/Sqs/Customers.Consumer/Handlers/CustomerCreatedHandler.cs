@@ -1,6 +1,9 @@
 using Customers.Consumer.Messages;
 using MediatR;
 
+using Customers.Consumer.Messages;
+using MediatR;
+
 namespace Customers.Consumer.Handlers;
 
 public class CustomerCreatedHandler : IRequestHandler<CustomerCreated>
@@ -14,7 +17,7 @@ public class CustomerCreatedHandler : IRequestHandler<CustomerCreated>
     
     public Task Handle(CustomerCreated request, CancellationToken cancellationToken)
     {
-       _logger.LogInformation("Customer created: {}", request.FullName);
-       return Unit.Task;
+        _logger.LogInformation("Customer created: {}", request.FullName);
+        return Unit.Task;
     }
 }

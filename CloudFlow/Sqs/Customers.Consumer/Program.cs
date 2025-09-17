@@ -7,7 +7,6 @@ builder.Services.Configure<QueueSettings>(builder.Configuration.GetSection(Queue
 builder.Services.AddSingleton<IAmazonSQS, AmazonSQSClient>();
 builder.Services.AddHostedService<QueueConsumerService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly));
-//services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
 var app = builder.Build();
 

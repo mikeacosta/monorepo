@@ -40,7 +40,7 @@ public class CustomerService : ICustomerService
         }
         
         var customerDto = customer.ToCustomerDto();
-        var response =  await _customerRepository.CreateAsync(customerDto);
+        var response = await _customerRepository.CreateAsync(customerDto);
         if (response)
             await _sqsMessenger.SendMessageAsync(customer.ToCustomerCreatedMessage());
 

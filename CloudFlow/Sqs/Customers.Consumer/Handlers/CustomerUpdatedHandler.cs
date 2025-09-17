@@ -11,7 +11,8 @@ public class CustomerUpdatedHandler : IRequestHandler<CustomerUpdated>
     {
         _logger = logger;
     }
-
+    
+    
     public Task Handle(CustomerUpdated request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Customer updated: {}", request.FullName);
