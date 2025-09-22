@@ -25,4 +25,11 @@ public class GimmicksController() : BaseApiController
     {
         return await Mediator.Send(new CreateGimmick.Command { Gimmick = gimmick });
     }
+    
+    [HttpPut("{id}")]
+    public async Task<ActionResult> EditGimmick(Gimmick gimmick)
+    {
+        await Mediator.Send(new EditGimmick.Command { Gimmick = gimmick });
+        return NoContent();
+    }
 }
