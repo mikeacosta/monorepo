@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  todo-api
+
+  Sample SAM Template for todo-api
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+    Runtime: nodejs22.x
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        TODO_TABLE: !Ref Table
+        REGION_NAME: !Ref Region
+Parameters:
+  Table:
+    Type: String
+    Default: Todos
+  Region: 
+    Type: String
+    Default: us-west-2
+
+Resources:
+  TodoTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeType: S
+          AttributeName: id
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: id
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: !Ref Table
+
+  CreateTodoFunction:
+    Type: 'AWS::Serverless::Function'    
+    Properties:
+      Handler: createTodo.createToDo
+      CodeUri: handler/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TodoTable      
+      Events:
+        CreateTodo:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: POST 
+
+  ListTodosFunction:
+    Type: 'AWS::Serverless::Function'    
+    Properties:
+      Handler: listTodos.listTodos
+      CodeUri: handler/
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref TodoTable      
+      Events:
+        ListTodos:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: GET
+
+Outputs:
+  TodoApi:
+    Description: "API Gateway endpoint URL for Prod stage for Todo API"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/todos"
+  CreateTodoFunction:
+    Description: "CreateTodo Lambda Function ARN"
+    Value: !GetAtt CreateTodoFunction.Arn
