@@ -4,6 +4,7 @@ using CodePulse.API.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,8 +17,13 @@ builder.Services.AddDbContext<AppDbContext>(
         builder.Configuration["ConnectionStrings:DbConnectionString"]));
 
 builder.Services.AddDbContext<AuthDbContext>(
-    dbContextOptions => dbContextOptions.UseNpgsql(
-        builder.Configuration["ConnectionStrings:DbConnectionString"]));
+    dbContextOptions =>
+    {
+        dbContextOptions.UseNpgsql(
+            builder.Configuration["ConnectionStrings:DbConnectionString"]);
+        dbContextOptions.ConfigureWarnings(w => 
+            w.Ignore(RelationalEventId.PendingModelChangesWarning));
+    });
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
