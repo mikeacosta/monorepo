@@ -1,3 +1,5 @@
+using System.Reflection;
+using Application.Core;
 using Application.Gimmicks.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -14,6 +16,10 @@ builder.Services.AddCors();
 builder.Services.AddMediatR(x => {
     x.RegisterServicesFromAssemblyContaining<GetGimmicksList.Handler>();
 });
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile(new MappingProfiles());
+}, Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

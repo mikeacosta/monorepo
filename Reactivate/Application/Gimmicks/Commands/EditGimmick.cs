@@ -1,3 +1,4 @@
+using AutoMapper;
 using Domain;
 using MediatR;
 using Persistence;
@@ -11,7 +12,7 @@ public class EditGimmick
         public required Gimmick Gimmick { get; set; }
     }
 
-    public class Handler(AppDbContext context) : IRequestHandler<Command>
+    public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command>
     {
         public async Task Handle(Command request, CancellationToken cancellationToken)
         {
@@ -19,7 +20,7 @@ public class EditGimmick
                 .FindAsync([request.Gimmick.Id], cancellationToken)
                 ?? throw new Exception("Gimmick not found");
             
-            gimmick.Title = request.Gimmick.Title;
+            mapper.Map(request.Gimmick, gimmick);
             
             await context.SaveChangesAsync(cancellationToken);
         }
