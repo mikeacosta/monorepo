@@ -1,6 +1,7 @@
 
 import { Grid } from "@mui/material"
 import GimmicksList from "./GimmicksList"
+import GimmickDetails from "../details/GimmickDetails"
 
 type Props = {  
   gimmicks: Gimmick[]
@@ -17,6 +18,9 @@ const GimmicksDashboard = ({ gimmicks, selectGimmick, deleteGimmick }: Props) =>
           selectGimmick={selectGimmick}
           deleteGimmick={deleteGimmick}
         />
+      </Grid>
+      <Grid size={5}>
+        {gimmicks[0] && <GimmickDetails gimmick={gimmicks[0]} />}
       </Grid>
     </Grid>
   )
