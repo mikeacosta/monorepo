@@ -6,8 +6,16 @@ import { useEffect, useState } from "react"
 
 function App() {
   const [gimmicks, setGimmicks] = useState<Gimmick[]>([])
+  const [selectedGimmick, setSelectedGimmick] = useState<Gimmick | undefined>(undefined)
 
-  const selectGimmick = (id: string) => alert(`Selected gimmick ${id}`)
+  const handleSelectGimmick = (id: string) => {
+    setSelectedGimmick(gimmicks.find(x => x.id === id));
+  }
+
+  const handleCancelSelect = () => {
+    setSelectedGimmick(undefined);
+  }
+
   const deleteGimmick = (id: string) => {
     setGimmicks(gimmicks.filter(g => g.id !== id))
   }
@@ -25,8 +33,11 @@ function App() {
         <Container maxWidth='xl' sx={{ mt: 3 }}>
           <GimmicksDashboard
             gimmicks={gimmicks}
-            selectGimmick={selectGimmick}
+            selectedGimmick={selectedGimmick}
+            selectGimmick={handleSelectGimmick}
+            cancelSelect={handleCancelSelect}
             deleteGimmick={deleteGimmick}
+
           />
         </Container>
 

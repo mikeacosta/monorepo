@@ -5,11 +5,13 @@ import GimmickDetails from "../details/GimmickDetails"
 
 type Props = {  
   gimmicks: Gimmick[]
+  selectedGimmick: Gimmick | undefined
   selectGimmick: (id: string) => void 
+  cancelSelect: () => void
   deleteGimmick: (id: string) => void
 }
 
-const GimmicksDashboard = ({ gimmicks, selectGimmick, deleteGimmick }: Props) => {
+const GimmicksDashboard = ({ gimmicks, selectedGimmick, selectGimmick, cancelSelect, deleteGimmick }: Props) => {
   return (
     <Grid container spacing={3}>
       <Grid size={7}>
@@ -20,7 +22,11 @@ const GimmicksDashboard = ({ gimmicks, selectGimmick, deleteGimmick }: Props) =>
         />
       </Grid>
       <Grid size={5}>
-        {gimmicks[0] && <GimmickDetails gimmick={gimmicks[0]} />}
+        {selectedGimmick && 
+        <GimmickDetails 
+          gimmick={selectedGimmick}
+          cancelSelect={cancelSelect}
+        />}
       </Grid>
     </Grid>
   )
