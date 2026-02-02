@@ -5,8 +5,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 function App() {
-  const [gimmicks, setGimmicks] = useState<Gimmick[]>([])
-  const [selectedGimmick, setSelectedGimmick] = useState<Gimmick | undefined>(undefined)
+  const [gimmicks, setGimmicks] = useState<Gimmick[]>([]);
+  const [selectedGimmick, setSelectedGimmick] = useState<Gimmick | undefined>(undefined);
+  const [editMode, setEditMode] = useState(false);
 
   const handleSelectGimmick = (id: string) => {
     setSelectedGimmick(gimmicks.find(x => x.id === id));
@@ -15,6 +16,16 @@ function App() {
   const handleCancelSelect = () => {
     setSelectedGimmick(undefined);
   }
+
+  const handleOpenForm = (id?: string) => {
+    if (id) handleSelectGimmick(id);
+    else handleCancelSelect();
+    setEditMode(true);
+  }
+
+  const handleFormClose = () => {
+    setEditMode(false);
+  }  
 
   const deleteGimmick = (id: string) => {
     setGimmicks(gimmicks.filter(g => g.id !== id))
@@ -29,15 +40,17 @@ function App() {
     <>
       <Box sx={{ bgcolor: '#eeeeee', minHeight: '100vh' }}>
         <CssBaseline />
-        <NavBar />
+        <NavBar openForm={handleOpenForm} />
         <Container maxWidth='xl' sx={{ mt: 3 }}>
           <GimmicksDashboard
             gimmicks={gimmicks}
             selectedGimmick={selectedGimmick}
             selectGimmick={handleSelectGimmick}
             cancelSelect={handleCancelSelect}
+            editMode={editMode}
+            openForm={handleOpenForm}
+            closeForm={handleFormClose}
             deleteGimmick={deleteGimmick}
-
           />
         </Container>
 

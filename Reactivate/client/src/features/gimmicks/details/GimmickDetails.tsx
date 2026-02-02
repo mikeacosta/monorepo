@@ -3,9 +3,10 @@ import { Card, CardMedia, CardContent, Typography, CardActions, Button } from "@
 type Props = {
   gimmick: Gimmick
   cancelSelect: () => void
+  openForm: (id: string) => void
 }
 
-const GimmickDetails = ({ gimmick, cancelSelect }: Props) => {
+const GimmickDetails = ({ gimmick, cancelSelect, openForm }: Props) => {
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardMedia
@@ -18,7 +19,7 @@ const GimmickDetails = ({ gimmick, cancelSelect }: Props) => {
         <Typography variant="body1">{gimmick.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button color="primary">Edit</Button>
+        <Button onClick={() => openForm(gimmick.id)} color="primary">Edit</Button>
         <Button onClick={cancelSelect} color='inherit'>Cancel</Button>
       </CardActions>
     </Card>
